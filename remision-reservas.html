@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas de Remisiones</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .reservation-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .reservation-card:hover {
+            transform: translateY(-5px);
+        }
+        .reservation-card.pending {
+            border-left: 5px solid #ffc107;
+        }
+        .reservation-card.confirmed {
+            border-left: 5px solid #28a745;
+        }
+        .reservation-card.cancelled {
+            border-left: 5px solid #dc3545;
+        }
+        .reservation-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+        .reservation-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .reservation-date {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        .reservation-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .filter-section {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .product-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .product-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-calendar-check fa-fw"></i> &nbsp; RESERVAS DE REMISIONES
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes gestionar las reservas de remisiones. Programa entregas futuras y mantén un control de las fechas establecidas.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="remision-crear.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA REMISIÓN</a>
+                    </li>
+                    <li>
+                        <a href="remision-consultar.html"><i class="fas fa-search fa-fw"></i> &nbsp; CONSULTAR REMISIONES</a>
+                    </li>
+                    <li>
+                        <a href="remision-sin-factura.html"><i class="fas fa-file-invoice fa-fw"></i> &nbsp; REMISIONES SIN FACTURA</a>
+                    </li>
+                    <li>
+                        <a class="active" href="remision-reservas.html"><i class="fas fa-calendar-check fa-fw"></i> &nbsp; RESERVAS</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Filtros y Botón de Nueva Reserva -->
+                <div class="filter-section">
+                    <div class="row mb-3">
+                        <div class="col-12 text-right">
+                            <button class="btn btn-primary btn-custom" id="btnNuevaReserva">
+                                <i class="fas fa-plus"></i> &nbsp; NUEVA RESERVA
+                            </button>
+                        </div>
+                    </div>
+                    <form class="form-neon" id="filterForm">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="estadoReserva">
+                                        <i class="fas fa-filter"></i> Estado de Reserva
+                                    </label>
+                                    <select class="form-control form-input" id="estadoReserva" name="estadoReserva">
+                                        <option value="">Todos los estados</option>
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="confirmada">Confirmada</option>
+                                        <option value="cancelada">Cancelada</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="fechaInicio">
+                                        <i class="fas fa-calendar"></i> Fecha Inicio
+                                    </label>
+                                    <input type="date" class="form-control form-input" id="fechaInicio" name="fechaInicio">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="fechaFin">
+                                        <i class="fas fa-calendar"></i> Fecha Fin
+                                    </label>
+                                    <input type="date" class="form-control form-input" id="fechaFin" name="fechaFin">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="cliente">
+                                        <i class="fas fa-user"></i> Cliente
+                                    </label>
+                                    <select class="form-control form-input" id="cliente" name="cliente">
+                                        <option value="">Todos los clientes</option>
+                                        <option value="1">Constructora XYZ</option>
+                                        <option value="2">Ferretería ABC</option>
+                                        <option value="3">Materiales S.A.</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-info btn-custom">
+                                <i class="fas fa-search"></i> &nbsp; FILTRAR
+                            </button>
+                            <button type="reset" class="btn btn-secondary btn-custom ml-2">
+                                <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Lista de Reservas -->
+                <div class="reservation-card pending">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <i class="fas fa-clock reservation-icon text-warning"></i>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="reservation-title">Reserva Pendiente - REM-2024-004</h5>
+                            <p class="mb-0">Cliente: Constructora XYZ</p>
+                            <small class="reservation-date"><i class="fas fa-calendar"></i> Fecha de entrega: 2024-04-20</small>
+                            <ul class="product-list">
+                                <li>Cemento - 50 unidades</li>
+                                <li>Arena - 25 m³</li>
+                            </ul>
+                        </div>
+                        <div class="col-3 text-right reservation-actions">
+                            <button class="btn btn-info action-btn" title="Ver Detalles">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-success action-btn" title="Confirmar">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-danger action-btn" title="Cancelar">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reservation-card confirmed">
+                    <div class="row align-items-center">
+                        <div class="col-1">
+                            <i class="fas fa-check-circle reservation-icon text-success"></i>
+                        </div>
+                        <div class="col-8">
+                            <h5 class="reservation-title">Reserva Confirmada - REM-2024-005</h5>
+                            <p class="mb-0">Cliente: Ferretería ABC</p>
+                            <small class="reservation-date"><i class="fas fa-calendar"></i> Fecha de entrega: 2024-04-22</small>
+                            <ul class="product-list">
+                                <li>Grava - 30 m³</li>
+                                <li>Varilla - 100 unidades</li>
+                            </ul>
+                        </div>
+                        <div class="col-3 text-right reservation-actions">
+                            <button class="btn btn-info action-btn" title="Ver Detalles">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-warning action-btn" title="Modificar">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger action-btn" title="Cancelar">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Botón de Nueva Reserva
+            $('#btnNuevaReserva').click(function() {
+                Swal.fire({
+                    title: 'Crear Nueva Reserva',
+                    html: `
+                        <form id="nuevaReservaForm">
+                            <div class="form-group text-left">
+                                <label for="clienteReserva">Cliente</label>
+                                <select class="form-control form-input" id="clienteReserva" required>
+                                    <option value="">Seleccione un cliente</option>
+                                    <option value="1">Constructora XYZ</option>
+                                    <option value="2">Ferretería ABC</option>
+                                    <option value="3">Materiales S.A.</option>
+                                </select>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="fechaReserva">Fecha de Entrega</label>
+                                <input type="date" class="form-control form-input" id="fechaReserva" required>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="productosReserva">Productos</label>
+                                <div id="productosContainer">
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <select class="form-control form-input producto-select" required>
+                                                <option value="">Seleccione producto</option>
+                                                <option value="1">Cemento</option>
+                                                <option value="2">Arena</option>
+                                                <option value="3">Grava</option>
+                                                <option value="4">Varilla</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <input type="number" class="form-control form-input cantidad-input" placeholder="Cantidad" required>
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="removeProduct(this)">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-info btn-sm mt-2" onclick="addProduct()">
+                                    <i class="fas fa-plus"></i> Agregar Producto
+                                </button>
+                            </div>
+                            <div class="form-group text-left">
+                                <label for="observacionesReserva">Observaciones</label>
+                                <textarea class="form-control form-input" id="observacionesReserva" rows="3"></textarea>
+                            </div>
+                        </form>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar Reserva',
+                    cancelButtonText: 'Cancelar',
+                    preConfirm: () => {
+                        const cliente = document.getElementById('clienteReserva').value;
+                        const fecha = document.getElementById('fechaReserva').value;
+                        const productos = [];
+                        
+                        document.querySelectorAll('.producto-select').forEach((select, index) => {
+                            const cantidad = document.querySelectorAll('.cantidad-input')[index].value;
+                            if (select.value && cantidad) {
+                                productos.push({
+                                    producto: select.options[select.selectedIndex].text,
+                                    cantidad: cantidad
+                                });
+                            }
+                        });
+
+                        if (!cliente || !fecha || productos.length === 0) {
+                            Swal.showValidationMessage('Por favor complete todos los campos requeridos');
+                            return false;
+                        }
+
+                        return {
+                            cliente: cliente,
+                            fecha: fecha,
+                            productos: productos,
+                            observaciones: document.getElementById('observacionesReserva').value
+                        };
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Reserva Creada!',
+                            'La reserva ha sido creada exitosamente.',
+                            'success'
+                        );
+                    }
+                });
+            });
+
+            // Función para agregar producto
+            window.addProduct = function() {
+                const container = document.getElementById('productosContainer');
+                const newProduct = document.createElement('div');
+                newProduct.className = 'row mb-2';
+                newProduct.innerHTML = `
+                    <div class="col-6">
+                        <select class="form-control form-input producto-select" required>
+                            <option value="">Seleccione producto</option>
+                            <option value="1">Cemento</option>
+                            <option value="2">Arena</option>
+                            <option value="3">Grava</option>
+                            <option value="4">Varilla</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <input type="number" class="form-control form-input cantidad-input" placeholder="Cantidad" required>
+                    </div>
+                    <div class="col-2">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="removeProduct(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(newProduct);
+            };
+
+            // Función para eliminar producto
+            window.removeProduct = function(button) {
+                button.closest('.row').remove();
+            };
+
+            // Manejo del formulario de filtros
+            $('#filterForm').on('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Filtrando...',
+                    text: 'Se están aplicando los filtros seleccionados',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+
+            // Confirmación para limpiar filtros
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Limpiar filtros?',
+                    text: "Se mostrarán todas las reservas",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#filterForm')[0].reset();
+                    }
+                });
+            });
+
+            // Ver detalles
+            $('.btn-info.action-btn').click(function() {
+                Swal.fire({
+                    title: 'Detalles de la Reserva',
+                    html: `
+                        <div class="text-left">
+                            <p><strong>Número de Reserva:</strong> REM-2024-004</p>
+                            <p><strong>Cliente:</strong> Constructora XYZ</p>
+                            <p><strong>Fecha de Entrega:</strong> 2024-04-20</p>
+                            <p><strong>Estado:</strong> Pendiente</p>
+                            <p><strong>Productos:</strong></p>
+                            <ul>
+                                <li>Cemento - 50 unidades</li>
+                                <li>Arena - 25 m³</li>
+                            </ul>
+                            <p><strong>Observaciones:</strong> Entregar en la obra principal</p>
+                        </div>
+                    `,
+                    confirmButtonColor: '#2C3E50'
+                });
+            });
+
+            // Confirmar reserva
+            $('.btn-success.action-btn').click(function() {
+                Swal.fire({
+                    title: '¿Confirmar reserva?',
+                    text: "Esta acción confirmará la reserva de la remisión",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, confirmar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Confirmado!',
+                            'La reserva ha sido confirmada.',
+                            'success'
+                        );
+                    }
+                });
+            });
+
+            // Cancelar reserva
+            $('.btn-danger.action-btn').click(function() {
+                Swal.fire({
+                    title: '¿Cancelar reserva?',
+                    text: "Esta acción cancelará la reserva de la remisión",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, cancelar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Cancelado!',
+                            'La reserva ha sido cancelada.',
+                            'success'
+                        );
+                    }
+                });
+            });
+
+            // Modificar reserva
+            $('.btn-warning.action-btn').click(function() {
+                Swal.fire({
+                    title: '¿Modificar reserva?',
+                    text: "Será redirigido a la página de edición",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, modificar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'remision-crear.html';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

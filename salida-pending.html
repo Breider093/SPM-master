@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salidas Pendientes</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .filter-section {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .pending-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #F1C40F;
+        }
+        .pending-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .pending-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .pending-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .pending-info {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .pending-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .pending-stat {
+            text-align: center;
+            padding: 10px;
+            flex: 1;
+        }
+        .pending-stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .pending-stat-label {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        .table-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .table-custom {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .table-custom th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .table-custom td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .table-custom tr:last-child td {
+            border-bottom: none;
+        }
+        .table-custom tr:hover {
+            background: #f8f9fa;
+        }
+        .badge-pending {
+            background-color: #F1C40F;
+            color: #fff;
+        }
+        .badge-overdue {
+            background-color: #E74C3C;
+            color: #fff;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        .search-box input {
+            padding-left: 40px;
+        }
+        .priority-high {
+            color: #E74C3C;
+        }
+        .priority-medium {
+            color: #F1C40F;
+        }
+        .priority-low {
+            color: #2ECC71;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-clock fa-fw"></i> &nbsp; SALIDAS PENDIENTES
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes gestionar todas las salidas que están pendientes de completar.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="salida-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA SALIDA</a>
+                    </li>
+                    <li>
+                        <a href="salida-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SALIDAS</a>
+                    </li>
+                    <li>
+                        <a class="active" href="salida-pending.html"><i class="fas fa-clock fa-fw"></i> &nbsp; PENDIENTES</a>
+                    </li>
+                    <li>
+                        <a href="salida-return.html"><i class="fas fa-undo fa-fw"></i> &nbsp; DEVOLUCIONES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Filtros y Búsqueda -->
+                <div class="filter-section">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <div class="form-group search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" class="form-control form-input" id="searchPending" placeholder="ID o nombre del cliente...">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <button type="button" class="btn btn-primary btn-custom btn-block" onclick="buscarSalida()">
+                                <i class="fas fa-search"></i> &nbsp; BUSCAR
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <select class="form-control form-input" id="tipoFilter">
+                                    <option value="">Todos los tipos</option>
+                                    <option value="venta">Venta</option>
+                                    <option value="prestamo">Préstamo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <select class="form-control form-input" id="prioridadFilter">
+                                    <option value="">Todas las prioridades</option>
+                                    <option value="alta">Alta</option>
+                                    <option value="media">Media</option>
+                                    <option value="baja">Baja</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="button" class="btn btn-primary btn-custom btn-block" onclick="window.location.href='salida-new.html'">
+                                <i class="fas fa-plus"></i> &nbsp; NUEVA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salidas Pendientes Destacadas -->
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="pending-card">
+                            <div class="pending-header">
+                                <div>
+                                    <div class="pending-title">Salida #002</div>
+                                    <div class="pending-info">
+                                        <i class="fas fa-user"></i> Cliente B<br>
+                                        <i class="fas fa-calendar"></i> 2024-03-16<br>
+                                        <i class="fas fa-exclamation-triangle priority-high"></i> Alta Prioridad
+                                    </div>
+                                </div>
+                                <span class="badge badge-pending">Pendiente</span>
+                            </div>
+                            <div class="pending-stats">
+                                <div class="pending-stat">
+                                    <div class="pending-stat-value">2</div>
+                                    <div class="pending-stat-label">Productos</div>
+                                </div>
+                                <div class="pending-stat">
+                                    <div class="pending-stat-value">$800.00</div>
+                                    <div class="pending-stat-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="text-right mt-3">
+                                <button class="btn btn-info btn-sm" onclick="verDetalle('002')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('002')">
+                                    <i class="fas fa-check"></i> Completar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="pending-card">
+                            <div class="pending-header">
+                                <div>
+                                    <div class="pending-title">Salida #004</div>
+                                    <div class="pending-info">
+                                        <i class="fas fa-user"></i> Cliente D<br>
+                                        <i class="fas fa-calendar"></i> 2024-03-18<br>
+                                        <i class="fas fa-exclamation-circle priority-medium"></i> Media Prioridad
+                                    </div>
+                                </div>
+                                <span class="badge badge-overdue">Atrasado</span>
+                            </div>
+                            <div class="pending-stats">
+                                <div class="pending-stat">
+                                    <div class="pending-stat-value">1</div>
+                                    <div class="pending-stat-label">Producto</div>
+                                </div>
+                                <div class="pending-stat">
+                                    <div class="pending-stat-value">$450.00</div>
+                                    <div class="pending-stat-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="text-right mt-3">
+                                <button class="btn btn-info btn-sm" onclick="verDetalle('004')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('004')">
+                                    <i class="fas fa-check"></i> Completar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="pending-card">
+                            <div class="pending-header">
+                                <div>
+                                    <div class="pending-title">Salida #005</div>
+                                    <div class="pending-info">
+                                        <i class="fas fa-user"></i> Cliente E<br>
+                                        <i class="fas fa-calendar"></i> 2024-03-19<br>
+                                        <i class="fas fa-check-circle priority-low"></i> Baja Prioridad
+                                    </div>
+                                </div>
+                                <span class="badge badge-pending">Pendiente</span>
+                            </div>
+                            <div class="pending-stats">
+                                <div class="pending-stat">
+                                    <div class="pending-stat-value">3</div>
+                                    <div class="pending-stat-label">Productos</div>
+                                </div>
+                                <div class="pending-stat">
+                                    <div class="pending-stat-value">$1,200.00</div>
+                                    <div class="pending-stat-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="text-right mt-3">
+                                <button class="btn btn-info btn-sm" onclick="verDetalle('005')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('005')">
+                                    <i class="fas fa-check"></i> Completar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Salidas Pendientes -->
+                <div class="table-container">
+                    <h5 class="mb-4">Lista Completa de Salidas Pendientes</h5>
+                    <div class="table-responsive">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Prioridad</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>002</td>
+                                    <td>Cliente B</td>
+                                    <td>2024-03-16</td>
+                                    <td>Préstamo</td>
+                                    <td>2</td>
+                                    <td>$800.00</td>
+                                    <td><i class="fas fa-exclamation-triangle priority-high"></i> Alta</td>
+                                    <td><span class="badge badge-pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm" onclick="verDetalle('002')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('002')">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>004</td>
+                                    <td>Cliente D</td>
+                                    <td>2024-03-18</td>
+                                    <td>Venta</td>
+                                    <td>1</td>
+                                    <td>$450.00</td>
+                                    <td><i class="fas fa-exclamation-circle priority-medium"></i> Media</td>
+                                    <td><span class="badge badge-overdue">Atrasado</span></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm" onclick="verDetalle('004')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('004')">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>005</td>
+                                    <td>Cliente E</td>
+                                    <td>2024-03-19</td>
+                                    <td>Préstamo</td>
+                                    <td>3</td>
+                                    <td>$1,200.00</td>
+                                    <td><i class="fas fa-check-circle priority-low"></i> Baja</td>
+                                    <td><span class="badge badge-pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm" onclick="verDetalle('005')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('005')">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Manejo de filtros
+            $('#tipoFilter, #prioridadFilter').change(function() {
+                const tipo = $('#tipoFilter').val();
+                const prioridad = $('#prioridadFilter').val();
+                
+                $('.table-custom tbody tr').each(function() {
+                    const rowTipo = $(this).find('td:eq(3)').text();
+                    const rowPrioridad = $(this).find('td:eq(6)').text().trim();
+                    
+                    const tipoMatch = !tipo || rowTipo.toLowerCase() === tipo;
+                    const prioridadMatch = !prioridad || 
+                        (prioridad === 'alta' && rowPrioridad === 'Alta') ||
+                        (prioridad === 'media' && rowPrioridad === 'Media') ||
+                        (prioridad === 'baja' && rowPrioridad === 'Baja');
+                    
+                    $(this).toggle(tipoMatch && prioridadMatch);
+                });
+            });
+        });
+
+        // Función para buscar salida
+        function buscarSalida() {
+            const searchText = $('#searchPending').val().toLowerCase();
+            if (searchText.trim() === '') {
+                Swal.fire({
+                    title: 'Campo vacío',
+                    text: 'Por favor ingresa un ID o nombre para buscar',
+                    icon: 'warning'
+                });
+                return;
+            }
+
+            $('.table-custom tbody tr').each(function() {
+                const id = $(this).find('td:eq(0)').text().toLowerCase();
+                const cliente = $(this).find('td:eq(1)').text().toLowerCase();
+                $(this).toggle(
+                    id.includes(searchText) || 
+                    cliente.includes(searchText)
+                );
+            });
+
+            // Mostrar mensaje si no hay resultados
+            if ($('.table-custom tbody tr:visible').length === 0) {
+                Swal.fire({
+                    title: 'Sin resultados',
+                    text: 'No se encontraron salidas con ese ID o nombre',
+                    icon: 'info'
+                });
+            }
+        }
+
+        // Función para ver detalle de salida
+        function verDetalle(id) {
+            window.location.href = 'salida-detail.html?id=' + id;
+        }
+
+        // Función para completar salida
+        function completarSalida(id) {
+            Swal.fire({
+                title: '¿Completar salida?',
+                text: "¿Está seguro de marcar esta salida como completada?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, completar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        '¡Completado!',
+                        'La salida ha sido marcada como completada.',
+                        'success'
+                    );
+                }
+            });
+        }
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

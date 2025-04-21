@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Salidas</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .filter-section {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .salida-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .salida-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .salida-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .salida-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .salida-info {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .salida-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .salida-stat {
+            text-align: center;
+            padding: 10px;
+            flex: 1;
+        }
+        .salida-stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .salida-stat-label {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        .table-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .table-custom {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .table-custom th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .table-custom td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .table-custom tr:last-child td {
+            border-bottom: none;
+        }
+        .table-custom tr:hover {
+            background: #f8f9fa;
+        }
+        .badge-completed {
+            background-color: #2ECC71;
+            color: #fff;
+        }
+        .badge-pending {
+            background-color: #F1C40F;
+            color: #fff;
+        }
+        .badge-cancelled {
+            background-color: #E74C3C;
+            color: #fff;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        .search-box input {
+            padding-left: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SALIDAS
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes ver y gestionar todas las salidas registradas en el sistema.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="salida-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA SALIDA</a>
+                    </li>
+                    <li>
+                        <a class="active" href="salida-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SALIDAS</a>
+                    </li>
+                    <li>
+                        <a href="salida-pending.html"><i class="fas fa-clock fa-fw"></i> &nbsp; PENDIENTES</a>
+                    </li>
+                    <li>
+                        <a href="salida-return.html"><i class="fas fa-undo fa-fw"></i> &nbsp; DEVOLUCIONES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Filtros y Búsqueda -->
+                <div class="filter-section">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <div class="form-group search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" class="form-control form-input" id="searchSalida" placeholder="Buscar salida...">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <select class="form-control form-input" id="tipoFilter">
+                                    <option value="">Todos los tipos</option>
+                                    <option value="venta">Venta</option>
+                                    <option value="prestamo">Préstamo</option>
+                                    <option value="devolucion">Devolución</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <select class="form-control form-input" id="estadoFilter">
+                                    <option value="">Todos los estados</option>
+                                    <option value="completado">Completado</option>
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="cancelado">Cancelado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="button" class="btn btn-primary btn-custom btn-block" onclick="window.location.href='salida-new.html'">
+                                <i class="fas fa-plus"></i> &nbsp; NUEVA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salidas Destacadas -->
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="salida-card">
+                            <div class="salida-header">
+                                <div>
+                                    <div class="salida-title">Salida #001</div>
+                                    <div class="salida-info">
+                                        <i class="fas fa-user"></i> Cliente A<br>
+                                        <i class="fas fa-calendar"></i> 2024-03-15
+                                    </div>
+                                </div>
+                                <span class="badge badge-completed">Completado</span>
+                            </div>
+                            <div class="salida-stats">
+                                <div class="salida-stat">
+                                    <div class="salida-stat-value">3</div>
+                                    <div class="salida-stat-label">Productos</div>
+                                </div>
+                                <div class="salida-stat">
+                                    <div class="salida-stat-value">$1,500.00</div>
+                                    <div class="salida-stat-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="text-right mt-3">
+                                <button class="btn btn-info btn-sm" onclick="verDetalle('001')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="btn btn-danger btn-sm ml-2" onclick="cancelarSalida('001')">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="salida-card">
+                            <div class="salida-header">
+                                <div>
+                                    <div class="salida-title">Salida #002</div>
+                                    <div class="salida-info">
+                                        <i class="fas fa-user"></i> Cliente B<br>
+                                        <i class="fas fa-calendar"></i> 2024-03-16
+                                    </div>
+                                </div>
+                                <span class="badge badge-pending">Pendiente</span>
+                            </div>
+                            <div class="salida-stats">
+                                <div class="salida-stat">
+                                    <div class="salida-stat-value">2</div>
+                                    <div class="salida-stat-label">Productos</div>
+                                </div>
+                                <div class="salida-stat">
+                                    <div class="salida-stat-value">$800.00</div>
+                                    <div class="salida-stat-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="text-right mt-3">
+                                <button class="btn btn-info btn-sm" onclick="verDetalle('002')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                                <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('002')">
+                                    <i class="fas fa-check"></i> Completar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="salida-card">
+                            <div class="salida-header">
+                                <div>
+                                    <div class="salida-title">Salida #003</div>
+                                    <div class="salida-info">
+                                        <i class="fas fa-user"></i> Cliente C<br>
+                                        <i class="fas fa-calendar"></i> 2024-03-17
+                                    </div>
+                                </div>
+                                <span class="badge badge-cancelled">Cancelado</span>
+                            </div>
+                            <div class="salida-stats">
+                                <div class="salida-stat">
+                                    <div class="salida-stat-value">1</div>
+                                    <div class="salida-stat-label">Producto</div>
+                                </div>
+                                <div class="salida-stat">
+                                    <div class="salida-stat-value">$350.00</div>
+                                    <div class="salida-stat-label">Total</div>
+                                </div>
+                            </div>
+                            <div class="text-right mt-3">
+                                <button class="btn btn-info btn-sm" onclick="verDetalle('003')">
+                                    <i class="fas fa-eye"></i> Ver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Salidas -->
+                <div class="table-container">
+                    <h5 class="mb-4">Lista Completa de Salidas</h5>
+                    <div class="table-responsive">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>001</td>
+                                    <td>Cliente A</td>
+                                    <td>2024-03-15</td>
+                                    <td>Venta</td>
+                                    <td>3</td>
+                                    <td>$1,500.00</td>
+                                    <td><span class="badge badge-completed">Completado</span></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm" onclick="verDetalle('001')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm ml-2" onclick="cancelarSalida('001')">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>002</td>
+                                    <td>Cliente B</td>
+                                    <td>2024-03-16</td>
+                                    <td>Préstamo</td>
+                                    <td>2</td>
+                                    <td>$800.00</td>
+                                    <td><span class="badge badge-pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm" onclick="verDetalle('002')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('002')">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>003</td>
+                                    <td>Cliente C</td>
+                                    <td>2024-03-17</td>
+                                    <td>Devolución</td>
+                                    <td>1</td>
+                                    <td>$350.00</td>
+                                    <td><span class="badge badge-cancelled">Cancelado</span></td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm" onclick="verDetalle('003')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Manejo de la búsqueda
+            $('#searchSalida').on('keyup', function() {
+                const searchText = $(this).val().toLowerCase();
+                $('.table-custom tbody tr').each(function() {
+                    const rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(searchText) > -1);
+                });
+            });
+
+            // Manejo de filtros
+            $('#tipoFilter, #estadoFilter').change(function() {
+                const tipo = $('#tipoFilter').val();
+                const estado = $('#estadoFilter').val();
+                
+                $('.table-custom tbody tr').each(function() {
+                    const rowTipo = $(this).find('td:eq(3)').text();
+                    const rowEstado = $(this).find('.badge').text();
+                    
+                    const tipoMatch = !tipo || rowTipo.toLowerCase() === tipo;
+                    const estadoMatch = !estado || 
+                        (estado === 'completado' && rowEstado === 'Completado') ||
+                        (estado === 'pendiente' && rowEstado === 'Pendiente') ||
+                        (estado === 'cancelado' && rowEstado === 'Cancelado');
+                    
+                    $(this).toggle(tipoMatch && estadoMatch);
+                });
+            });
+        });
+
+        // Función para ver detalle de salida
+        function verDetalle(id) {
+            window.location.href = 'salida-detail.html?id=' + id;
+        }
+
+        // Función para completar salida
+        function completarSalida(id) {
+            Swal.fire({
+                title: '¿Completar salida?',
+                text: "¿Está seguro de marcar esta salida como completada?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, completar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        '¡Completado!',
+                        'La salida ha sido marcada como completada.',
+                        'success'
+                    );
+                }
+            });
+        }
+
+        // Función para cancelar salida
+        function cancelarSalida(id) {
+            Swal.fire({
+                title: '¿Cancelar salida?',
+                text: "Esta acción no se puede deshacer",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, cancelar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        '¡Cancelado!',
+                        'La salida ha sido cancelada correctamente.',
+                        'success'
+                    );
+                }
+            });
+        }
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

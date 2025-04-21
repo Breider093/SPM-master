@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Lista de Clientes</title>
+
+	<!-- Normalize V8.0.1 -->
+	<link rel="stylesheet" href="./css/normalize.css">
+
+	<!-- Bootstrap V4.3 -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+
+	<!-- Bootstrap Material Design V4.0 -->
+	<link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+	<!-- Font Awesome V5.9.0 -->
+	<link rel="stylesheet" href="./css/all.css">
+
+	<!-- Sweet Alerts V8.13.0 CSS file -->
+	<link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+	<!-- jQuery Custom Content Scroller V3.1.5 -->
+	<link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+	
+	<!-- General Styles -->
+	<link rel="stylesheet" href="./css/style.css">
+
+	<!-- Preload Styles -->
+	<link rel="stylesheet" href="./css/preload.css">
+
+	<style>
+		.filter-section {
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 15px rgba(0,0,0,0.1);
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+		.form-input {
+			border-radius: 25px;
+			padding: 10px 20px;
+			border: 1px solid #e0e0e0;
+			transition: all 0.3s ease;
+		}
+		.form-input:focus {
+			border-color: #2C3E50;
+			box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+		}
+		.table-container {
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 15px rgba(0,0,0,0.1);
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+		.btn-action {
+			border-radius: 50%;
+			width: 35px;
+			height: 35px;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+		}
+		.btn-action:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		}
+		.client-card {
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 15px rgba(0,0,0,0.1);
+			padding: 20px;
+			margin-bottom: 20px;
+			transition: all 0.3s ease;
+		}
+		.client-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+		}
+		.client-name {
+			font-size: 1.2rem;
+			font-weight: 600;
+			color: #2C3E50;
+			margin-bottom: 10px;
+		}
+		.client-info {
+			color: #666;
+			font-size: 0.9rem;
+		}
+	</style>
+</head>
+<body>
+	
+	<!-- Main container -->
+	<main class="full-box main-container">
+		<!-- El menú lateral se cargará dinámicamente desde components.js -->
+
+		<!-- Page content -->
+		<section class="full-box page-content">
+			<!-- La barra de navegación se cargará dinámicamente desde components.js -->
+
+			<!-- Page header -->
+			<div class="full-box page-header">
+				<h3 class="text-left">
+					<i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES
+				</h3>
+				<p class="text-justify">
+					En esta sección puedes ver la lista de todos los clientes registrados en el sistema. Puedes buscar clientes específicos, ver sus detalles, editar su información o eliminarlos del sistema.
+				</p>
+			</div>
+
+			<div class="container-fluid">
+				<ul class="full-box list-unstyled page-nav-tabs">
+					<li>
+						<a href="client-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE</a>
+					</li>
+					<li>
+						<a class="active" href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES</a>
+					</li>
+					<li>
+						<a href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE</a>
+					</li>
+					<li>
+						<a href="cliente-saldo.html"><i class="fas fa-dollar-sign fa-fw"></i> &nbsp; CONSULTAR SALDO</a>
+					</li>
+					<li>
+						<a href="cliente-kardex.html"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; KARDEX</a>
+					</li>
+				</ul>	
+			</div>
+			
+			<!-- Filtros -->
+			<div class="container-fluid">
+				<div class="filter-section">
+					<div class="row">
+						<div class="col-12 col-md-6">
+							<div class="form-group">
+								<label for="buscarCliente" class="bmd-label-floating">Buscar Cliente</label>
+								<input type="text" class="form-control form-input" id="buscarCliente" placeholder="ID, nombre o apellido...">
+							</div>
+						</div>
+						<div class="col-12 col-md-3">
+							<div class="form-group">
+								<label for="filtroEstado" class="bmd-label-floating">Estado</label>
+								<select class="form-control form-input" id="filtroEstado">
+									<option value="">Todos</option>
+									<option value="activo">Activo</option>
+									<option value="inactivo">Inactivo</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-12 col-md-3">
+							<div class="form-group">
+								<label for="filtroFecha" class="bmd-label-floating">Fecha de Registro</label>
+								<input type="date" class="form-control form-input" id="filtroFecha">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Tarjetas de Clientes -->
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-12 col-md-6 col-lg-4">
+						<div class="client-card">
+							<div class="client-name">Juan Pérez</div>
+							<div class="client-info">
+								<p><strong>ID:</strong> 001</p>
+								<p><strong>Teléfono:</strong> 123-456-7890</p>
+								<p><strong>Email:</strong> juan@ejemplo.com</p>
+								<p><strong>Estado:</strong> <span class="badge badge-success">Activo</span></p>
+							</div>
+							<div class="text-right mt-3">
+								<button class="btn btn-info btn-action" title="Ver Detalles">
+									<i class="fas fa-eye"></i>
+								</button>
+								<button class="btn btn-success btn-action" title="Editar">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button class="btn btn-danger btn-action" title="Eliminar">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- Más tarjetas de clientes aquí -->
+				</div>
+			</div>
+
+			<!-- Tabla de Clientes -->
+			<div class="container-fluid">
+				<div class="table-container">
+					<div class="table-responsive">
+						<table class="table table-dark table-sm">
+							<thead>
+								<tr class="text-center roboto-medium">
+									<th>#</th>
+									<th>DNI</th>
+									<th>NOMBRE</th>
+									<th>APELLIDO</th>
+									<th>TELÉFONO</th>
+									<th>EMAIL</th>
+									<th>ESTADO</th>
+									<th>ACCIONES</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center">
+									<td>1</td>
+									<td>12345678</td>
+									<td>Juan</td>
+									<td>Pérez</td>
+									<td>123-456-7890</td>
+									<td>juan@ejemplo.com</td>
+									<td><span class="badge badge-success">Activo</span></td>
+									<td>
+										<button class="btn btn-info btn-action" title="Ver Detalles">
+											<i class="fas fa-eye"></i>
+										</button>
+										<button class="btn btn-success btn-action" title="Editar">
+											<i class="fas fa-edit"></i>
+										</button>
+										<button class="btn btn-danger btn-action" title="Eliminar">
+											<i class="fas fa-trash-alt"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	
+	<!--=============================================
+	=            Include JavaScript files           =
+	==============================================-->
+	<!-- jQuery V3.4.1 -->
+	<script src="./js/jquery-3.4.1.min.js"></script>
+
+	<!-- popper -->
+	<script src="./js/popper.min.js"></script>
+
+	<!-- Bootstrap V4.3 -->
+	<script src="./js/bootstrap.min.js"></script>
+
+	<!-- jQuery Custom Content Scroller V3.1.5 -->
+	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- Bootstrap Material Design V4.0 -->
+	<script src="./js/bootstrap-material-design.min.js"></script>
+	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
+	<!-- Componentes -->
+	<script src="./js/components.js"></script>
+
+	<script src="./js/main.js"></script>
+
+	<!-- Script para manejar la precarga -->
+	<script>
+		window.addEventListener('load', function() {
+			document.body.classList.add('loaded');
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('#buscarCliente').on('keyup', function() {
+				const value = $(this).val().toLowerCase();
+				$('.client-card').filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+				});
+			});
+
+			$('.btn-danger').on('click', function() {
+				Swal.fire({
+					title: '¿Estás seguro?',
+					text: "Esta acción no se puede deshacer",
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Sí, eliminar',
+					cancelButtonText: 'Cancelar'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire(
+							'¡Eliminado!',
+							'El cliente ha sido eliminado correctamente.',
+							'success'
+						);
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

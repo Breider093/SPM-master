@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Buscar Cliente</title>
+
+	<!-- Normalize V8.0.1 -->
+	<link rel="stylesheet" href="./css/normalize.css">
+
+	<!-- Bootstrap V4.3 -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+
+	<!-- Bootstrap Material Design V4.0 -->
+	<link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+	<!-- Font Awesome V5.9.0 -->
+	<link rel="stylesheet" href="./css/all.css">
+
+	<!-- Sweet Alerts V8.13.0 CSS file -->
+	<link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+	<!-- jQuery Custom Content Scroller V3.1.5 -->
+	<link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+	
+	<!-- General Styles -->
+	<link rel="stylesheet" href="./css/style.css">
+
+	<!-- Preload Styles -->
+	<link rel="stylesheet" href="./css/preload.css">
+
+	<style>
+		.search-section {
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 15px rgba(0,0,0,0.1);
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+		.form-input {
+			border-radius: 25px;
+			padding: 10px 20px;
+			border: 1px solid #e0e0e0;
+			transition: all 0.3s ease;
+		}
+		.form-input:focus {
+			border-color: #2C3E50;
+			box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+		}
+		.result-card {
+			background: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 15px rgba(0,0,0,0.1);
+			padding: 20px;
+			margin-bottom: 20px;
+			transition: all 0.3s ease;
+		}
+		.result-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+		}
+		.client-name {
+			font-size: 1.2rem;
+			font-weight: 600;
+			color: #2C3E50;
+			margin-bottom: 10px;
+		}
+		.client-info {
+			color: #666;
+			font-size: 0.9rem;
+		}
+		.btn-search {
+			border-radius: 25px;
+			padding: 10px 30px;
+			transition: all 0.3s ease;
+		}
+		.btn-search:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		}
+	</style>
+</head>
+<body>
+	
+	<!-- Main container -->
+	<main class="full-box main-container">
+		<!-- El menú lateral se cargará dinámicamente desde components.js -->
+
+		<!-- Page content -->
+		<section class="full-box page-content">
+			<!-- La barra de navegación se cargará dinámicamente desde components.js -->
+
+			<!-- Page header -->
+			<div class="full-box page-header">
+				<h3 class="text-left">
+					<i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE
+				</h3>
+				<p class="text-justify">
+					En esta sección puedes buscar clientes específicos por su ID, nombre o apellido. Ingresa los datos del cliente que deseas encontrar y haz clic en el botón de búsqueda.
+				</p>
+			</div>
+
+			<div class="container-fluid">
+				<ul class="full-box list-unstyled page-nav-tabs">
+					<li>
+						<a href="client-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR CLIENTE</a>
+					</li>
+					<li>
+						<a href="client-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE CLIENTES</a>
+					</li>
+					<li>
+						<a class="active" href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR CLIENTE</a>
+					</li>
+					<li>
+						<a href="cliente-saldo.html"><i class="fas fa-dollar-sign fa-fw"></i> &nbsp; CONSULTAR SALDO</a>
+					</li>
+					<li>
+						<a href="cliente-kardex.html"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; KARDEX</a>
+					</li>
+				</ul>	
+			</div>
+			
+			<!-- Formulario de búsqueda -->
+			<div class="container-fluid">
+				<div class="search-section">
+					<div class="row">
+						<div class="col-12 col-md-6">
+							<div class="form-group">
+								<label for="buscarCliente" class="bmd-label-floating">Buscar Cliente</label>
+								<input type="text" class="form-control form-input" id="buscarCliente" placeholder="ID, nombre o apellido...">
+							</div>
+						</div>
+						<div class="col-12 col-md-3">
+							<div class="form-group">
+								<label for="tipoBusqueda" class="bmd-label-floating">Tipo de Búsqueda</label>
+								<select class="form-control form-input" id="tipoBusqueda">
+									<option value="todos">Todos</option>
+									<option value="id">ID</option>
+									<option value="nombre">Nombre</option>
+									<option value="apellido">Apellido</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-12 col-md-3">
+							<div class="form-group">
+								<label for="estadoCliente" class="bmd-label-floating">Estado</label>
+								<select class="form-control form-input" id="estadoCliente">
+									<option value="todos">Todos</option>
+									<option value="activo">Activo</option>
+									<option value="inactivo">Inactivo</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="text-center mt-4">
+						<button class="btn btn-raised btn-info btn-search" id="btnBuscar">
+							<i class="fas fa-search"></i> &nbsp; BUSCAR
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Resultados de búsqueda -->
+			<div class="container-fluid">
+				<div class="row" id="resultadosBusqueda">
+					<!-- Los resultados se mostrarán aquí -->
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	
+	<!--=============================================
+	=            Include JavaScript files           =
+	==============================================-->
+	<!-- jQuery V3.4.1 -->
+	<script src="./js/jquery-3.4.1.min.js"></script>
+
+	<!-- popper -->
+	<script src="./js/popper.min.js"></script>
+
+	<!-- Bootstrap V4.3 -->
+	<script src="./js/bootstrap.min.js"></script>
+
+	<!-- jQuery Custom Content Scroller V3.1.5 -->
+	<script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<!-- Bootstrap Material Design V4.0 -->
+	<script src="./js/bootstrap-material-design.min.js"></script>
+	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
+	<!-- Componentes -->
+	<script src="./js/components.js"></script>
+
+	<script src="./js/main.js"></script>
+
+	<!-- Script para manejar la precarga -->
+	<script>
+		window.addEventListener('load', function() {
+			document.body.classList.add('loaded');
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('#btnBuscar').on('click', function() {
+				const busqueda = $('#buscarCliente').val().trim();
+				const tipo = $('#tipoBusqueda').val();
+				const estado = $('#estadoCliente').val();
+
+				if (busqueda === '') {
+					Swal.fire({
+						icon: 'warning',
+						title: 'Campo vacío',
+						text: 'Por favor ingresa un término de búsqueda',
+						confirmButtonText: 'Entendido'
+					});
+					return;
+				}
+
+				// Aquí iría la lógica de búsqueda real
+				// Por ahora mostramos un ejemplo
+				const resultados = `
+					<div class="col-12 col-md-6 col-lg-4">
+						<div class="result-card">
+							<div class="client-name">Juan Pérez</div>
+							<div class="client-info">
+								<p><strong>ID:</strong> 001</p>
+								<p><strong>Teléfono:</strong> 123-456-7890</p>
+								<p><strong>Email:</strong> juan@ejemplo.com</p>
+								<p><strong>Estado:</strong> <span class="badge badge-success">Activo</span></p>
+							</div>
+							<div class="text-right mt-3">
+								<button class="btn btn-info btn-action" title="Ver Detalles">
+									<i class="fas fa-eye"></i>
+								</button>
+								<button class="btn btn-success btn-action" title="Editar">
+									<i class="fas fa-edit"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				`;
+
+				$('#resultadosBusqueda').html(resultados);
+			});
+		});
+	</script>
+</body>
+</html>

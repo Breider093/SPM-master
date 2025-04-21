@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Cotizaciones</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .search-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table th {
+            background-color: #2C3E50;
+            color: white;
+            border: none;
+            padding: 15px;
+        }
+        .table td {
+            vertical-align: middle;
+            padding: 15px;
+        }
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        .badge {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 3px;
+            transition: all 0.3s ease;
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-search fa-fw"></i> &nbsp; CONSULTAR COTIZACIONES
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes consultar y gestionar las cotizaciones existentes. Utiliza los filtros para encontrar la información que necesitas.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="cotizacion-crear.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA COTIZACIÓN</a>
+                    </li>
+                    <li>
+                        <a class="active" href="cotizacion-consultar.html"><i class="fas fa-search fa-fw"></i> &nbsp; CONSULTAR COTIZACIONES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Filtros de Búsqueda -->
+                <div class="search-card">
+                    <form class="form-neon" id="searchForm">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="fechaInicio">
+                                        <i class="fas fa-calendar"></i> Fecha Inicio
+                                    </label>
+                                    <input type="date" class="form-control form-input" id="fechaInicio" name="fechaInicio">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="fechaFin">
+                                        <i class="fas fa-calendar"></i> Fecha Fin
+                                    </label>
+                                    <input type="date" class="form-control form-input" id="fechaFin" name="fechaFin">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="cliente">
+                                        <i class="fas fa-user"></i> Cliente
+                                    </label>
+                                    <select class="form-control form-input" id="cliente" name="cliente">
+                                        <option value="">Todos los clientes</option>
+                                        <option value="1">Constructora XYZ</option>
+                                        <option value="2">Ferretería ABC</option>
+                                        <option value="3">Materiales S.A.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="estado">
+                                        <i class="fas fa-tag"></i> Estado
+                                    </label>
+                                    <select class="form-control form-input" id="estado" name="estado">
+                                        <option value="">Todos los estados</option>
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="aprobada">Aprobada</option>
+                                        <option value="rechazada">Rechazada</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-info btn-custom">
+                                <i class="fas fa-search"></i> &nbsp; BUSCAR
+                            </button>
+                            <button type="reset" class="btn btn-secondary btn-custom ml-2">
+                                <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Tabla de Cotizaciones -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Número de Cotización</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Vencimiento</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>COT-2024-001</td>
+                                <td>Constructora XYZ</td>
+                                <td>2024-04-15</td>
+                                <td>2024-04-30</td>
+                                <td>$1,250,000</td>
+                                <td>
+                                    <span class="badge badge-success">Aprobada</span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info action-btn" title="Ver Detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-warning action-btn" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger action-btn" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>COT-2024-002</td>
+                                <td>Ferretería ABC</td>
+                                <td>2024-04-16</td>
+                                <td>2024-05-01</td>
+                                <td>$850,000</td>
+                                <td>
+                                    <span class="badge badge-warning">Pendiente</span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-info action-btn" title="Ver Detalles">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-warning action-btn" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger action-btn" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Manejo del formulario de búsqueda
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Buscando...',
+                    text: 'Se están aplicando los filtros seleccionados',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+
+            // Confirmación para limpiar filtros
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Limpiar filtros?',
+                    text: "Se mostrarán todos los datos",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#searchForm')[0].reset();
+                    }
+                });
+            });
+
+            // Ver detalles
+            $('.btn-info.action-btn').click(function() {
+                Swal.fire({
+                    title: 'Detalles de la Cotización',
+                    html: `
+                        <div class="text-left">
+                            <p><strong>Número:</strong> COT-2024-001</p>
+                            <p><strong>Cliente:</strong> Constructora XYZ</p>
+                            <p><strong>Fecha:</strong> 2024-04-15</p>
+                            <p><strong>Vencimiento:</strong> 2024-04-30</p>
+                            <p><strong>Estado:</strong> Aprobada</p>
+                            <p><strong>Monto Total:</strong> $1,250,000</p>
+                            <hr>
+                            <h6>Productos:</h6>
+                            <ul>
+                                <li>Cemento - 100 unidades - $500 c/u</li>
+                                <li>Arena - 50 m³ - $1,000 c/u</li>
+                                <li>Grava - 30 m³ - $1,500 c/u</li>
+                            </ul>
+                        </div>
+                    `,
+                    confirmButtonColor: '#2C3E50'
+                });
+            });
+
+            // Editar
+            $('.btn-warning.action-btn').click(function() {
+                window.location.href = 'cotizacion-crear.html';
+            });
+
+            // Eliminar
+            $('.btn-danger.action-btn').click(function() {
+                Swal.fire({
+                    title: '¿Eliminar cotización?',
+                    text: "Esta acción no se puede deshacer",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'La cotización ha sido eliminada.',
+                            'success'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Órdenes de Compra</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .search-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .search-card:hover {
+            transform: translateY(-5px);
+        }
+        .table-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-action {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            padding: 0;
+            line-height: 35px;
+            text-align: center;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table th {
+            background-color: #2C3E50;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-weight: 500;
+        }
+        .table td {
+            vertical-align: middle;
+            padding: 15px;
+        }
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+            transform: scale(1.01);
+        }
+        .badge {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .search-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .orden-info {
+            display: flex;
+            align-items: center;
+        }
+        .orden-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2C3E50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+        .status-badge i {
+            font-size: 0.8rem;
+        }
+        .proveedor-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fecha-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .fecha-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin: 0;
+        }
+        .monto-info {
+            font-weight: 600;
+            color: #2C3E50;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-shopping-cart fa-fw"></i> &nbsp; CONSULTA DE ÓRDENES DE COMPRA
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes consultar y gestionar las órdenes de compra del sistema. Utiliza los filtros para encontrar órdenes específicas y las acciones disponibles para ver detalles, editar o eliminar registros.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="orden-compra-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA ORDEN</a>
+                    </li>
+                    <li>
+                        <a class="active" href="orden-compra-consultar.html"><i class="fas fa-search fa-fw"></i> &nbsp; CONSULTAR ÓRDENES</a>
+                    </li>
+                    <li>
+                        <a href="orden-compra-reportes.html"><i class="fas fa-chart-bar fa-fw"></i> &nbsp; REPORTES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Search Form -->
+                <div class="search-card">
+                    <form class="form-neon" id="searchForm">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="searchOrden">
+                                        <i class="fas fa-hashtag"></i> Número de Orden
+                                    </label>
+                                    <input type="text" class="form-control search-input" id="searchOrden" name="searchOrden" placeholder="Número de orden...">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="searchProveedor">
+                                        <i class="fas fa-building"></i> Proveedor
+                                    </label>
+                                    <input type="text" class="form-control search-input" id="searchProveedor" name="searchProveedor" placeholder="Nombre del proveedor...">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="searchFecha">
+                                        <i class="fas fa-calendar"></i> Fecha
+                                    </label>
+                                    <input type="date" class="form-control search-input" id="searchFecha" name="searchFecha">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="searchEstado">
+                                        <i class="fas fa-tag"></i> Estado
+                                    </label>
+                                    <select class="form-control search-input" id="searchEstado" name="searchEstado">
+                                        <option value="">Todos</option>
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="aprobada">Aprobada</option>
+                                        <option value="rechazada">Rechazada</option>
+                                        <option value="completada">Completada</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-info btn-custom">
+                                <i class="fas fa-search"></i> &nbsp; BUSCAR
+                            </button>
+                            <button type="reset" class="btn btn-secondary btn-custom ml-2">
+                                <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Table -->
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Orden</th>
+                                    <th>Proveedor</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <div class="orden-info">
+                                            <div class="orden-icon">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">OC-2024-001</h6>
+                                                <small class="text-muted">Materiales de Construcción</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="proveedor-info">
+                                            <i class="fas fa-building text-primary"></i>
+                                            <div>
+                                                <h6 class="mb-0">Constructora XYZ</h6>
+                                                <small class="text-muted">NIT: 900.123.456-7</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="fecha-info">
+                                            <div>
+                                                <p class="fecha-label mb-0">Emisión:</p>
+                                                <strong>2024-04-15</strong>
+                                            </div>
+                                            <div>
+                                                <p class="fecha-label mb-0">Entrega:</p>
+                                                <strong>2024-04-20</strong>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="monto-info">
+                                        $1,250,000
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="status-badge badge-success">
+                                            <i class="fas fa-check-circle"></i>
+                                            Aprobada
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-info btn-action" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-action" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-action" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <div class="orden-info">
+                                            <div class="orden-icon">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">OC-2024-002</h6>
+                                                <small class="text-muted">Herramientas</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="proveedor-info">
+                                            <i class="fas fa-building text-primary"></i>
+                                            <div>
+                                                <h6 class="mb-0">Ferretería ABC</h6>
+                                                <small class="text-muted">NIT: 800.987.654-3</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="fecha-info">
+                                            <div>
+                                                <p class="fecha-label mb-0">Emisión:</p>
+                                                <strong>2024-04-16</strong>
+                                            </div>
+                                            <div>
+                                                <p class="fecha-label mb-0">Entrega:</p>
+                                                <strong>2024-04-18</strong>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="monto-info">
+                                        $850,000
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="status-badge badge-warning">
+                                            <i class="fas fa-clock"></i>
+                                            Pendiente
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-info btn-action" title="Ver detalles">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-action" title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-action" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Búsqueda en tiempo real
+            $('.search-input').on('keyup', function() {
+                var value = $(this).val().toLowerCase();
+                $("table tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            // Manejo de botones de acción
+            $('.btn-action').click(function() {
+                if($(this).hasClass('btn-info')) {
+                    // Ver detalles
+                    Swal.fire({
+                        title: 'Detalles de la Orden',
+                        html: `
+                            <div class="text-left">
+                                <p><strong>Número de Orden:</strong> ${$(this).closest('tr').find('h6').first().text()}</p>
+                                <p><strong>Tipo:</strong> ${$(this).closest('tr').find('small').first().text()}</p>
+                                <p><strong>Proveedor:</strong> ${$(this).closest('tr').find('.proveedor-info h6').text()}</p>
+                                <p><strong>NIT:</strong> ${$(this).closest('tr').find('.proveedor-info small').text()}</p>
+                                <p><strong>Fecha Emisión:</strong> ${$(this).closest('tr').find('.fecha-info strong').first().text()}</p>
+                                <p><strong>Fecha Entrega:</strong> ${$(this).closest('tr').find('.fecha-info strong').last().text()}</p>
+                                <p><strong>Monto:</strong> ${$(this).closest('tr').find('.monto-info').text()}</p>
+                                <p><strong>Estado:</strong> ${$(this).closest('tr').find('.status-badge').text().trim()}</p>
+                            </div>
+                        `,
+                        confirmButtonColor: '#2C3E50'
+                    });
+                } else if($(this).hasClass('btn-danger')) {
+                    // Eliminar
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "Esta acción no se puede deshacer",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                '¡Eliminado!',
+                                'La orden ha sido eliminada.',
+                                'success'
+                            )
+                        }
+                    });
+                }
+            });
+
+            // Manejo del formulario de búsqueda
+            $('#searchForm').on('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Buscando...',
+                    text: 'Se están filtrando los resultados',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            });
+
+            // Confirmación para limpiar búsqueda
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Limpiar filtros?',
+                    text: "Se mostrarán todas las órdenes",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#searchForm')[0].reset();
+                        $('table tbody tr').show();
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

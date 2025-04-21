@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Productos</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .filter-section {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .chart-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .table-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .table-custom {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .table-custom th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .table-custom td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .table-custom tr:last-child td {
+            border-bottom: none;
+        }
+        .table-custom tr:hover {
+            background: #f8f9fa;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .product-info {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .product-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .product-stat {
+            text-align: center;
+            padding: 10px;
+            flex: 1;
+        }
+        .product-stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .product-stat-label {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        .stock-low {
+            color: #E74C3C;
+        }
+        .stock-medium {
+            color: #F1C40F;
+        }
+        .stock-high {
+            color: #2ECC71;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-box fa-fw"></i> &nbsp; REPORTE DE PRODUCTOS
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes analizar el rendimiento y disponibilidad de tus productos.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="reporte-ventas.html"><i class="fas fa-chart-line fa-fw"></i> &nbsp; VENTAS</a>
+                    </li>
+                    <li>
+                        <a href="reporte-clientes.html"><i class="fas fa-users fa-fw"></i> &nbsp; CLIENTES</a>
+                    </li>
+                    <li>
+                        <a class="active" href="reporte-productos.html"><i class="fas fa-box fa-fw"></i> &nbsp; PRODUCTOS</a>
+                    </li>
+                    <li>
+                        <a href="reporte-finanzas.html"><i class="fas fa-money-bill-wave fa-fw"></i> &nbsp; FINANZAS</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Filtros -->
+                <div class="filter-section">
+                    <form class="form-neon" id="filterForm">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="categoria">
+                                        <i class="fas fa-tags"></i> Categoría
+                                    </label>
+                                    <select class="form-control form-input" id="categoria" name="categoria">
+                                        <option value="">Todas las categorías</option>
+                                        <option value="materiales">Materiales</option>
+                                        <option value="herramientas">Herramientas</option>
+                                        <option value="equipos">Equipos</option>
+                                        <option value="otros">Otros</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="stock">
+                                        <i class="fas fa-boxes"></i> Estado de Stock
+                                    </label>
+                                    <select class="form-control form-input" id="stock" name="stock">
+                                        <option value="">Todos</option>
+                                        <option value="bajo">Stock Bajo</option>
+                                        <option value="medio">Stock Medio</option>
+                                        <option value="alto">Stock Alto</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="ordenar">
+                                        <i class="fas fa-sort"></i> Ordenar por
+                                    </label>
+                                    <select class="form-control form-input" id="ordenar" name="ordenar">
+                                        <option value="ventas">Más Vendidos</option>
+                                        <option value="stock">Stock</option>
+                                        <option value="precio">Precio</option>
+                                        <option value="nombre">Nombre</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="proveedor">
+                                        <i class="fas fa-truck"></i> Proveedor
+                                    </label>
+                                    <select class="form-control form-input" id="proveedor" name="proveedor">
+                                        <option value="">Todos los proveedores</option>
+                                        <option value="1">Proveedor A</option>
+                                        <option value="2">Proveedor B</option>
+                                        <option value="3">Proveedor C</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-info btn-custom">
+                                <i class="fas fa-search"></i> &nbsp; GENERAR REPORTE
+                            </button>
+                            <button type="reset" class="btn btn-secondary btn-custom ml-2">
+                                <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                            </button>
+                            <button type="button" class="btn btn-success btn-custom ml-2" onclick="exportarReporte()">
+                                <i class="fas fa-file-excel"></i> &nbsp; EXPORTAR
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Estadísticas -->
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">250</div>
+                            <div class="stat-label">Total Productos</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">45</div>
+                            <div class="stat-label">Productos con Stock Bajo</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">$15,500</div>
+                            <div class="stat-label">Valor Total en Stock</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Productos Sin Movimiento</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos -->
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="chart-container">
+                            <h5 class="text-center mb-4">Distribución de Productos por Categoría</h5>
+                            <canvas id="productosCategoriaChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="chart-container">
+                            <h5 class="text-center mb-4">Top 5 Productos Más Vendidos</h5>
+                            <canvas id="topProductosChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productos Destacados -->
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="product-card">
+                            <div class="product-header">
+                                <div>
+                                    <div class="product-name">Cemento Portland</div>
+                                    <div class="product-info">
+                                        <i class="fas fa-tag"></i> Materiales<br>
+                                        <i class="fas fa-barcode"></i> PROD-001
+                                    </div>
+                                </div>
+                                <span class="badge badge-warning">Stock Medio</span>
+                            </div>
+                            <div class="product-stats">
+                                <div class="product-stat">
+                                    <div class="product-stat-value">$25.00</div>
+                                    <div class="product-stat-label">Precio Unitario</div>
+                                </div>
+                                <div class="product-stat">
+                                    <div class="product-stat-value">150</div>
+                                    <div class="product-stat-label">Stock Actual</div>
+                                </div>
+                                <div class="product-stat">
+                                    <div class="product-stat-value">45</div>
+                                    <div class="product-stat-label">Ventas Mes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="product-card">
+                            <div class="product-header">
+                                <div>
+                                    <div class="product-name">Martillo Demoledor</div>
+                                    <div class="product-info">
+                                        <i class="fas fa-tag"></i> Herramientas<br>
+                                        <i class="fas fa-barcode"></i> PROD-002
+                                    </div>
+                                </div>
+                                <span class="badge badge-success">Stock Alto</span>
+                            </div>
+                            <div class="product-stats">
+                                <div class="product-stat">
+                                    <div class="product-stat-value">$350.00</div>
+                                    <div class="product-stat-label">Precio Unitario</div>
+                                </div>
+                                <div class="product-stat">
+                                    <div class="product-stat-value">25</div>
+                                    <div class="product-stat-label">Stock Actual</div>
+                                </div>
+                                <div class="product-stat">
+                                    <div class="product-stat-value">12</div>
+                                    <div class="product-stat-label">Ventas Mes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de Productos -->
+                <div class="table-container">
+                    <h5 class="mb-4">Lista de Productos</h5>
+                    <div class="table-responsive">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Stock</th>
+                                    <th>Precio</th>
+                                    <th>Ventas Mes</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cemento Portland</td>
+                                    <td>Materiales</td>
+                                    <td class="stock-medium">150</td>
+                                    <td>$25.00</td>
+                                    <td>45</td>
+                                    <td><span class="badge badge-warning">Stock Medio</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Martillo Demoledor</td>
+                                    <td>Herramientas</td>
+                                    <td class="stock-high">25</td>
+                                    <td>$350.00</td>
+                                    <td>12</td>
+                                    <td><span class="badge badge-success">Stock Alto</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Pintura Acrílica</td>
+                                    <td>Materiales</td>
+                                    <td class="stock-low">5</td>
+                                    <td>$45.00</td>
+                                    <td>30</td>
+                                    <td><span class="badge badge-danger">Stock Bajo</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Configuración de gráficos
+            const productosCategoriaCtx = document.getElementById('productosCategoriaChart').getContext('2d');
+            const topProductosCtx = document.getElementById('topProductosChart').getContext('2d');
+
+            // Gráfico de distribución de productos por categoría
+            new Chart(productosCategoriaCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Materiales', 'Herramientas', 'Equipos', 'Otros'],
+                    datasets: [{
+                        data: [40, 30, 20, 10],
+                        backgroundColor: [
+                            '#2C3E50',
+                            '#3498DB',
+                            '#E74C3C',
+                            '#F1C40F'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            // Gráfico de top productos más vendidos
+            new Chart(topProductosCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cemento', 'Pintura', 'Martillo', 'Tornillos', 'Cables'],
+                    datasets: [{
+                        label: 'Unidades Vendidas',
+                        data: [45, 30, 25, 20, 15],
+                        backgroundColor: '#2C3E50'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Manejo del formulario de filtros
+            $('#filterForm').on('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Generando Reporte',
+                    text: 'Se están procesando los datos según los filtros seleccionados',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+
+            // Confirmación para limpiar filtros
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Limpiar filtros?',
+                    text: "Se mostrarán todos los registros",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#filterForm')[0].reset();
+                    }
+                });
+            });
+        });
+
+        // Función para exportar reporte
+        function exportarReporte() {
+            Swal.fire({
+                title: 'Exportar Reporte',
+                text: 'Seleccione el formato de exportación',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Excel',
+                cancelButtonText: 'PDF'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        '¡Exportado!',
+                        'El reporte se ha exportado en formato Excel',
+                        'success'
+                    );
+                } else {
+                    Swal.fire(
+                        '¡Exportado!',
+                        'El reporte se ha exportado en formato PDF',
+                        'success'
+                    );
+                }
+            });
+        }
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

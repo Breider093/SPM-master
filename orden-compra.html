@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Órdenes de Compra</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .dashboard-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card {
+            background: linear-gradient(45deg, #2C3E50, #3498db);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .action-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #2C3E50;
+        }
+        .action-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2C3E50;
+        }
+        .action-description {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        .btn-action {
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .recent-orders {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .order-item {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .order-item:hover {
+            background-color: #f8f9fa;
+        }
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-approved {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-shopping-cart fa-fw"></i> &nbsp; GESTIÓN DE ÓRDENES DE COMPRA
+                </h3>
+                <p class="text-justify">
+                    Bienvenido al módulo de gestión de órdenes de compra. Aquí podrás crear nuevas órdenes, consultar las existentes y generar reportes detallados. Utiliza las herramientas disponibles para una gestión eficiente de tus compras.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="orden-compra-crear.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA ORDEN</a>
+                    </li>
+                    <li>
+                        <a href="orden-compra-consultar.html"><i class="fas fa-search fa-fw"></i> &nbsp; CONSULTAR ÓRDENES</a>
+                    </li>
+                    <li>
+                        <a href="orden-compra-reportes.html"><i class="fas fa-chart-bar fa-fw"></i> &nbsp; REPORTES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Estadísticas -->
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Órdenes Totales</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Pendientes</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Aprobadas</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-number">$1.2M</div>
+                            <div class="stat-label">Total Mensual</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones Rápidas -->
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <div class="action-title">Nueva Orden</div>
+                            <div class="action-description">
+                                Crea una nueva orden de compra para tus proveedores
+                            </div>
+                            <a href="orden-compra-crear.html" class="btn btn-info btn-action">
+                                <i class="fas fa-plus"></i> &nbsp; CREAR
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="action-title">Consultar Órdenes</div>
+                            <div class="action-description">
+                                Busca y gestiona tus órdenes de compra existentes
+                            </div>
+                            <a href="orden-compra-consultar.html" class="btn btn-info btn-action">
+                                <i class="fas fa-search"></i> &nbsp; CONSULTAR
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="action-card">
+                            <div class="action-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="action-title">Reportes</div>
+                            <div class="action-description">
+                                Genera reportes detallados de tus compras
+                            </div>
+                            <a href="orden-compra-reportes.html" class="btn btn-info btn-action">
+                                <i class="fas fa-chart-bar"></i> &nbsp; VER REPORTES
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Órdenes Recientes -->
+                <div class="recent-orders">
+                    <h4 class="text-left mb-4">
+                        <i class="fas fa-history"></i> &nbsp; Órdenes Recientes
+                    </h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Número de Orden</th>
+                                    <th>Proveedor</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>OC-2024-001</td>
+                                    <td>Constructora XYZ</td>
+                                    <td>2024-04-15</td>
+                                    <td>$1,250,000</td>
+                                    <td>
+                                        <span class="order-status status-approved">
+                                            Aprobada
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="orden-compra-consultar.html" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>OC-2024-002</td>
+                                    <td>Ferretería ABC</td>
+                                    <td>2024-04-16</td>
+                                    <td>$850,000</td>
+                                    <td>
+                                        <span class="order-status status-pending">
+                                            Pendiente
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="orden-compra-consultar.html" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Animación de las tarjetas
+            $('.stat-card, .action-card').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-5px)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

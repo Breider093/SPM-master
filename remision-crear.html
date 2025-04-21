@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Remisión</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .form-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .form-card:hover {
+            transform: translateY(-5px);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .section-title {
+            color: #2C3E50;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i {
+            font-size: 1.2rem;
+        }
+        .product-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        .product-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        .remove-product {
+            color: #dc3545;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .remove-product:hover {
+            transform: scale(1.2);
+        }
+        .total-section {
+            background: #2C3E50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .required-field::after {
+            content: "*";
+            color: #dc3545;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA REMISIÓN
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes crear una nueva remisión. Completa todos los campos requeridos y agrega los productos necesarios. Asegúrate de verificar toda la información antes de guardar.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="remision-crear.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA REMISIÓN</a>
+                    </li>
+                    <li>
+                        <a href="remision-consultar.html"><i class="fas fa-search fa-fw"></i> &nbsp; CONSULTAR REMISIONES</a>
+                    </li>
+                    <li>
+                        <a href="remision-sin-factura.html"><i class="fas fa-file-invoice fa-fw"></i> &nbsp; REMISIONES SIN FACTURA</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form class="form-neon" id="remisionForm">
+                    <!-- Información General -->
+                    <div class="form-card">
+                        <h4 class="section-title">
+                            <i class="fas fa-info-circle"></i> Información General
+                        </h4>
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="cliente" class="required-field">
+                                        <i class="fas fa-user"></i> Cliente
+                                    </label>
+                                    <select class="form-control form-input" id="cliente" name="cliente" required>
+                                        <option value="">Seleccione un cliente</option>
+                                        <option value="1">Constructora XYZ</option>
+                                        <option value="2">Ferretería ABC</option>
+                                        <option value="3">Materiales S.A.</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="fechaEntrega" class="required-field">
+                                        <i class="fas fa-calendar"></i> Fecha de Entrega
+                                    </label>
+                                    <input type="date" class="form-control form-input" id="fechaEntrega" name="fechaEntrega" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="transportador" class="required-field">
+                                        <i class="fas fa-truck"></i> Transportador
+                                    </label>
+                                    <select class="form-control form-input" id="transportador" name="transportador" required>
+                                        <option value="">Seleccione un transportador</option>
+                                        <option value="1">Transportes Rápidos</option>
+                                        <option value="2">Logística Express</option>
+                                        <option value="3">Carga Segura</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="observaciones">
+                                        <i class="fas fa-comment"></i> Observaciones
+                                    </label>
+                                    <textarea class="form-control form-input" id="observaciones" name="observaciones" rows="3" placeholder="Ingrese observaciones adicionales..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Productos -->
+                    <div class="form-card">
+                        <h4 class="section-title">
+                            <i class="fas fa-boxes"></i> Productos
+                        </h4>
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="producto" class="required-field">
+                                        <i class="fas fa-box"></i> Producto
+                                    </label>
+                                    <select class="form-control form-input" id="producto" name="producto">
+                                        <option value="">Seleccione un producto</option>
+                                        <option value="1">Cemento</option>
+                                        <option value="2">Arena</option>
+                                        <option value="3">Grava</option>
+                                        <option value="4">Varilla</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <div class="form-group">
+                                    <label for="cantidad" class="required-field">
+                                        <i class="fas fa-hashtag"></i> Cantidad
+                                    </label>
+                                    <input type="number" class="form-control form-input" id="cantidad" name="cantidad" min="1">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <div class="form-group">
+                                    <label for="precio" class="required-field">
+                                        <i class="fas fa-dollar-sign"></i> Precio Unitario
+                                    </label>
+                                    <input type="number" class="form-control form-input" id="precio" name="precio" min="0" step="0.01">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3 d-flex align-items-end">
+                                <button type="button" class="btn btn-info btn-custom w-100" id="agregarProducto">
+                                    <i class="fas fa-plus"></i> &nbsp; AGREGAR
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Lista de Productos -->
+                        <div id="listaProductos">
+                            <!-- Los productos se agregarán aquí dinámicamente -->
+                        </div>
+
+                        <!-- Total -->
+                        <div class="total-section">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5>Total de la Remisión:</h5>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <span class="total-amount">$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-info btn-custom">
+                            <i class="fas fa-save"></i> &nbsp; GUARDAR REMISIÓN
+                        </button>
+                        <button type="reset" class="btn btn-secondary btn-custom ml-2">
+                            <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            let total = 0;
+
+            // Agregar producto
+            $('#agregarProducto').click(function() {
+                const producto = $('#producto option:selected').text();
+                const cantidad = $('#cantidad').val();
+                const precio = $('#precio').val();
+
+                if (!producto || !cantidad || !precio) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campos incompletos',
+                        text: 'Por favor complete todos los campos del producto',
+                        confirmButtonColor: '#2C3E50'
+                    });
+                    return;
+                }
+
+                const subtotal = cantidad * precio;
+                total += subtotal;
+
+                const productItem = `
+                    <div class="product-item">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-4">
+                                <h6 class="mb-0">${producto}</h6>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <p class="mb-0">Cantidad: ${cantidad}</p>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <p class="mb-0">Precio: $${precio}</p>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <p class="mb-0">Subtotal: $${subtotal.toFixed(2)}</p>
+                            </div>
+                            <div class="col-12 col-md-1 text-right">
+                                <i class="fas fa-times remove-product"></i>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $('#listaProductos').append(productItem);
+                $('.total-amount').text('$' + total.toFixed(2));
+
+                // Limpiar campos
+                $('#producto').val('');
+                $('#cantidad').val('');
+                $('#precio').val('');
+            });
+
+            // Eliminar producto
+            $(document).on('click', '.remove-product', function() {
+                const subtotal = parseFloat($(this).closest('.product-item').find('p:last').text().replace('Subtotal: $', ''));
+                total -= subtotal;
+                $('.total-amount').text('$' + total.toFixed(2));
+                $(this).closest('.product-item').remove();
+            });
+
+            // Enviar formulario
+            $('#remisionForm').on('submit', function(e) {
+                e.preventDefault();
+
+                if (total === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Sin productos',
+                        text: 'Debe agregar al menos un producto a la remisión',
+                        confirmButtonColor: '#2C3E50'
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    title: '¿Guardar remisión?',
+                    text: "¿Está seguro de guardar esta remisión?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, guardar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Guardado!',
+                            'La remisión ha sido creada exitosamente.',
+                            'success'
+                        ).then(() => {
+                            window.location.href = 'remision-consultar.html';
+                        });
+                    }
+                });
+            });
+
+            // Confirmación para limpiar formulario
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Limpiar formulario?',
+                    text: "Se perderán todos los datos ingresados",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#remisionForm')[0].reset();
+                        $('#listaProductos').empty();
+                        total = 0;
+                        $('.total-amount').text('$0.00');
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

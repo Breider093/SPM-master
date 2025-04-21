@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Agregar Producto</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .form-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .form-card:hover {
+            transform: translateY(-5px);
+        }
+        .form-section-icon {
+            font-size: 2rem;
+            color: #2C3E50;
+            margin-right: 10px;
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .category-badge {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+            background: #f8f9fa;
+            color: #2C3E50;
+            transition: all 0.3s ease;
+        }
+        .category-badge:hover {
+            background: #2C3E50;
+            color: #fff;
+            cursor: pointer;
+        }
+        .input-group-text {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+        }
+        .form-section {
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff;
+            margin-bottom: 30px;
+        }
+        .form-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            height: calc(100% - 40px);
+            width: 3px;
+            background: #2C3E50;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes agregar un nuevo producto al sistema. Completa los campos requeridos con la información básica del producto, como nombre, categoría, precio y cantidad. Asegúrate de que los datos sean correctos antes de guardarlos.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="producto-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
+                    </li>
+                    <li>
+                        <a href="producto-lista.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
+                    </li>
+                    <li>
+                        <a href="producto-categorias.html"><i class="fas fa-tags fa-fw"></i> &nbsp; CATEGORÍAS</a>
+                    </li>
+                    <li>
+                        <a href="producto-reportes.html"><i class="fas fa-chart-pie fa-fw"></i> &nbsp; REPORTES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form action="" class="form-neon" autocomplete="off" id="formProducto">
+                    <div class="form-section">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fas fa-box form-section-icon"></i>
+                            <h4 class="mb-0">Información del Producto</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="producto_nombre">
+                                            <i class="fas fa-tag"></i> Nombre del Producto
+                                        </label>
+                                        <input type="text" class="form-control" id="producto_nombre" name="producto_nombre" maxlength="40" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="producto_categoria">
+                                            <i class="fas fa-folder"></i> Categoría
+                                        </label>
+                                        <select class="form-control" id="producto_categoria" name="producto_categoria" required>
+                                            <option value="" disabled selected>Seleccione una categoría</option>
+                                            <option value="Herramientas">Herramientas</option>
+                                            <option value="Materiales">Materiales</option>
+                                            <option value="Equipos">Equipos</option>
+                                            <option value="Seguridad">Seguridad</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="producto_precio">
+                                            <i class="fas fa-dollar-sign"></i> Precio
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">$</span>
+                                            </div>
+                                            <input type="number" class="form-control" id="producto_precio" name="producto_precio" min="0" step="0.01" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="producto_cantidad">
+                                            <i class="fas fa-boxes"></i> Cantidad en Stock
+                                        </label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" id="producto_cantidad" name="producto_cantidad" min="0" required>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">unidades</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="reset" class="btn btn-raised btn-secondary btn-custom mr-3">
+                            <i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
+                        </button>
+                        <button type="submit" class="btn btn-raised btn-info btn-custom">
+                            <i class="far fa-save"></i> &nbsp; GUARDAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Validación y envío del formulario
+            $('#formProducto').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Validación de campos
+                let nombre = $('#producto_nombre').val();
+                let categoria = $('#producto_categoria').val();
+                let precio = $('#producto_precio').val();
+                let cantidad = $('#producto_cantidad').val();
+                
+                if (!nombre || !categoria || !precio || !cantidad) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Campos Incompletos',
+                        text: 'Por favor complete todos los campos requeridos'
+                    });
+                    return;
+                }
+                
+                // Simulación de envío exitoso
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'Producto registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    $('#formProducto')[0].reset();
+                });
+            });
+
+            // Confirmación para limpiar el formulario
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Se borrarán todos los datos ingresados",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#formProducto')[0].reset();
+                        Swal.fire(
+                            '¡Limpiado!',
+                            'El formulario ha sido limpiado.',
+                            'success'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

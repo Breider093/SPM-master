@@ -1,0 +1,7 @@
+body {
+    visibility: hidden;
+}
+
+body.loaded {
+    visibility: visible;
+} 

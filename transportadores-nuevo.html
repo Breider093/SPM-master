@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transportadores - Nuevo</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .form-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .form-card:hover {
+            transform: translateY(-5px);
+        }
+        .form-section-icon {
+            font-size: 2rem;
+            color: #2C3E50;
+            margin-right: 10px;
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .form-section {
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff;
+            margin-bottom: 30px;
+        }
+        .form-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            height: calc(100% - 40px);
+            width: 3px;
+            background: #2C3E50;
+            border-radius: 3px;
+        }
+        .input-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #2C3E50;
+        }
+        .input-with-icon {
+            padding-left: 35px;
+        }
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            color: #2C3E50;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .form-group i {
+            margin-right: 8px;
+            color: #2C3E50;
+        }
+        .section-title {
+            color: #2C3E50;
+            border-bottom: 2px solid #f8f9fa;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR TRANSPORTADOR
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes registrar un nuevo transportador en el sistema. Completa todos los campos requeridos con la información personal y del vehículo para crear un nuevo registro.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="transportadores-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR TRANSPORTADOR</a>
+                    </li>
+                    <li>
+                        <a href="transportadores-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE TRANSPORTADORES</a>
+                    </li>
+                    <li>
+                        <a href="transportadores-viajes.html"><i class="fas fa-truck fa-fw"></i> &nbsp; GESTIÓN DE VIAJES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form class="form-neon" id="formTransportador" autocomplete="off">
+                    <div class="form-section">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fas fa-user form-section-icon"></i>
+                            <h4 class="mb-0">Información Personal</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="nombre">
+                                            <i class="fas fa-user-circle"></i>Nombre Completo
+                                        </label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="documento">
+                                            <i class="fas fa-id-card"></i>Documento de Identidad
+                                        </label>
+                                        <input type="text" class="form-control" id="documento" name="documento" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="telefono">
+                                            <i class="fas fa-phone"></i>Teléfono
+                                        </label>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="email">
+                                            <i class="fas fa-envelope"></i>Email
+                                        </label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="fas fa-truck form-section-icon"></i>
+                            <h4 class="mb-0">Información del Vehículo</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="licencia">
+                                            <i class="fas fa-id-badge"></i>Número de Licencia
+                                        </label>
+                                        <input type="text" class="form-control" id="licencia" name="licencia" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="vehiculo">
+                                            <i class="fas fa-truck-moving"></i>Tipo de Vehículo
+                                        </label>
+                                        <select class="form-control" id="vehiculo" name="vehiculo" required>
+                                            <option value="" selected disabled>Seleccione una opción</option>
+                                            <option value="camion">Camión</option>
+                                            <option value="furgon">Furgón</option>
+                                            <option value="camioneta">Camioneta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="placa">
+                                            <i class="fas fa-car"></i>Placa del Vehículo
+                                        </label>
+                                        <input type="text" class="form-control" id="placa" name="placa" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-card">
+                                    <div class="form-group">
+                                        <label for="estado">
+                                            <i class="fas fa-toggle-on"></i>Estado
+                                        </label>
+                                        <select class="form-control" id="estado" name="estado" required>
+                                            <option value="activo" selected>Activo</option>
+                                            <option value="inactivo">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-raised btn-info btn-custom mr-3">
+                            <i class="fas fa-save"></i> &nbsp; GUARDAR
+                        </button>
+                        <button type="reset" class="btn btn-raised btn-secondary btn-custom">
+                            <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+            
+            // Validación del formulario
+            $('#formTransportador').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Validación de campos
+                let nombre = $('#nombre').val();
+                let telefono = $('#telefono').val();
+                let email = $('#email').val();
+                let documento = $('#documento').val();
+                let licencia = $('#licencia').val();
+                let vehiculo = $('#vehiculo').val();
+                let placa = $('#placa').val();
+                
+                if (!nombre || !telefono || !email || !documento || !licencia || !vehiculo || !placa) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Campos Incompletos',
+                        text: 'Por favor complete todos los campos requeridos',
+                        confirmButtonColor: '#2C3E50'
+                    });
+                    return;
+                }
+                
+                // Validación de email
+                let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Email Inválido',
+                        text: 'Por favor ingrese un email válido',
+                        confirmButtonColor: '#2C3E50'
+                    });
+                    return;
+                }
+                
+                // Validación de teléfono
+                let telefonoRegex = /^\+?[0-9]{10,15}$/;
+                if (!telefonoRegex.test(telefono)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Teléfono Inválido',
+                        text: 'Por favor ingrese un número de teléfono válido (10-15 dígitos)',
+                        confirmButtonColor: '#2C3E50'
+                    });
+                    return;
+                }
+                
+                // Simulación de envío exitoso
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Registro Exitoso!',
+                    text: 'El transportador ha sido registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Limpiar formulario
+                    $('#formTransportador')[0].reset();
+                    // Redirigir a la lista
+                    window.location.href = 'transportadores-list.html';
+                });
+            });
+
+            // Confirmación para limpiar el formulario
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Se borrarán todos los datos ingresados",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#formTransportador')[0].reset();
+                        Swal.fire(
+                            '¡Limpiado!',
+                            'El formulario ha sido limpiado.',
+                            'success'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 
+</html> 

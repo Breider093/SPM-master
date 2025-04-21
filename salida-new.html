@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Salida</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .form-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .product-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .product-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .product-info {
+            flex: 1;
+        }
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .total-section {
+            background: #2C3E50;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-box-open fa-fw"></i> &nbsp; NUEVA SALIDA
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes registrar nuevas salidas de productos del inventario.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="salida-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVA SALIDA</a>
+                    </li>
+                    <li>
+                        <a href="salida-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE SALIDAS</a>
+                    </li>
+                    <li>
+                        <a href="salida-pending.html"><i class="fas fa-clock fa-fw"></i> &nbsp; PENDIENTES</a>
+                    </li>
+                    <li>
+                        <a href="salida-return.html"><i class="fas fa-undo fa-fw"></i> &nbsp; DEVOLUCIONES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form class="form-neon" id="salidaForm">
+                    <!-- Información General -->
+                    <div class="form-card">
+                        <h4 class="mb-4">Información General</h4>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="fecha">
+                                        <i class="fas fa-calendar"></i> Fecha
+                                    </label>
+                                    <input type="date" class="form-control form-input" id="fecha" name="fecha" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="cliente">
+                                        <i class="fas fa-user"></i> Cliente
+                                    </label>
+                                    <select class="form-control form-input" id="cliente" name="cliente" required>
+                                        <option value="">Seleccione un cliente</option>
+                                        <option value="1">Cliente A</option>
+                                        <option value="2">Cliente B</option>
+                                        <option value="3">Cliente C</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="tipo">
+                                        <i class="fas fa-tag"></i> Tipo de Salida
+                                    </label>
+                                    <select class="form-control form-input" id="tipo" name="tipo" required>
+                                        <option value="">Seleccione un tipo</option>
+                                        <option value="venta">Venta</option>
+                                        <option value="prestamo">Préstamo</option>
+                                        <option value="devolucion">Devolución</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="responsable">
+                                        <i class="fas fa-user-tie"></i> Responsable
+                                    </label>
+                                    <select class="form-control form-input" id="responsable" name="responsable" required>
+                                        <option value="">Seleccione un responsable</option>
+                                        <option value="1">Usuario A</option>
+                                        <option value="2">Usuario B</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Productos -->
+                    <div class="form-card">
+                        <h4 class="mb-4">Productos</h4>
+                        <div class="product-section">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label for="producto">
+                                            <i class="fas fa-box"></i> Producto
+                                        </label>
+                                        <select class="form-control form-input" id="producto" name="producto">
+                                            <option value="">Seleccione un producto</option>
+                                            <option value="1">Producto A</option>
+                                            <option value="2">Producto B</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group">
+                                        <label for="cantidad">
+                                            <i class="fas fa-cubes"></i> Cantidad
+                                        </label>
+                                        <input type="number" class="form-control form-input" id="cantidad" name="cantidad" min="1">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group">
+                                        <label for="precio">
+                                            <i class="fas fa-dollar-sign"></i> Precio
+                                        </label>
+                                        <input type="number" class="form-control form-input" id="precio" name="precio" min="0.01" step="0.01">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-2">
+                                    <label>&nbsp;</label>
+                                    <button type="button" class="btn btn-primary btn-custom btn-block" onclick="agregarProducto()">
+                                        <i class="fas fa-plus"></i> &nbsp; AGREGAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lista de Productos -->
+                        <div id="listaProductos">
+                            <!-- Los productos se agregarán aquí dinámicamente -->
+                        </div>
+
+                        <!-- Totales -->
+                        <div class="total-section">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label>Subtotal</label>
+                                        <h4 id="subtotal">$0.00</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label>IVA (16%)</label>
+                                        <h4 id="iva">$0.00</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label>Total</label>
+                                        <h4 id="total">$0.00</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Observaciones -->
+                    <div class="form-card">
+                        <h4 class="mb-4">Observaciones</h4>
+                        <div class="form-group">
+                            <textarea class="form-control form-input" id="observaciones" name="observaciones" rows="3" placeholder="Ingrese cualquier observación adicional..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-custom">
+                            <i class="fas fa-save"></i> &nbsp; GUARDAR SALIDA
+                        </button>
+                        <button type="reset" class="btn btn-secondary btn-custom ml-2">
+                            <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        let productos = [];
+        let subtotal = 0;
+        let iva = 0;
+        let total = 0;
+
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Establecer fecha actual
+            const today = new Date().toISOString().split('T')[0];
+            $('#fecha').val(today);
+
+            // Manejo del formulario
+            $('#salidaForm').on('submit', function(e) {
+                e.preventDefault();
+                if (productos.length === 0) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Debe agregar al menos un producto',
+                        icon: 'error'
+                    });
+                    return;
+                }
+                Swal.fire({
+                    title: '¿Guardar salida?',
+                    text: "¿Está seguro de guardar esta salida?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, guardar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Guardado!',
+                            'La salida ha sido registrada correctamente.',
+                            'success'
+                        ).then(() => {
+                            window.location.href = 'salida-list.html';
+                        });
+                    }
+                });
+            });
+
+            // Confirmación para limpiar formulario
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Limpiar formulario?',
+                    text: "Se perderán todos los datos ingresados",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#salidaForm')[0].reset();
+                        productos = [];
+                        actualizarListaProductos();
+                        actualizarTotales();
+                    }
+                });
+            });
+        });
+
+        function agregarProducto() {
+            const producto = $('#producto').val();
+            const cantidad = $('#cantidad').val();
+            const precio = $('#precio').val();
+
+            if (!producto || !cantidad || !precio) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Debe completar todos los campos del producto',
+                    icon: 'error'
+                });
+                return;
+            }
+
+            const productoInfo = {
+                id: producto,
+                nombre: $('#producto option:selected').text(),
+                cantidad: cantidad,
+                precio: precio,
+                total: cantidad * precio
+            };
+
+            productos.push(productoInfo);
+            actualizarListaProductos();
+            actualizarTotales();
+
+            // Limpiar campos
+            $('#producto').val('');
+            $('#cantidad').val('');
+            $('#precio').val('');
+        }
+
+        function eliminarProducto(index) {
+            productos.splice(index, 1);
+            actualizarListaProductos();
+            actualizarTotales();
+        }
+
+        function actualizarListaProductos() {
+            const lista = $('#listaProductos');
+            lista.empty();
+
+            productos.forEach((producto, index) => {
+                lista.append(`
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-title">${producto.nombre}</div>
+                            <div>Cantidad: ${producto.cantidad} | Precio: $${producto.precio} | Total: $${producto.total}</div>
+                        </div>
+                        <div class="product-actions">
+                            <button type="button" class="btn btn-danger btn-sm" onclick="eliminarProducto(${index})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        function actualizarTotales() {
+            subtotal = productos.reduce((sum, producto) => sum + producto.total, 0);
+            iva = subtotal * 0.16;
+            total = subtotal + iva;
+
+            $('#subtotal').text('$' + subtotal.toFixed(2));
+            $('#iva').text('$' + iva.toFixed(2));
+            $('#total').text('$' + total.toFixed(2));
+        }
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

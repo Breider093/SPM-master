@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Ingresos</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .filter-section {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #2ECC71;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .chart-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .table-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .table-custom {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .table-custom th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+        .table-custom td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .table-custom tr:last-child td {
+            border-bottom: none;
+        }
+        .table-custom tr:hover {
+            background: #f8f9fa;
+        }
+        .nav-tabs .nav-link {
+            border-radius: 25px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            color: #666;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            background: #2C3E50;
+            color: #fff;
+            border: none;
+        }
+        .nav-tabs {
+            border: none;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-chart-line fa-fw"></i> &nbsp; CONSULTAR INGRESOS
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes consultar los ingresos por día, semana o mes.
+                </p>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Filtros y Búsqueda -->
+                <div class="filter-section">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="day-tab" data-toggle="tab" href="#day" role="tab">
+                                        <i class="fas fa-calendar-day"></i> &nbsp; Día
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="week-tab" data-toggle="tab" href="#week" role="tab">
+                                        <i class="fas fa-calendar-week"></i> &nbsp; Semana
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="month-tab" data-toggle="tab" href="#month" role="tab">
+                                        <i class="fas fa-calendar-month"></i> &nbsp; Mes
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Día -->
+                        <div class="tab-pane fade show active" id="day" role="tabpanel">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label>Fecha</label>
+                                        <input type="date" class="form-control form-input" id="fechaDia">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <button type="button" class="btn btn-primary btn-custom btn-block" onclick="consultarIngresos('dia')">
+                                        <i class="fas fa-search"></i> &nbsp; CONSULTAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Semana -->
+                        <div class="tab-pane fade" id="week" role="tabpanel">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label>Semana</label>
+                                        <input type="week" class="form-control form-input" id="fechaSemana">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <button type="button" class="btn btn-primary btn-custom btn-block" onclick="consultarIngresos('semana')">
+                                        <i class="fas fa-search"></i> &nbsp; CONSULTAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mes -->
+                        <div class="tab-pane fade" id="month" role="tabpanel">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="form-group">
+                                        <label>Mes</label>
+                                        <input type="month" class="form-control form-input" id="fechaMes">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <button type="button" class="btn btn-primary btn-custom btn-block" onclick="consultarIngresos('mes')">
+                                        <i class="fas fa-search"></i> &nbsp; CONSULTAR
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estadísticas -->
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalIngresos">$0.00</div>
+                            <div class="stat-label">Total de Ingresos</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalVentas">0</div>
+                            <div class="stat-label">Total de Ventas</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="promedioVenta">$0.00</div>
+                            <div class="stat-label">Promedio por Venta</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico -->
+                <div class="chart-container">
+                    <canvas id="ingresosChart"></canvas>
+                </div>
+
+                <!-- Tabla de Detalles -->
+                <div class="table-container">
+                    <h5 class="mb-4">Detalle de Ingresos</h5>
+                    <div class="table-responsive">
+                        <table class="table-custom">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaIngresos">
+                                <!-- Los datos se cargarán dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/Chart.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+            
+            // Inicializar el gráfico
+            const ctx = document.getElementById('ingresosChart').getContext('2d');
+            window.ingresosChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Ingresos',
+                        data: [],
+                        borderColor: '#2ECC71',
+                        backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Función para consultar ingresos
+        function consultarIngresos(tipo) {
+            let fecha;
+            switch(tipo) {
+                case 'dia':
+                    fecha = $('#fechaDia').val();
+                    break;
+                case 'semana':
+                    fecha = $('#fechaSemana').val();
+                    break;
+                case 'mes':
+                    fecha = $('#fechaMes').val();
+                    break;
+            }
+
+            if (!fecha) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Por favor selecciona una fecha',
+                    icon: 'warning'
+                });
+                return;
+            }
+
+            // Aquí iría la llamada AJAX para obtener los datos
+            // Por ahora usaremos datos de ejemplo
+            const datosEjemplo = {
+                totalIngresos: 12500.00,
+                totalVentas: 15,
+                promedioVenta: 833.33,
+                grafico: {
+                    labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+                    datos: [1500, 2000, 1800, 2200, 2500, 1500, 1000]
+                },
+                detalles: [
+                    {id: '001', fecha: '2024-03-15', cliente: 'Cliente A', productos: 2, total: 1500.00, tipo: 'Venta'},
+                    {id: '002', fecha: '2024-03-15', cliente: 'Cliente B', productos: 1, total: 800.00, tipo: 'Préstamo'},
+                    {id: '003', fecha: '2024-03-15', cliente: 'Cliente C', productos: 3, total: 2200.00, tipo: 'Venta'}
+                ]
+            };
+
+            // Actualizar estadísticas
+            $('#totalIngresos').text('$' + datosEjemplo.totalIngresos.toLocaleString());
+            $('#totalVentas').text(datosEjemplo.totalVentas);
+            $('#promedioVenta').text('$' + datosEjemplo.promedioVenta.toLocaleString());
+
+            // Actualizar gráfico
+            window.ingresosChart.data.labels = datosEjemplo.grafico.labels;
+            window.ingresosChart.data.datasets[0].data = datosEjemplo.grafico.datos;
+            window.ingresosChart.update();
+
+            // Actualizar tabla
+            let tablaHTML = '';
+            datosEjemplo.detalles.forEach(detalle => {
+                tablaHTML += `
+                    <tr>
+                        <td>${detalle.id}</td>
+                        <td>${detalle.fecha}</td>
+                        <td>${detalle.cliente}</td>
+                        <td>${detalle.productos}</td>
+                        <td>$${detalle.total.toLocaleString()}</td>
+                        <td>${detalle.tipo}</td>
+                    </tr>
+                `;
+            });
+            $('#tablaIngresos').html(tablaHTML);
+        }
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

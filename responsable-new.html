@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Responsable</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO RESPONSABLE
+                </h3>
+                <p class="text-justify">
+                    Complete el formulario para registrar un nuevo responsable en el sistema.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="responsable-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO RESPONSABLE</a>
+                    </li>
+                    <li>
+                        <a href="responsable-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE RESPONSABLES</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form class="form-neon" id="formResponsable" autocomplete="off">
+                    <fieldset>
+                        <legend><i class="far fa-address-card"></i> &nbsp; Información Personal</legend>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="documento" class="bmd-label-floating">Documento de Identidad</label>
+                                    <input type="text" pattern="[0-9-]{8,20}" class="form-control" name="documento" id="documento" maxlength="20" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre" class="bmd-label-floating">Nombres</label>
+                                    <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,35}" class="form-control" name="nombre" id="nombre" maxlength="35" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="apellido" class="bmd-label-floating">Apellidos</label>
+                                    <input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,35}" class="form-control" name="apellido" id="apellido" maxlength="35" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="direccion" class="bmd-label-floating">Dirección</label>
+                                    <input type="text" class="form-control" name="direccion" id="direccion" maxlength="100" required>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                        <legend><i class="fas fa-phone"></i> &nbsp; Información de Contacto</legend>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="celular" class="bmd-label-floating">Teléfono Celular</label>
+                                    <input type="text" pattern="[0-9]{10,15}" class="form-control" name="celular" id="celular" maxlength="15" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="telefono" class="bmd-label-floating">Teléfono Fijo</label>
+                                    <input type="text" pattern="[0-9]{7,10}" class="form-control" name="telefono" id="telefono" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="bmd-label-floating">Email</label>
+                                    <input type="email" class="form-control" name="email" id="email" maxlength="70" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="estado" class="bmd-label-floating">Estado</label>
+                                    <select class="form-control" name="estado" id="estado" required>
+                                        <option value="activo" selected>Activo</option>
+                                        <option value="inactivo">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br>
+                    <p class="text-center">
+                        <button type="submit" class="btn btn-info"><i class="fas fa-save"></i> &nbsp; GUARDAR</button>
+                        <button type="reset" class="btn btn-secondary" id="btnLimpiar"><i class="fas fa-eraser"></i> &nbsp; LIMPIAR</button>
+                    </p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Validación y envío del formulario
+            $('#formResponsable').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Validación de campos
+                let documento = $('#documento').val();
+                let nombre = $('#nombre').val();
+                let apellido = $('#apellido').val();
+                let direccion = $('#direccion').val();
+                let celular = $('#celular').val();
+                let email = $('#email').val();
+                
+                if (!documento || !nombre || !apellido || !direccion || !celular || !email) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor complete todos los campos requeridos'
+                    });
+                    return;
+                }
+                
+                // Validación de email
+                let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor ingrese un email válido'
+                    });
+                    return;
+                }
+                
+                // Validación de celular
+                let celularRegex = /^[0-9]{10,15}$/;
+                if (!celularRegex.test(celular)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Por favor ingrese un número de celular válido'
+                    });
+                    return;
+                }
+                
+                // Simulación de envío exitoso
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Éxito!',
+                    text: 'Responsable registrado correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Limpiar formulario
+                    $('#formResponsable')[0].reset();
+                    // Redirigir a la lista
+                    window.location.href = 'responsable-list.html';
+                });
+            });
+
+            // Manejar el botón de limpiar
+            $('#btnLimpiar').click(function() {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Se borrarán todos los datos ingresados",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#formResponsable')[0].reset();
+                        Swal.fire(
+                            '¡Limpiado!',
+                            'El formulario ha sido limpiado.',
+                            'success'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html> 

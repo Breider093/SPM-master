@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes de Productos</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .stat-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+        }
+        .stat-card-info h4 {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        .stat-card-info p {
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 300px;
+        }
+        .card {
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border: none;
+            margin-bottom: 25px;
+        }
+        .card-header {
+            background-color: #fff;
+            border-bottom: 2px solid #f8f9fa;
+        }
+        .table th {
+            font-weight: 600;
+            background-color: #2C3E50;
+            color: white;
+        }
+        .trend-up {
+            color: #28a745;
+        }
+        .trend-down {
+            color: #dc3545;
+        }
+        .filter-section {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-chart-pie fa-fw"></i> &nbsp; REPORTES DE PRODUCTOS
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes visualizar reportes detallados sobre los productos, incluyendo estadísticas de ventas, inventario y rendimiento.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li><a href="producto-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a></li>
+                    <li><a href="producto-lista.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a></li>
+                    <li><a href="producto-categorias.html"><i class="fas fa-tags fa-fw"></i> &nbsp; CATEGORÍAS</a></li>
+                    <li><a class="active" href="producto-reportes.html"><i class="fas fa-chart-pie fa-fw"></i> &nbsp; REPORTES</a></li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <!-- Filtros -->
+                <div class="filter-section mb-4">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="form-group mb-0">
+                                <label for="fechaInicio">Fecha Inicio</label>
+                                <input type="date" class="form-control" id="fechaInicio">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group mb-0">
+                                <label for="fechaFin">Fecha Fin</label>
+                                <input type="date" class="form-control" id="fechaFin">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-group mb-0">
+                                <label for="categoria">Categoría</label>
+                                <select class="form-control" id="categoria">
+                                    <option value="">Todas</option>
+                                    <option value="1">Electrónica</option>
+                                    <option value="2">Ropa</option>
+                                    <option value="3">Hogar</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen General -->
+                <div class="row mb-4">
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon bg-primary">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <div class="stat-card-info">
+                                <h4>Total Productos</h4>
+                                <p>150</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon bg-success">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div class="stat-card-info">
+                                <h4>Categorías</h4>
+                                <p>12</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon bg-warning">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-card-info">
+                                <h4>Ventas Totales</h4>
+                                <p>$45,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-card-icon bg-info">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-card-info">
+                                <h4>Crecimiento</h4>
+                                <p>+15%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos y Tablas -->
+                <div class="row">
+                    <!-- Productos más Vendidos -->
+                    <div class="col-12 col-lg-8 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-star text-warning"></i> Productos más Vendidos
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th class="text-center">Unidades</th>
+                                                <th class="text-center">Total</th>
+                                                <th class="text-center">Tendencia</th>
+                                                <th class="text-center">Stock</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-hammer fa-2x text-primary mr-3"></i>
+                                                        <div>
+                                                            <h6 class="mb-0">Martillo Profesional</h6>
+                                                            <small class="text-muted">Herramientas</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">50</td>
+                                                <td class="text-center">$25,000</td>
+                                                <td class="text-center">
+                                                    <span class="trend-up">
+                                                        <i class="fas fa-arrow-up"></i> 15%
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge badge-success">25 unidades</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-tools fa-2x text-success mr-3"></i>
+                                                        <div>
+                                                            <h6 class="mb-0">Taladro Industrial</h6>
+                                                            <small class="text-muted">Herramientas</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">100</td>
+                                                <td class="text-center">$2,000</td>
+                                                <td class="text-center">
+                                                    <span class="trend-up">
+                                                        <i class="fas fa-arrow-up"></i> 8%
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge badge-warning">50 unidades</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="fas fa-cubes fa-2x text-info mr-3"></i>
+                                                        <div>
+                                                            <h6 class="mb-0">Concreto Premium</h6>
+                                                            <small class="text-muted">Materiales</small>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">75</td>
+                                                <td class="text-center">$15,000</td>
+                                                <td class="text-center">
+                                                    <span class="trend-down">
+                                                        <i class="fas fa-arrow-down"></i> 5%
+                                                    </span>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span class="badge badge-danger">10 unidades</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos -->
+                    <div class="col-12 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-pie text-primary"></i> Inventario por Categoría
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="inventarioCategoriaChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico de Ventas -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-chart-line text-success"></i> Tendencia de Ventas
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="ventasChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/chart.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+            
+            // Gráfico de Inventario por Categoría
+            var ctxPie = document.getElementById('inventarioCategoriaChart').getContext('2d');
+            new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Electrónica', 'Ropa', 'Hogar', 'Deportes', 'Otros'],
+                    datasets: [{
+                        data: [30, 25, 20, 15, 10],
+                        backgroundColor: [
+                            '#4e73df',
+                            '#1cc88a',
+                            '#36b9cc',
+                            '#f6c23e',
+                            '#e74a3b'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            });
+
+            // Gráfico de Ventas
+            var ctxLine = document.getElementById('ventasChart').getContext('2d');
+            new Chart(ctxLine, {
+                type: 'line',
+                data: {
+                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Ventas 2024',
+                        data: [5000, 8000, 12000, 9000, 15000, 20000],
+                        borderColor: '#1cc88a',
+                        backgroundColor: 'rgba(28, 200, 138, 0.1)',
+                        borderWidth: 2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function(value) {
+                                    return '$' + value;
+                                }
+                            }
+                        }]
+                    }
+                }
+            });
+
+            // Manejador de filtros
+            $('.form-control').change(function() {
+                // Aquí iría la lógica para actualizar los reportes según los filtros
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Actualizando datos...',
+                    text: 'Los reportes se están actualizando con los filtros seleccionados',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+
+</html>

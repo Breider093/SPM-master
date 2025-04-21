@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Ítem</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .form-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .item-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-box fa-fw"></i> &nbsp; NUEVO ÍTEM
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes registrar nuevos ítems para el inventario del sistema.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO ÍTEM</a>
+                    </li>
+                    <li>
+                        <a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE ÍTEMS</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form class="form-neon" id="itemForm">
+                    <!-- Información General -->
+                    <div class="form-card">
+                        <h4 class="mb-4">Información General</h4>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="codigo">
+                                        <i class="fas fa-barcode"></i> Código
+                                    </label>
+                                    <input type="text" class="form-control form-input" id="codigo" name="codigo" placeholder="PROD-XXX" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre">
+                                        <i class="fas fa-box"></i> Nombre
+                                    </label>
+                                    <input type="text" class="form-control form-input" id="nombre" name="nombre" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="categoria">
+                                        <i class="fas fa-tag"></i> Categoría
+                                    </label>
+                                    <select class="form-control form-input" id="categoria" name="categoria" required>
+                                        <option value="">Seleccione una categoría</option>
+                                        <option value="1">Materiales de Construcción</option>
+                                        <option value="2">Herramientas</option>
+                                        <option value="3">Pinturas</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="stock">
+                                        <i class="fas fa-cubes"></i> Stock Inicial
+                                    </label>
+                                    <input type="number" class="form-control form-input" id="stock" name="stock" min="0" required>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="precio">
+                                        <i class="fas fa-dollar-sign"></i> Precio Unitario
+                                    </label>
+                                    <input type="number" class="form-control form-input" id="precio" name="precio" min="0.01" step="0.01" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalles Adicionales -->
+                    <div class="form-card">
+                        <h4 class="mb-4">Detalles Adicionales</h4>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="proveedor">
+                                        <i class="fas fa-truck"></i> Proveedor
+                                    </label>
+                                    <select class="form-control form-input" id="proveedor" name="proveedor">
+                                        <option value="">Seleccione un proveedor</option>
+                                        <option value="1">Proveedor A</option>
+                                        <option value="2">Proveedor B</option>
+                                        <option value="3">Proveedor C</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="unidad">
+                                        <i class="fas fa-ruler"></i> Unidad de Medida
+                                    </label>
+                                    <select class="form-control form-input" id="unidad" name="unidad" required>
+                                        <option value="">Seleccione una unidad</option>
+                                        <option value="unidad">Unidad</option>
+                                        <option value="kg">Kilogramo</option>
+                                        <option value="lt">Litro</option>
+                                        <option value="m">Metro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="descripcion">
+                                        <i class="fas fa-align-left"></i> Descripción
+                                    </label>
+                                    <textarea class="form-control form-input" id="descripcion" name="descripcion" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-custom">
+                            <i class="fas fa-save"></i> &nbsp; GUARDAR ÍTEM
+                        </button>
+                        <button type="reset" class="btn btn-secondary btn-custom ml-2">
+                            <i class="fas fa-eraser"></i> &nbsp; LIMPIAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').bootstrapMaterialDesign();
+
+            // Manejo del formulario
+            $('#itemForm').on('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Guardar ítem?',
+                    text: "¿Está seguro de guardar este ítem en el inventario?",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, guardar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Guardado!',
+                            'El ítem ha sido registrado correctamente.',
+                            'success'
+                        ).then(() => {
+                            window.location.href = 'inventario.html';
+                        });
+                    }
+                });
+            });
+
+            // Confirmación para limpiar formulario
+            $('button[type="reset"]').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: '¿Limpiar formulario?',
+                    text: "Se perderán todos los datos ingresados",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, limpiar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#itemForm')[0].reset();
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
