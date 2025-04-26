@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Consultar Saldo</title>
+    <title>Clientes con Equipo Pendiente</title>
 
     <!-- Normalize V8.0.1 -->
     <link rel="stylesheet" href="./css/normalize.css">
@@ -22,7 +22,7 @@
 
     <!-- jQuery Custom Content Scroller V3.1.5 -->
     <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
-
+    
     <!-- General Styles -->
     <link rel="stylesheet" href="./css/style.css">
 
@@ -30,69 +30,60 @@
     <link rel="stylesheet" href="./css/preload.css">
 
     <style>
+        .table-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
         .search-section {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            padding: 20px;
             margin-bottom: 20px;
         }
-        .form-input {
-            border-radius: 25px;
-            padding: 10px 20px;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
+        .search-input {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 8px 15px;
         }
-        .form-input:focus {
-            border-color: #2C3E50;
-            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
-        }
-        .balance-card {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        .balance-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .client-name {
-            font-size: 1.2rem;
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            color: #333;
             font-weight: 600;
-            color: #2C3E50;
-            margin-bottom: 10px;
         }
-        .client-info {
-            color: #666;
-            font-size: 0.9rem;
+        .table td {
+            vertical-align: middle;
         }
-        .balance-amount {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2C3E50;
-            margin: 20px 0;
+        .btn-action {
+            padding: 5px 10px;
+            margin: 0 2px;
+            border-radius: 4px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
         }
-        .balance-positive {
-            color: #28a745;
+        .btn-action i {
+            margin-right: 5px;
         }
-        .balance-negative {
-            color: #dc3545;
+        .nit-cell {
+            color: #007bff;
+            font-weight: 500;
         }
-        .btn-search {
-            border-radius: 25px;
-            padding: 10px 30px;
-            transition: all 0.3s ease;
+        .table-hover tbody tr:hover {
+            background-color: rgba(0,123,255,0.05);
         }
-        .btn-search:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        .btn-ver-detalle {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
+    
+    <!-- Main container -->
     <main class="full-box main-container">
         <!-- El menú lateral se cargará dinámicamente desde components.js -->
 
@@ -103,10 +94,10 @@
             <!-- Page header -->
             <div class="full-box page-header">
                 <h3 class="text-left">
-                    <i class="fas fa-dollar-sign fa-fw"></i> &nbsp; CONSULTAR SALDO
+                    <i class="fas fa-tools fa-fw"></i> &nbsp; CLIENTES CON EQUIPO PENDIENTE
                 </h3>
                 <p class="text-justify">
-                    En esta sección puedes consultar el saldo actual de un cliente específico. Ingresa el ID o nombre del cliente para ver su saldo y estado de cuenta.
+                    Lista de clientes que tienen equipos pendientes por devolver o en proceso de mantenimiento.
                 </p>
             </div>
 
@@ -129,71 +120,40 @@
                     </li>
                 </ul>	
             </div>
-            
-            <!-- Formulario de búsqueda -->
+
+            <!-- Content -->
             <div class="container-fluid">
-                <div class="search-section">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <div class="form-group">
-                                <label for="buscarCliente" class="bmd-label-floating">Buscar Cliente</label>
-                                <input type="text" class="form-control form-input" id="buscarCliente" placeholder="ID o nombre del cliente...">
-                            </div>
+                <div class="row mb-4">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <input type="text" class="form-control search-input" id="searchCliente" placeholder="Buscar cliente...">
                         </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <label for="tipoBusqueda" class="bmd-label-floating">Tipo de Búsqueda</label>
-                                <select class="form-control form-input" id="tipoBusqueda">
-                                    <option value="id">ID</option>
-                                    <option value="nombre">Nombre</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <label for="fechaConsulta" class="bmd-label-floating">Fecha de Consulta</label>
-                                <input type="date" class="form-control form-input" id="fechaConsulta">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-raised btn-info btn-search" id="btnBuscar">
-                            <i class="fas fa-search"></i> &nbsp; BUSCAR
-                        </button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Resultados de búsqueda -->
-            <div class="container-fluid">
-                <div class="row" id="resultadosBusqueda">
-                    <div class="col-12 col-md-6">
-                        <div class="balance-card">
-                            <div class="client-name">Juan Pérez</div>
-                            <div class="client-info">
-                                <p><strong>ID:</strong> 001</p>
-                                <p><strong>Teléfono:</strong> 123-456-7890</p>
-                                <p><strong>Email:</strong> juan@ejemplo.com</p>
-                                <p><strong>Estado:</strong> <span class="badge badge-success">Activo</span></p>
-                            </div>
-                            <div class="balance-amount balance-positive">
-                                $1,500.00
-                            </div>
-                            <div class="text-right">
-                                <button class="btn btn-info btn-action" title="Ver Detalles">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-success btn-action" title="Imprimir">
-                                    <i class="fas fa-print"></i>
-                                </button>
-                            </div>
-                        </div>
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>NIT</th>
+                                    <th>CLIENTE</th>
+                                    <th>OBRA</th>
+                                    <th>TELÉFONO</th>
+                                    <th>CONTACTO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientesTableBody">
+                                <!-- Los datos se cargarán dinámicamente -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    
     
     <!--=============================================
     =            Include JavaScript files           =
@@ -228,49 +188,107 @@
 
     <script>
         $(document).ready(function() {
-            $('#btnBuscar').on('click', function() {
-                const busqueda = $('#buscarCliente').val().trim();
-                const tipo = $('#tipoBusqueda').val();
-                const fecha = $('#fechaConsulta').val();
-
-                if (busqueda === '') {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Campo vacío',
-                        text: 'Por favor ingresa un término de búsqueda',
-                        confirmButtonText: 'Entendido'
-                    });
-                    return;
+            // Datos de ejemplo - En producción, estos vendrían de una API
+            const clientesEjemplo = [
+                {
+                    nit: '802020796-9',
+                    cliente: 'A&B GERENCIA INTEGRAL SAS',
+                    obra: 'CALLE 45B #20-136',
+                    telefono: '3043450209',
+                    contacto: '3043'
+                },
+                {
+                    nit: '72252275',
+                    cliente: 'ADRIAN MARCHENA',
+                    obra: 'CALLE 35 # 5 A 15',
+                    telefono: '3006414049',
+                    contacto: 'ADRIAN'
+                },
+                {
+                    nit: '1111117',
+                    cliente: 'AICL CONSTRUCCIONES',
+                    obra: 'CRA 6G #101-24 VILLA SAN PEDRO',
+                    telefono: 'X',
+                    contacto: 'X'
+                },
+                {
+                    nit: '2222222222222',
+                    cliente: 'ALEX RIOS',
+                    obra: 'CIUDADELA METROPOLITANA',
+                    telefono: 'X',
+                    contacto: 'PRIMO'
+                },
+                {
+                    nit: '22639',
+                    cliente: 'ALEXIS GUZMAN',
+                    obra: 'CALLE 45 # 8B 30',
+                    telefono: 'X',
+                    contacto: 'alexis'
+                },
+                {
+                    nit: '901061987',
+                    cliente: 'ALQUILERES LYN',
+                    obra: 'CRA 8C #44-65',
+                    telefono: '3104121478',
+                    contacto: 'X'
+                },
+                {
+                    nit: '8.709.694',
+                    cliente: 'ANGEL GAMERO',
+                    obra: 'CALLE 77 CON VIA 40',
+                    telefono: '3105330749',
+                    contacto: 'X'
                 }
+            ];
 
-                // Aquí iría la lógica de búsqueda real
-                // Por ahora mostramos un ejemplo
-                const resultados = `
-                    <div class="col-12 col-md-6">
-                        <div class="balance-card">
-                            <div class="client-name">Juan Pérez</div>
-                            <div class="client-info">
-                                <p><strong>ID:</strong> 001</p>
-                                <p><strong>Teléfono:</strong> 123-456-7890</p>
-                                <p><strong>Email:</strong> juan@ejemplo.com</p>
-                                <p><strong>Estado:</strong> <span class="badge badge-success">Activo</span></p>
-                            </div>
-                            <div class="balance-amount balance-positive">
-                                $1,500.00
-                            </div>
-                            <div class="text-right">
-                                <button class="btn btn-info btn-action" title="Ver Detalles">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn btn-success btn-action" title="Imprimir">
-                                    <i class="fas fa-print"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
+            function renderClientes(clientes) {
+                const tbody = $('#clientesTableBody');
+                tbody.empty();
 
-                $('#resultadosBusqueda').html(resultados);
+                clientes.forEach(cliente => {
+                    const row = `
+                        <tr>
+                            <td class="nit-cell">${cliente.nit}</td>
+                            <td>${cliente.cliente}</td>
+                            <td>${cliente.obra}</td>
+                            <td>${cliente.telefono}</td>
+                            <td>${cliente.contacto}</td>
+                            <td>
+                                <button class="btn btn-ver-detalle">
+                                    Ver Detalle
+                                </button>
+                                <button class="btn btn-action">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.append(row);
+                });
+            }
+
+            // Filtrado de clientes
+            $('#searchCliente').on('keyup', function() {
+                const searchTerm = $(this).val().toLowerCase();
+                const filteredClientes = clientesEjemplo.filter(cliente => 
+                    cliente.cliente.toLowerCase().includes(searchTerm) ||
+                    cliente.nit.toLowerCase().includes(searchTerm)
+                );
+                renderClientes(filteredClientes);
+            });
+
+            // Inicializar la tabla con los datos de ejemplo
+            renderClientes(clientesEjemplo);
+
+            // Manejadores para los botones de acción
+            $(document).on('click', '.btn-ver-detalle', function() {
+                const row = $(this).closest('tr');
+                const cliente = row.find('td:eq(1)').text();
+                Swal.fire({
+                    title: 'Detalles del Cliente',
+                    text: `Mostrando detalles de ${cliente}`,
+                    icon: 'info'
+                });
             });
         });
     </script>
