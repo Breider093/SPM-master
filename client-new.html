@@ -37,11 +37,24 @@
 			padding: 20px;
 			margin-bottom: 20px;
 		}
+		.form-group {
+			position: relative;
+			margin-bottom: 1.5rem;
+		}
+		.form-group label {
+			display: block;
+			margin-bottom: 0.5rem;
+			color: #2C3E50;
+			font-weight: 500;
+			font-size: 0.9rem;
+		}
 		.form-input {
+			width: 100%;
 			border-radius: 25px;
 			padding: 10px 20px;
 			border: 1px solid #e0e0e0;
 			transition: all 0.3s ease;
+			height: calc(1.5em + 0.75rem + 2px);
 		}
 		.form-input:focus {
 			border-color: #2C3E50;
@@ -57,6 +70,82 @@
 		.btn-custom:hover {
 			transform: translateY(-2px);
 			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		}
+		/* Estilos para los campos de archivo */
+		.custom-file {
+			position: relative;
+			display: inline-block;
+			width: 100%;
+		}
+		.custom-file-input {
+			position: relative;
+			z-index: 2;
+			width: 100%;
+			height: calc(1.5em + 0.75rem + 2px);
+			opacity: 0;
+		}
+		.custom-file-label {
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			z-index: 1;
+			height: calc(1.5em + 0.75rem + 2px);
+			padding: 0.375rem 0.75rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #495057;
+			background-color: #fff;
+			border: 1px solid #ced4da;
+			border-radius: 25px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.custom-file-label::after {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 3;
+			display: block;
+			height: calc(1.5em + 0.75rem);
+			padding: 0.375rem 0.75rem;
+			line-height: 1.5;
+			color: #495057;
+			content: "Examinar";
+			background-color: #e9ecef;
+			border-left: inherit;
+			border-radius: 0 25px 25px 0;
+		}
+		/* Estilos para el checkbox */
+		.checkbox {
+			margin-top: 1rem;
+		}
+		.checkbox label {
+			display: inline-flex;
+			align-items: center;
+			cursor: pointer;
+			font-weight: normal;
+		}
+		.checkbox input[type="checkbox"] {
+			margin-right: 0.5rem;
+		}
+		/* Estilos para campos requeridos */
+		label.required::after {
+			content: " *";
+			color: #dc3545;
+		}
+		/* Estilos para select */
+		select.form-input {
+			appearance: none;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill='%23495057' d='M4 5L0 0h8z'/%3E%3C/svg%3E");
+			background-repeat: no-repeat;
+			background-position: right 1rem center;
+			background-size: 8px 8px;
+			padding-right: 2.5rem;
 		}
 	</style>
 </head>
@@ -110,32 +199,51 @@
 								<div class="row">
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_dni" class="bmd-label-floating">DNI</label>
-											<input type="text" pattern="[a-zA-Z0-9-]{1,27}" class="form-control form-input" id="cliente_dni" name="cliente_dni" maxlength="27" required>
+											<label for="cliente_documento" class="required">Documento</label>
+											<input type="text" pattern="[a-zA-Z0-9-]{1,27}" class="form-input" id="cliente_documento" name="cliente_documento" maxlength="27" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_nombre" class="bmd-label-floating">Nombre</label>
-											<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control form-input" name="cliente_nombre" id="cliente_nombre" maxlength="40" required>
+											<label for="tipo_documento">Tipo documento</label>
+											<select class="form-input" name="tipo_documento" id="tipo_documento">
+												<option value="">Seleccionar tipo</option>
+												<option value="nit">NIT</option>
+												<option value="cc">CC</option>
+												<option value="pasaporte">PASAPORTE</option>
+												<option value="t.residente">T. RESIDENTE</option>
+												
+											</select>
 										</div>
 									</div>
-									<div class="col-12 col-md-4">
+									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_apellido" class="bmd-label-floating">Apellido</label>
-											<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control form-input" name="cliente_apellido" id="cliente_apellido" maxlength="40" required>
+											<label for="razon_social" class="required">Razón social</label>
+											<input type="text" class="form-input" name="razon_social" id="razon_social" maxlength="150" required>
 										</div>
 									</div>
-									<div class="col-12 col-md-4">
+									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_telefono" class="bmd-label-floating">Teléfono</label>
-											<input type="text" pattern="[0-9()+]{1,20}" class="form-control form-input" name="cliente_telefono" id="cliente_telefono" maxlength="20" required>
+											<label for="cliente_direccion" class="required">Dirección</label>
+											<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" class="form-input" name="cliente_direccion" id="cliente_direccion" maxlength="150" required>
 										</div>
 									</div>
-									<div class="col-12 col-md-4">
+									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-											<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" class="form-control form-input" name="cliente_direccion" id="cliente_direccion" maxlength="150" required>
+											<label for="cliente_email" class="required">Email</label>
+											<input type="email" class="form-input" name="cliente_email" id="cliente_email" maxlength="70" required>
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="cliente_telefono">Teléfono</label>
+											<input type="text" pattern="[0-9()+]{1,20}" class="form-input" name="cliente_telefono" id="cliente_telefono" maxlength="20">
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="cliente_celular" class="required">Celular</label>
+											<input type="text" pattern="[0-9()+]{1,20}" class="form-input" name="cliente_celular" id="cliente_celular" maxlength="20" required>
 										</div>
 									</div>
 								</div>
@@ -145,19 +253,68 @@
 
 					<div class="form-section">
 						<fieldset>
-							<legend><i class="fas fa-info-circle"></i> &nbsp; Información adicional</legend>
+							<legend><i class="fas fa-file-alt"></i> &nbsp; Documentación requerida</legend>
 							<div class="container-fluid">
 								<div class="row">
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_email" class="bmd-label-floating">Email</label>
-											<input type="email" class="form-control form-input" name="cliente_email" id="cliente_email" maxlength="70">
+											<label for="rut">RUT</label>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="rut" name="rut">
+												<label class="custom-file-label" for="rut">Ningún archivo seleccionado</label>
+											</div>
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_empresa" class="bmd-label-floating">Empresa</label>
-											<input type="text" class="form-control form-input" name="cliente_empresa" id="cliente_empresa" maxlength="70">
+											<label for="cedula_repr">Cédula Repr.</label>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="cedula_repr" name="cedula_repr">
+												<label class="custom-file-label" for="cedula_repr">Ningún archivo seleccionado</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="contrato_alquiler">Contrato Alquiler</label>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="contrato_alquiler" name="contrato_alquiler">
+												<label class="custom-file-label" for="contrato_alquiler">Ningún archivo seleccionado</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="camara_comercio">Cámara de comercio</label>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="camara_comercio" name="camara_comercio">
+												<label class="custom-file-label" for="camara_comercio">Ningún archivo seleccionado</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="certificado_bancario">Certificado Bancario</label>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="certificado_bancario" name="certificado_bancario">
+												<label class="custom-file-label" for="certificado_bancario">Ningún archivo seleccionado</label>
+											</div>
+										</div>
+									</div>
+									<div class="col-12 col-md-6">
+										<div class="form-group">
+											<label for="ciudad" class="required">Ciudad</label>
+											<input type="text" class="form-input" name="ciudad" id="ciudad" maxlength="50" required>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<div class="checkbox">
+												<label>
+													<input type="checkbox" name="habilitado" id="habilitado">
+													Habilitado
+												</label>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -166,9 +323,9 @@
 					</div>
 
 					<p class="text-center" style="margin-top: 40px;">
-						<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR</button>
+						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; Crear cliente</button>
 						&nbsp; &nbsp;
-						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; GUARDAR</button>
+						<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; Cancelar</button>
 					</p>
 				</form>
 			</div>	
@@ -202,16 +359,45 @@
 
 	<!-- Script para manejar la precarga -->
 	<script>
-		window.addEventListener('load', function() {
-			document.body.classList.add('loaded');
-		});
-	</script>
-
-	<script>
 		$(document).ready(function() {
+			// Manejo de la precarga
+			window.addEventListener('load', function() {
+				document.body.classList.add('loaded');
+			});
+
+			// Actualizar el nombre del archivo seleccionado en los campos de tipo file
+			$('.custom-file-input').on('change', function() {
+				let fileName = $(this).val().split('\\').pop();
+				$(this).next('.custom-file-label').addClass("selected").html(fileName || 'Ningún archivo seleccionado');
+			});
+
+			// Manejo del formulario
 			$('#formCliente').on('submit', function(e) {
 				e.preventDefault();
 				
+				// Validar campos requeridos
+				let camposRequeridos = $(this).find('[required]');
+				let todosValidos = true;
+
+				camposRequeridos.each(function() {
+					if (!$(this).val()) {
+						todosValidos = false;
+						$(this).addClass('is-invalid');
+					} else {
+						$(this).removeClass('is-invalid');
+					}
+				});
+
+				if (!todosValidos) {
+					Swal.fire({
+						icon: 'error',
+						title: 'Error de validación',
+						text: 'Por favor, complete todos los campos requeridos'
+					});
+					return;
+				}
+
+				// Confirmación antes de enviar
 				Swal.fire({
 					title: '¿Estás seguro?',
 					text: "¿Deseas guardar este cliente?",
@@ -230,6 +416,7 @@
 							'success'
 						).then(() => {
 							$('#formCliente')[0].reset();
+							$('.custom-file-label').html('Ningún archivo seleccionado');
 						});
 					}
 				});
