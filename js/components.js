@@ -270,9 +270,7 @@ function loadSidebar() {
                         </li>
 
 
-                        <li>
-                            <a href="company.html"><i class="fas fa-store-alt fa-fw"></i> &nbsp; Empresa</a>
-                        </li>
+                       
                     </ul>
                 </nav>
             </div>
