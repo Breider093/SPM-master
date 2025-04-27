@@ -212,6 +212,65 @@
 
             <!-- Content -->
             <div class="container-fluid">
+                <!-- Estadísticas Principales -->
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <i class="fas fa-exclamation-triangle text-warning mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="stat-value" id="lowStockCount">12</h3>
+                            <p class="stat-label">Productos con Stock Bajo</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <i class="fas fa-chart-line text-success mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="stat-value" id="monthlyRevenue">$45,680</h3>
+                            <p class="stat-label">Ingresos del Mes</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <i class="fas fa-trophy text-primary mb-3" style="font-size: 2rem;"></i>
+                            <h3 class="stat-value" id="topSellerRevenue">$12,350</h3>
+                            <p class="stat-label">Ingresos del Producto Más Vendido</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Productos con Stock Bajo -->
+                <div class="table-container mt-4">
+                    <h4 class="mb-4"><i class="fas fa-exclamation-triangle text-warning"></i> Productos con Stock Bajo</h4>
+                    <div class="table-responsive">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Stock Actual</th>
+                                    <th>Stock Mínimo</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lowStockTable">
+                                <!-- Datos dinámicos -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Productos Más Vendidos -->
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="chart-container">
+                            <h4 class="mb-4"><i class="fas fa-crown text-warning"></i> Top 5 Productos Más Vendidos</h4>
+                            <canvas id="topProductosChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="chart-container">
+                            <h4 class="mb-4"><i class="fas fa-dollar-sign text-success"></i> Ingresos por Producto</h4>
+                            <canvas id="ingresosChart"></canvas>
+                        </div>
+                    </div>
+                </div>
                 <!-- Filtros -->
                 <div class="filter-section">
                     <form class="form-neon" id="filterForm">
@@ -283,155 +342,6 @@
                         </div>
                     </form>
                 </div>
-
-                <!-- Estadísticas -->
-                <div class="row">
-                    <div class="col-12 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-value">250</div>
-                            <div class="stat-label">Total Productos</div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-value">45</div>
-                            <div class="stat-label">Productos con Stock Bajo</div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-value">$15,500</div>
-                            <div class="stat-label">Valor Total en Stock</div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-value">12</div>
-                            <div class="stat-label">Productos Sin Movimiento</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Gráficos -->
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="chart-container">
-                            <h5 class="text-center mb-4">Distribución de Productos por Categoría</h5>
-                            <canvas id="productosCategoriaChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="chart-container">
-                            <h5 class="text-center mb-4">Top 5 Productos Más Vendidos</h5>
-                            <canvas id="topProductosChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Productos Destacados -->
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div>
-                                    <div class="product-name">Cemento Portland</div>
-                                    <div class="product-info">
-                                        <i class="fas fa-tag"></i> Materiales<br>
-                                        <i class="fas fa-barcode"></i> PROD-001
-                                    </div>
-                                </div>
-                                <span class="badge badge-warning">Stock Medio</span>
-                            </div>
-                            <div class="product-stats">
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$25.00</div>
-                                    <div class="product-stat-label">Precio Unitario</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">150</div>
-                                    <div class="product-stat-label">Stock Actual</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">45</div>
-                                    <div class="product-stat-label">Ventas Mes</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div>
-                                    <div class="product-name">Martillo Demoledor</div>
-                                    <div class="product-info">
-                                        <i class="fas fa-tag"></i> Herramientas<br>
-                                        <i class="fas fa-barcode"></i> PROD-002
-                                    </div>
-                                </div>
-                                <span class="badge badge-success">Stock Alto</span>
-                            </div>
-                            <div class="product-stats">
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$350.00</div>
-                                    <div class="product-stat-label">Precio Unitario</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">25</div>
-                                    <div class="product-stat-label">Stock Actual</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">12</div>
-                                    <div class="product-stat-label">Ventas Mes</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tabla de Productos -->
-                <div class="table-container">
-                    <h5 class="mb-4">Lista de Productos</h5>
-                    <div class="table-responsive">
-                        <table class="table-custom">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Categoría</th>
-                                    <th>Stock</th>
-                                    <th>Precio</th>
-                                    <th>Ventas Mes</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Cemento Portland</td>
-                                    <td>Materiales</td>
-                                    <td class="stock-medium">150</td>
-                                    <td>$25.00</td>
-                                    <td>45</td>
-                                    <td><span class="badge badge-warning">Stock Medio</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Martillo Demoledor</td>
-                                    <td>Herramientas</td>
-                                    <td class="stock-high">25</td>
-                                    <td>$350.00</td>
-                                    <td>12</td>
-                                    <td><span class="badge badge-success">Stock Alto</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Pintura Acrílica</td>
-                                    <td>Materiales</td>
-                                    <td class="stock-low">5</td>
-                                    <td>$45.00</td>
-                                    <td>30</td>
-                                    <td><span class="badge badge-danger">Stock Bajo</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
@@ -451,34 +361,14 @@
             const productosCategoriaCtx = document.getElementById('productosCategoriaChart').getContext('2d');
             const topProductosCtx = document.getElementById('topProductosChart').getContext('2d');
 
-            // Gráfico de distribución de productos por categoría
-            new Chart(productosCategoriaCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Materiales', 'Herramientas', 'Equipos', 'Otros'],
-                    datasets: [{
-                        data: [40, 30, 20, 10],
-                        backgroundColor: [
-                            '#2C3E50',
-                            '#3498DB',
-                            '#E74C3C',
-                            '#F1C40F'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-
-            // Gráfico de top productos más vendidos
-            new Chart(topProductosCtx, {
+            // Gráfico de productos más vendidos
+            const topProductosChart = new Chart(document.getElementById('topProductosChart').getContext('2d'), {
                 type: 'bar',
                 data: {
-                    labels: ['Cemento', 'Pintura', 'Martillo', 'Tornillos', 'Cables'],
+                    labels: ['Cemento', 'Varillas', 'Pintura', 'Blocks', 'Tubería PVC'],
                     datasets: [{
                         label: 'Unidades Vendidas',
-                        data: [45, 30, 25, 20, 15],
+                        data: [150, 120, 90, 80, 75],
                         backgroundColor: '#2C3E50'
                     }]
                 },
@@ -487,6 +377,50 @@
                     plugins: {
                         legend: {
                             display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Unidades Vendidas este Mes'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de ingresos por producto
+            const ingresosChart = new Chart(document.getElementById('ingresosChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Cemento', 'Varillas', 'Pintura', 'Blocks', 'Tubería PVC'],
+                    datasets: [{
+                        label: 'Ingresos ($)',
+                        data: [15000, 12000, 8500, 6000, 4180],
+                        backgroundColor: '#27AE60'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Ingresos Generados este Mes'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
                         }
                     }
                 }
