@@ -125,29 +125,38 @@
             <!-- Content -->
             <div class="container-fluid">
                 <!-- Filtros -->
-                <div class="filter-section mb-4">
-                    <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="form-group mb-0">
-                                <label for="fechaInicio">Fecha Inicio</label>
-                                <input type="date" class="form-control" id="fechaInicio">
+                <!-- Estadísticas Principales -->
+                <div class="row mb-4">
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-card-icon bg-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-card-info text-center">
+                                <h4>Productos con Stock Bajo</h4>
+                                <p id="lowStockCount">12</p>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group mb-0">
-                                <label for="fechaFin">Fecha Fin</label>
-                                <input type="date" class="form-control" id="fechaFin">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-card-icon bg-success">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-card-info text-center">
+                                <h4>Ingresos del Mes</h4>
+                                <p id="monthlyRevenue">$45,680</p>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <div class="form-group mb-0">
-                                <label for="categoria">Categoría</label>
-                                <select class="form-control" id="categoria">
-                                    <option value="">Todas</option>
-                                    <option value="1">Electrónica</option>
-                                    <option value="2">Ropa</option>
-                                    <option value="3">Hogar</option>
-                                </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-card-icon bg-primary">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-card-info text-center">
+                                <h4>Producto Más Vendido</h4>
+                                <p id="topSellerRevenue">$12,350</p>
                             </div>
                         </div>
                     </div>
@@ -196,6 +205,74 @@
                             <div class="stat-card-info">
                                 <h4>Crecimiento</h4>
                                 <p>+15%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productos con Stock Bajo -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-exclamation-triangle text-warning"></i> Productos con Stock Bajo
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Categoría</th>
+                                        <th>Stock Actual</th>
+                                        <th>Stock Mínimo</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lowStockTable">
+                                    <tr>
+                                        <td>Cemento Portland</td>
+                                        <td>Materiales</td>
+                                        <td class="text-danger">5</td>
+                                        <td>20</td>
+                                        <td><span class="badge badge-danger">Crítico</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Varillas de Acero</td>
+                                        <td>Materiales</td>
+                                        <td class="text-warning">15</td>
+                                        <td>25</td>
+                                        <td><span class="badge badge-warning">Bajo</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos de Ventas e Ingresos -->
+                <div class="row">
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-crown text-warning"></i> Top 5 Productos Más Vendidos
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="topProductosChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-dollar-sign text-success"></i> Ingresos por Producto
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="ingresosChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -343,60 +420,69 @@
         $(document).ready(function() {
             $('body').bootstrapMaterialDesign();
             
-            // Gráfico de Inventario por Categoría
-            var ctxPie = document.getElementById('inventarioCategoriaChart').getContext('2d');
-            new Chart(ctxPie, {
-                type: 'doughnut',
+            // Gráfico de productos más vendidos
+            const topProductosChart = new Chart(document.getElementById('topProductosChart').getContext('2d'), {
+                type: 'bar',
                 data: {
-                    labels: ['Electrónica', 'Ropa', 'Hogar', 'Deportes', 'Otros'],
+                    labels: ['Cemento', 'Varillas', 'Pintura', 'Blocks', 'Tubería PVC'],
                     datasets: [{
-                        data: [30, 25, 20, 15, 10],
-                        backgroundColor: [
-                            '#4e73df',
-                            '#1cc88a',
-                            '#36b9cc',
-                            '#f6c23e',
-                            '#e74a3b'
-                        ],
-                        borderWidth: 1
+                        label: 'Unidades Vendidas',
+                        data: [150, 120, 90, 80, 75],
+                        backgroundColor: '#2C3E50'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    legend: {
-                        position: 'bottom'
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Unidades Vendidas este Mes'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
             });
 
-            // Gráfico de Ventas
-            var ctxLine = document.getElementById('ventasChart').getContext('2d');
-            new Chart(ctxLine, {
-                type: 'line',
+            // Gráfico de ingresos por producto
+            const ingresosChart = new Chart(document.getElementById('ingresosChart').getContext('2d'), {
+                type: 'bar',
                 data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    labels: ['Cemento', 'Varillas', 'Pintura', 'Blocks', 'Tubería PVC'],
                     datasets: [{
-                        label: 'Ventas 2024',
-                        data: [5000, 8000, 12000, 9000, 15000, 20000],
-                        borderColor: '#1cc88a',
-                        backgroundColor: 'rgba(28, 200, 138, 0.1)',
-                        borderWidth: 2,
-                        fill: true
+                        label: 'Ingresos ($)',
+                        data: [15000, 12000, 8500, 6000, 4180],
+                        backgroundColor: '#27AE60'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Ingresos Generados este Mes'
+                        }
+                    },
                     scales: {
-                        yAxes: [{
+                        y: {
+                            beginAtZero: true,
                             ticks: {
-                                beginAtZero: true,
                                 callback: function(value) {
-                                    return '$' + value;
+                                    return '$' + value.toLocaleString();
                                 }
                             }
-                        }]
+                        }
                     }
                 }
             });
