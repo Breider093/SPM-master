@@ -51,7 +51,9 @@ function loadSidebar() {
                                 <li>
                                     <a href="producto-lista.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Productos</a>
                                 </li>
-                               
+                                <li>
+                                    <a href="producto-categorias.html"><i class="fas fa-tags fa-fw"></i> &nbsp; Categorías</a>
+                                </li>
                                 <li>
                                     <a href="producto-reportes.html"><i class="fas fa-chart-pie fa-fw"></i> &nbsp; Reportes de Productos</a>
                                 </li>
