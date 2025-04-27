@@ -121,107 +121,134 @@
             <!-- Content -->
             <div class="container-fluid">
                 <form class="form-neon" id="devolucionForm">
-                    <!-- Información General -->
                     <div class="form-card">
                         <h4 class="section-title">
-                            <i class="fas fa-info-circle"></i> &nbsp; Información General
+                            <i class="fas fa-undo"></i> &nbsp; Formulario de Devolución
                         </h4>
                         <div class="row">
-                            <div class="col-12 col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="cliente">
-                                        <i class="fas fa-user"></i> &nbsp; Cliente
-                                    </label>
-                                    <select class="form-control form-input" id="cliente" name="cliente" required>
-                                        <option value="">Seleccione un cliente</option>
+                                    <label>Fecha Factura *</label>
+                                    <input type="date" class="form-control form-input" id="fechaFactura" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Fecha Entrega</label>
+                                    <input type="datetime-local" class="form-control form-input" id="fechaEntrega">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Datos del cliente -->
+                            <div class="col-md-6">
+                                <h5 class="mt-3 mb-2"><b>Datos del cliente</b></h5>
+                                <div class="form-group">
+                                    <label>Cliente *</label>
+                                    <select class="form-control form-input" id="cliente" required>
+                                        <option value="">SELECCIONAR *</option>
                                         <option value="1">Constructora XYZ</option>
                                         <option value="2">Ferretería ABC</option>
                                         <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6">
                                 <div class="form-group">
-                                    <label for="fecha">
-                                        <i class="fas fa-calendar"></i> &nbsp; Fecha de Devolución
-                                    </label>
-                                    <input type="date" class="form-control form-input" id="fecha" name="fecha" required>
+                                    <label>Nit</label>
+                                    <input type="text" class="form-control form-input" id="nit" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dirección</label>
+                                    <input type="text" class="form-control form-input" id="direccionCliente" readonly>
+                                </div>
+                            </div>
+                            <!-- Datos de la obra -->
+                            <div class="col-md-6">
+                                <h5 class="mt-3 mb-2"><b>Datos de la Obra</b></h5>
+                                <div class="form-group">
+                                    <label>Obra *</label>
+                                    <select class="form-control form-input" id="obra" required>
+                                        <option value="">SELECCIONAR *</option>
+                                        <option value="1">Obra Norte</option>
+                                        <option value="2">Obra Sur</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dirección</label>
+                                    <input type="text" class="form-control form-input" id="direccionObra" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Teléfono</label>
+                                    <input type="text" class="form-control form-input" id="telefonoObra" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Transportador y precio -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Transportador *</label>
+                                    <select class="form-control form-input" id="transportador" required>
+                                        <option value="">Seleccionar *</option>
+                                        <option value="1">Transporte A</option>
+                                        <option value="2">Transporte B</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Precio de Transporte *</label>
+                                    <input type="number" class="form-control form-input" id="precioTransporte" required>
+                                    <small>Sugerido: <span id="sugerido">0</span></small>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Observaciones</label>
+                                    <textarea class="form-control form-input" id="observaciones" rows="1"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Productos a Devolver -->
+                    <!-- Tabla de productos -->
                     <div class="form-card">
                         <h4 class="section-title">
                             <i class="fas fa-box"></i> &nbsp; Productos a Devolver
                         </h4>
-                        <div id="productosContainer">
-                            <div class="product-item">
-                                <div class="row">
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label>Producto</label>
-                                            <select class="form-control form-input producto-select" required>
-                                                <option value="">Seleccione producto</option>
-                                                <option value="1">Cemento</option>
-                                                <option value="2">Arena</option>
-                                                <option value="3">Grava</option>
-                                                <option value="4">Varilla</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label>Cantidad</label>
-                                            <input type="number" class="form-control form-input cantidad-input" placeholder="Cantidad" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label>Motivo</label>
-                                            <select class="form-control form-input motivo-select" required>
-                                                <option value="">Seleccione motivo</option>
-                                                <option value="1">Producto defectuoso</option>
-                                                <option value="2">Exceso de pedido</option>
-                                                <option value="3">Cambio de producto</option>
-                                                <option value="4">Otro</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-1">
-                                        <div class="form-group">
-                                            <label>&nbsp;</label>
-                                            <button type="button" class="btn btn-danger btn-block" onclick="removeProduct(this)">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Pendiente</th>
+                                        <th>Cantidad</th>
+                                        <th>Peso</th>
+                                        <th>Total Kg</th>
+                                        <th>Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaProductos">
+                                    <!-- Aquí se agregan dinámicamente los productos -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-right"><b>Total</b></td>
+                                        <td id="totalKg">0.00 Kgr</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                        <button type="button" class="btn btn-info btn-custom" onclick="addProduct()">
+                        <button type="button" class="btn btn-info btn-custom" onclick="addProductRow()">
                             <i class="fas fa-plus"></i> &nbsp; AGREGAR PRODUCTO
                         </button>
                     </div>
-
-                    <!-- Observaciones -->
-                    <div class="form-card">
-                        <h4 class="section-title">
-                            <i class="fas fa-comment"></i> &nbsp; Observaciones
-                        </h4>
-                        <div class="form-group">
-                            <textarea class="form-control form-input" id="observaciones" name="observaciones" rows="4" placeholder="Ingrese observaciones adicionales sobre la devolución"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Botones de Acción -->
+                    <!-- Botones de acción -->
                     <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-primary btn-custom">
-                            <i class="fas fa-save"></i> &nbsp; GUARDAR DEVOLUCIÓN
+                        <button type="submit" class="btn btn-success btn-custom">
+                            <i class="fas fa-check"></i> Crear devolución
                         </button>
-                        <button type="reset" class="btn btn-secondary btn-custom ml-2">
-                            <i class="fas fa-eraser"></i> &nbsp; LIMPIAR FORMULARIO
+                        <button type="reset" class="btn btn-danger btn-custom ml-2">
+                            <i class="fas fa-times"></i> Cancelar
                         </button>
                     </div>
                 </form>
