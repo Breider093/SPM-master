@@ -35,12 +35,14 @@
             background: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
+
         .stat-card:hover {
             transform: translateY(-5px);
         }
+
         .stat-card-icon {
             width: 60px;
             height: 60px;
@@ -51,47 +53,43 @@
             margin: 0 auto 15px;
             font-size: 24px;
         }
+
         .stat-card-info h4 {
             color: #555;
             font-size: 1rem;
             margin-bottom: 10px;
         }
+
         .stat-card-info p {
             color: #333;
             font-size: 1.5rem;
             font-weight: bold;
             margin: 0;
         }
-        .chart-container {
-            position: relative;
-            margin: auto;
-            height: 300px;
-        }
+
         .card {
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             border: none;
             margin-bottom: 25px;
         }
+
         .card-header {
             background-color: #fff;
             border-bottom: 2px solid #f8f9fa;
         }
+
         .table th {
             font-weight: 600;
             background-color: #2C3E50;
             color: white;
         }
+
         .trend-up {
             color: #28a745;
         }
+
         .trend-down {
             color: #dc3545;
-        }
-        .filter-section {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -108,10 +106,12 @@
                     <i class="fas fa-chart-pie fa-fw"></i> &nbsp; REPORTES DE PRODUCTOS
                 </h3>
                 <p class="text-justify">
-                    En esta sección puedes visualizar reportes detallados sobre los productos, incluyendo estadísticas de ventas, inventario y rendimiento.
+                    En esta sección puedes visualizar reportes detallados sobre los productos, incluyendo productos que se están terminando, los más vendidos en el mes y el dinero generado.
                 </p>
             </div>
 
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
             <!-- Navigation tabs -->
             <div class="container-fluid">
                 <ul class="full-box list-unstyled page-nav-tabs">
