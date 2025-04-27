@@ -37,11 +37,24 @@
 			padding: 20px;
 			margin-bottom: 20px;
 		}
+		.form-group {
+			position: relative;
+			margin-bottom: 1.5rem;
+		}
+		.form-group label {
+			display: block;
+			margin-bottom: 0.5rem;
+			color: #2C3E50;
+			font-weight: 500;
+			font-size: 0.9rem;
+		}
 		.form-input {
+			width: 100%;
 			border-radius: 25px;
 			padding: 10px 20px;
 			border: 1px solid #e0e0e0;
 			transition: all 0.3s ease;
+			height: calc(1.5em + 0.75rem + 2px);
 		}
 		.form-input:focus {
 			border-color: #2C3E50;
@@ -77,6 +90,17 @@
 		.btn-search:hover {
 			transform: translateY(-2px);
 			box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+		}
+		.btn-action {
+			padding: 5px 10px;
+			margin: 0 2px;
+			border-radius: 4px;
+			background-color: #6c757d;
+			color: white;
+			border: none;
+		}
+		.btn-action i {
+			margin-right: 5px;
 		}
 	</style>
 </head>
@@ -126,13 +150,13 @@
 					<div class="row">
 						<div class="col-12 col-md-6">
 							<div class="form-group">
-								<label for="buscarCliente" class="bmd-label-floating">Buscar Cliente</label>
+								<label for="buscarCliente">Buscar Cliente</label>
 								<input type="text" class="form-control form-input" id="buscarCliente" placeholder="ID, nombre o apellido...">
 							</div>
 						</div>
 						<div class="col-12 col-md-3">
 							<div class="form-group">
-								<label for="tipoBusqueda" class="bmd-label-floating">Tipo de Búsqueda</label>
+								<label for="tipoBusqueda">Tipo de Búsqueda</label>
 								<select class="form-control form-input" id="tipoBusqueda">
 									<option value="todos">Todos</option>
 									<option value="id">ID</option>
@@ -143,7 +167,7 @@
 						</div>
 						<div class="col-12 col-md-3">
 							<div class="form-group">
-								<label for="estadoCliente" class="bmd-label-floating">Estado</label>
+								<label for="estadoCliente">Estado</label>
 								<select class="form-control form-input" id="estadoCliente">
 									<option value="todos">Todos</option>
 									<option value="activo">Activo</option>
