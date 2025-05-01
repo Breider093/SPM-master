@@ -29,7 +29,13 @@
     <!-- Preload Styles -->
     <link rel="stylesheet" href="./css/preload.css">
 </head>
-<body>
+<body class="scroll-style-1">
+    <!-- Loading -->
+    <div class="loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <!-- Main container -->
     <main class="full-box main-container">
         <!-- El menú lateral se cargará dinámicamente desde components.js -->
@@ -62,37 +68,74 @@
             <!-- Content -->
             <div class="container-fluid">
                 <div class="row mb-4">
-                    <div class="col-12 col-md-6">
-                        <div class="form-group">
-                            <label for="descripcion">Descripción</label>
-                            <input type="text" class="form-control" id="descripcion" placeholder="Buscar descripción...">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group bmd-form-group">
+                            <label for="cliente" class="bmd-label-floating">Cliente</label>
+                            <select class="form-control" id="cliente">
+                                <option value="">Seleccione un cliente</option>
+                                <option value="todos">TODOS</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 text-right">
-                        <button class="btn btn-success"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group bmd-form-group">
+                            <label for="descripcion" class="bmd-label-floating">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion" maxlength="70">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group bmd-form-group">
+                            <label for="obra" class="bmd-label-floating">Obra</label>
+                            <select class="form-control" id="obra">
+                                <option value="">Seleccione una obra</option>
+                                <option value="todos">TODAS</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12 text-right">
+                        <button type="button" class="btn btn-raised btn-info"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR</button>
+                        <button type="button" class="btn btn-raised btn-success"><i class="fas fa-file-pdf fa-fw"></i> &nbsp; EXPORTAR PDF</button>
+                        <button type="button" class="btn btn-raised btn-success"><i class="fas fa-file-excel fa-fw"></i> &nbsp; EXPORTAR EXCEL</button>
                     </div>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-dark table-sm">
                         <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Descripción</th>
-                                <th>Cantidad</th>
-                                <th>Cliente</th>
-                                <th>Obra</th>
+                            <tr class="text-center roboto-medium">
+                                <th>ID</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>CANTIDAD</th>
+                                <th>CLIENTE</th>
+                                <th>OBRA</th>
+                                <th>FECHA INICIO</th>
+                                <th>FECHA FIN</th>
+                                <th>ESTADO</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="text-center">
                                 <td>RM-136</td>
                                 <td>ABRAZADERAS RM</td>
                                 <td>1</td>
                                 <td>IMPORTADORA JVC</td>
                                 <td>CRA 44 88-05</td>
+                                <td>01/05/2025</td>
+                                <td>15/05/2025</td>
+                                <td><span class="badge badge-info">En Uso</span></td>
                             </tr>
-                            <!-- Más filas según sea necesario -->
+                            <tr class="text-center">
+                                <td>RM-137</td>
+                                <td>ANDAMIO CERTIFICADO</td>
+                                <td>3</td>
+                                <td>CONSTRUCTORA ABC</td>
+                                <td>EDIFICIO CENTRAL</td>
+                                <td>28/04/2025</td>
+                                <td>28/05/2025</td>
+                                <td><span class="badge badge-success">Activo</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -112,5 +155,12 @@
     <script src="./js/components.js"></script>
 
     <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
 </body>
 </html>

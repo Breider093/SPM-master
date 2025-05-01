@@ -29,7 +29,13 @@
     <!-- Preload Styles -->
     <link rel="stylesheet" href="./css/preload.css">
 </head>
-<body>
+<body class="scroll-style-1">
+    <!-- Loading -->
+    <div class="loading">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <!-- Main container -->
     <main class="full-box main-container">
         <!-- El menú lateral se cargará dinámicamente desde components.js -->
@@ -63,48 +69,62 @@
             <div class="container-fluid">
                 <div class="row mb-4">
                     <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label for="proveedor">Proveedor</label>
+                        <div class="form-group bmd-form-group">
+                            <label for="proveedor" class="bmd-label-floating">Proveedor</label>
                             <select class="form-control" id="proveedor">
+                                <option value="">Seleccione un proveedor</option>
                                 <option value="todos">TODOS</option>
-                                <option value="proveedor1">Proveedor 1</option>
-                                <option value="proveedor2">Proveedor 2</option>
+                                <option value="ANDAMIOS S.A.">ANDAMIOS S.A.</option>
+                                <option value="EQUIPOS INDUSTRIALES">EQUIPOS INDUSTRIALES</option>
+                                <option value="HERRAMIENTAS PRO">HERRAMIENTAS PRO</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-4">
-                        <div class="form-group">
-                            <label for="tipoProducto">Tipo Producto</label>
+                        <div class="form-group bmd-form-group">
+                            <label for="tipoProducto" class="bmd-label-floating">Tipo Producto</label>
                             <select class="form-control" id="tipoProducto">
+                                <option value="">Seleccione un tipo</option>
                                 <option value="todos">TODOS</option>
-                                <option value="tipo1">Tipo 1</option>
-                                <option value="tipo2">Tipo 2</option>
+                                <option value="ANDAMIOS">ANDAMIOS</option>
+                                <option value="HERRAMIENTAS">HERRAMIENTAS</option>
+                                <option value="EQUIPOS">EQUIPOS</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 text-right">
-                        <button class="btn btn-success"><i class="fas fa-file-pdf"></i> PDF</button>
-                        <button class="btn btn-success"><i class="fas fa-file-excel"></i> XLS</button>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group bmd-form-group">
+                            <label for="descripcion" class="bmd-label-floating">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion" maxlength="70">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12 text-right">
+                        <button type="button" class="btn btn-raised btn-info"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR</button>
+                        <button type="button" class="btn btn-raised btn-success"><i class="fas fa-file-pdf fa-fw"></i> &nbsp; EXPORTAR PDF</button>
+                        <button type="button" class="btn btn-raised btn-success"><i class="fas fa-file-excel fa-fw"></i> &nbsp; EXPORTAR EXCEL</button>
                     </div>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-dark table-sm">
                         <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descripción</th>
-                                <th>Tipo</th>
-                                <th>Saldo Proveedor</th>
-                                <th>Remisión</th>
-                                <th>Devolución</th>
-                                <th>Reposición</th>
-                                <th>Equipos en Alquiler</th>
-                                <th>Existencia Bodega</th>
+                            <tr class="text-center roboto-medium">
+                                <th>CÓDIGO</th>
+                                <th>DESCRIPCIÓN</th>
+                                <th>TIPO</th>
+                                <th>SALDO PROVEEDOR</th>
+                                <th>REMISIÓN</th>
+                                <th>DEVOLUCIÓN</th>
+                                <th>REPOSICIÓN</th>
+                                <th>EN ALQUILER</th>
+                                <th>EN BODEGA</th>
+                                <th>ESTADO</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="text-center">
                                 <td>RM-136</td>
                                 <td>ABRAZADERAS RM</td>
                                 <td>ANDAMIOS CERTIFICADOS</td>
@@ -114,8 +134,20 @@
                                 <td>0</td>
                                 <td>85</td>
                                 <td>0</td>
+                                <td><span class="badge badge-warning">Stock Bajo</span></td>
                             </tr>
-                            <!-- Más filas según sea necesario -->
+                            <tr class="text-center">
+                                <td>RM-137</td>
+                                <td>ANDAMIO CERTIFICADO</td>
+                                <td>ANDAMIOS CERTIFICADOS</td>
+                                <td>150</td>
+                                <td>80</td>
+                                <td>20</td>
+                                <td>10</td>
+                                <td>60</td>
+                                <td>90</td>
+                                <td><span class="badge badge-success">Disponible</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -135,5 +167,12 @@
     <script src="./js/components.js"></script>
 
     <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
 </body>
 </html>

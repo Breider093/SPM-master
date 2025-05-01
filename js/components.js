@@ -187,7 +187,8 @@ function loadSidebar() {
                                     <a href="equipos-obra.html"><i class="fas fa-hard-hat fa-fw"></i> &nbsp; equipos en obra </a>
                                 </li>
                                 <li>
-                                    <a href="saldo-proveedores.html"><i class="fas fa-dollar-sign fa-fw"></i> &nbsp; saldo de proveedores </a>
+                                  
+                            
                                 </li>
                             </ul>
                         </li>
@@ -309,4 +310,4 @@ function initComponents() {
 }
 
 // Ejecutar cuando el documento esté listo
-document.addEventListener('DOMContentLoaded', initComponents); 
+document.addEventListener('DOMContentLoaded', initComponents);
