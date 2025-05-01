@@ -43,19 +43,13 @@ function loadSidebar() {
                             <a href="#" class="nav-btn-submenu"><i class="fas fa-box fa-fw"></i> &nbsp; Producto <i class="fas fa-chevron-down"></i></a>
                             <ul>
                                 <li>
-                                    <a href="producto-vincular.html"><i class="fas fa-link fa-fw"></i> &nbsp; Vincular Producto</a>
+                                    <a href="producto-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
                                 </li>
                                 <li>
-                                    <a href="producto-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar Producto</a>
+                                    <a href="producto-lista.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
                                 </li>
                                 <li>
-                                    <a href="producto-lista.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de Productos</a>
-                                </li>
-                                <li>
-                                    <a href="producto-categorias.html"><i class="fas fa-tags fa-fw"></i> &nbsp; Categorías</a>
-                                </li>
-                                <li>
-                                    <a href="producto-reportes.html"><i class="fas fa-chart-pie fa-fw"></i> &nbsp; Reportes de Productos</a>
+                                    <a href="producto-vincular.html"><i class="fas fa-link fa-fw"></i> &nbsp; VINCULAR PRODUCTO</a>
                                 </li>
                             </ul>
                         </li>

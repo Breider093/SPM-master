@@ -129,10 +129,7 @@
                         <a href="producto-lista.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
                     </li>
                     <li>
-                        <a href="producto-categorias.html"><i class="fas fa-tags fa-fw"></i> &nbsp; CATEGORÍAS</a>
-                    </li>
-                    <li>
-                        <a href="producto-reportes.html"><i class="fas fa-chart-pie fa-fw"></i> &nbsp; REPORTES</a>
+                        <a href="producto-vincular.html"><i class="fas fa-link fa-fw"></i> &nbsp; VINCULAR PRODUCTO</a>
                     </li>
                 </ul>
             </div>
@@ -140,77 +137,71 @@
             <!-- Content -->
             <div class="container-fluid">
                 <form action="" class="form-neon" autocomplete="off" id="formProducto">
-                    <div class="form-section">
-                        <div class="d-flex align-items-center mb-4">
-                            <i class="fas fa-box form-section-icon"></i>
-                            <h4 class="mb-0">Información del Producto</h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-card">
+                    <fieldset>
+                        <legend><i class="fas fa-box"></i> &nbsp; Formulario de Producto</legend>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <label for="producto_nombre">
-                                            <i class="fas fa-tag"></i> Nombre del Producto
-                                        </label>
-                                        <input type="text" class="form-control" id="producto_nombre" name="producto_nombre" maxlength="40" required>
+                                        <label for="descripcion">Descripción</label>
+                                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-card">
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <label for="producto_categoria">
-                                            <i class="fas fa-folder"></i> Categoría
-                                        </label>
-                                        <select class="form-control" id="producto_categoria" name="producto_categoria" required>
-                                            <option value="" disabled selected>Seleccione una categoría</option>
-                                            <option value="Herramientas">Herramientas</option>
-                                            <option value="Materiales">Materiales</option>
-                                            <option value="Equipos">Equipos</option>
-                                            <option value="Seguridad">Seguridad</option>
+                                        <label for="tipo_producto">Tipo Producto</label>
+                                        <select class="form-control" id="tipo_producto" name="tipo_producto" required>
+                                            <option value="" selected disabled>Seleccionar *</option>
+                                            <option value="ANDAMIOS">ANDAMIOS</option>
+                                            <option value="ENCOFRADO">ENCOFRADO</option>
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-card">
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <label for="producto_precio">
-                                            <i class="fas fa-dollar-sign"></i> Precio
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">$</span>
-                                            </div>
-                                            <input type="number" class="form-control" id="producto_precio" name="producto_precio" min="0" step="0.01" required>
+                                        <label for="peso">Peso (Kg)</label>
+                                        <input type="number" class="form-control" id="peso" name="peso" value="0.0" step="0.1" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="precio_alquiler">Precio Alquiler</label>
+                                        <input type="number" class="form-control" id="precio_alquiler" name="precio_alquiler" value="0" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="precio_reposicion">Precio Reposición</label>
+                                        <input type="number" class="form-control" id="precio_reposicion" name="precio_reposicion" value="0" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="manual">Manual</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="manual" name="manual">
+                                            <label class="custom-file-label" for="manual">Seleccionar archivo</label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-card">
+                                <div class="col-12">
                                     <div class="form-group">
-                                        <label for="producto_cantidad">
-                                            <i class="fas fa-boxes"></i> Cantidad en Stock
-                                        </label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" id="producto_cantidad" name="producto_cantidad" min="0" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">unidades</span>
-                                            </div>
+                                        <label for="ficha_tecnica">Ficha Técnica</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="ficha_tecnica" name="ficha_tecnica">
+                                            <label class="custom-file-label" for="ficha_tecnica">Seleccionar archivo</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    </fieldset>
                     <div class="text-center mt-4">
-                        <button type="reset" class="btn btn-raised btn-secondary btn-custom mr-3">
-                            <i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR
+                        <button type="submit" class="btn btn-raised btn-info btn-sm">
+                            <i class="far fa-save"></i> &nbsp; Crear Producto
                         </button>
-                        <button type="submit" class="btn btn-raised btn-info btn-custom">
-                            <i class="far fa-save"></i> &nbsp; GUARDAR
+                        <button type="reset" class="btn btn-raised btn-secondary btn-sm">
+                            <i class="fas fa-paint-roller"></i> &nbsp; Cancelar
                         </button>
                     </div>
                 </form>

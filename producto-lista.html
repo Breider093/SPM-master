@@ -52,60 +52,84 @@
                     <li>
                         <a href="producto-vincular.html"><i class="fas fa-link fa-fw"></i> &nbsp; VINCULAR PRODUCTO</a>
                     </li>
-                    <li>
-                        <a href="producto-reportes.html"><i class="fas fa-chart-pie fa-fw"></i> &nbsp; REPORTES DE PRODUCTOS</a>
-                    </li>
                 </ul>
             </div>
 
             <!-- Content here -->
             <div class="container-fluid">
+                <!-- Botón Crear producto -->
+                <div class="mb-4">
+                    <a href="producto-nuevo.html" class="btn btn-info">
+                        <i class="fas fa-plus"></i> Crear producto
+                    </a>
+                    <a href="#" class="btn btn-success float-right">
+                        <i class="fas fa-file-pdf"></i> PDF
+                    </a>
+                </div>
+
+                <!-- Barra de búsqueda -->
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar producto...">
+                            <div class="input-group-append">
+                                <button class="btn btn-info" type="button">
+                                    <i class="fas fa-search"></i> Filtrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla de productos -->
                 <div class="table-responsive">
-                    <table class="table table-dark table-sm">
+                    <table class="table table-striped">
                         <thead>
-                            <tr class="text-center roboto-medium">
-                                <th>ID</th>
-                                <th>NOMBRE</th>
-                                <th>CATEGORÍA</th>
-                                <th>PRECIO</th>
-                                <th>CANTIDAD</th>
-                                <th>ACTUALIZAR</th>
-                                <th>ELIMINAR</th>
+                            <tr>
+                                <th>Id</th>
+                                <th>Descripción</th>
+                                <th>Tipo Producto</th>
+                                <th>Peso</th>
+                                <th>Precio Alquiler</th>
+                                <th>Precio Reposición</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td>001</td>
-                                <td>Televisor</td>
-                                <td>Electrónica</td>
-                                <td>$500.00</td>
-                                <td>10</td>
+                            <tr>
+                                <td>RM-129</td>
+                                <td>ABRAZADERAS</td>
+                                <td>ANDAMIOS CERTIFICADOS</td>
+                                <td>0.26 Kgr</td>
+                                <td>$0.00</td>
+                                <td>$0.00</td>
                                 <td>
-                                    <a href="producto-update.html" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
+                                    <div class="btn-group">
+                                        <button class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </button>
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
-                            <tr class="text-center">
-                                <td>002</td>
-                                <td>Camisa</td>
-                                <td>Ropa</td>
-                                <td>$20.00</td>
-                                <td>50</td>
+                            <tr>
+                                <td>RM-237</td>
+                                <td>ALINEADORES 0.80</td>
+                                <td>ENCOFRADO</td>
+                                <td>0.0 Kgr</td>
+                                <td>$0.00</td>
+                                <td>$0.00</td>
                                 <td>
-                                    <a href="producto-update.html" class="btn btn-success">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button>
+                                    <div class="btn-group">
+                                        <button class="btn btn-info btn-sm">
+                                            <i class="fas fa-edit"></i> Editar
+                                        </button>
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Eliminar
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
