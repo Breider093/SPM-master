@@ -25,140 +25,138 @@
     
     <!-- General Styles -->
     <link rel="stylesheet" href="./css/style.css">
-
-    <!-- Preload Styles -->
-    <link rel="stylesheet" href="./css/preload.css">
-
+    
     <style>
-        .filter-section {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .form-input {
-            border-radius: 25px;
-            padding: 10px 20px;
-            border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
-        }
-        .form-input:focus {
-            border-color: #2C3E50;
-            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
-        }
-        .btn-custom {
-            border-radius: 25px;
-            padding: 10px 30px;
-            font-weight: 500;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-        .btn-custom:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .product-card {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-        .product-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .product-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #2C3E50;
-        }
-        .product-info {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        .product-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-        .product-stat {
-            text-align: center;
-            padding: 10px;
-            flex: 1;
-        }
-        .product-stat-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #2C3E50;
-        }
-        .product-stat-label {
-            color: #666;
-            font-size: 0.8rem;
-        }
-        .table-container {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .table-custom {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-        .table-custom th {
-            background: #f8f9fa;
+        /* Estilos adicionales para la nueva apariencia */
+        .content-header {
+            background-color: #f8f9fa;
             padding: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+            font-weight: bold;
+        }
+        
+        .filter-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th {
+            background-color: #f8f9fa;
+            padding: 10px;
             text-align: left;
-            font-weight: 600;
-            color: #2C3E50;
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
         }
-        .table-custom td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #e0e0e0;
+        
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid #dee2e6;
         }
-        .table-custom tr:last-child td {
-            border-bottom: none;
+        
+        .data-table tr:nth-child(even) {
+            background-color: #f8f9fa;
         }
-        .table-custom tr:hover {
-            background: #f8f9fa;
+        
+        .btn-export {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            margin-left: 5px;
+            border-radius: 4px;
         }
-        .badge-stock {
-            background-color: #2ECC71;
-            color: #fff;
+        
+        .filter-label {
+            font-weight: bold;
+            margin-bottom: 5px;
         }
-        .badge-low {
-            background-color: #F1C40F;
-            color: #fff;
+        
+        .filter-select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
         }
-        .badge-out {
-            background-color: #E74C3C;
-            color: #fff;
+        
+        .green-badge {
+            background-color: #28a745;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
         }
-        .search-box {
-            position: relative;
+        
+        .yellow-badge {
+            background-color: #ffc107;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
         }
-        .search-box i {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            color: #666;
+        /* Barra de navegación minimalista estilo clientes */
+        .reportes-nav-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            margin: 0 0 2rem 0;
+            padding: 0;
+            gap: 3rem;
         }
-        .search-box input {
-            padding-left: 40px;
+        .reportes-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: #34495e;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .reportes-nav-link i {
+            font-size: 1.1em;
+        }
+        .reportes-nav-link.active {
+            color: #ec7063 !important; /* Rojo suave */
+            font-weight: 500;
+        }
+        .reportes-nav-link:hover {
+            color: #2ecc71;
+            text-decoration: none;
+        }
+        .reportes-nav-list li {
+            margin: 0;
+        }
+        /* Fin barra de navegación minimalista */
+        .nav-link.active.reporte-tab-inventario {
+            color: #28a745 !important;
+            border: 2px solid #28a745;
+            font-weight: bold;
+            border-radius: 0 10px 10px 0;
+        }
+        .nav-link.active.reporte-tab-inventario,
+        .nav-link.reporte-tab-inventario:hover {
+            background: #218838 !important;
+            color: #fff !important;
+        }
+        .nav-link.reporte-tab-equipos:hover {
+            background: #e0a800 !important;
+            color: #fff !important;
+        }
+        .nav-link.reporte-tab-saldo:hover {
+            background: #28a745 !important;
+            color: #fff !important;
         }
     </style>
 </head>
@@ -167,340 +165,169 @@
     <main class="full-box main-container">
         <!-- Page content -->
         <section class="full-box page-content">
+            <!-- Barra de navegación de reportes estilo clientes -->
+            <nav class="mb-4">
+                <ul class="reportes-nav-list">
+                    <li><a href="inventario.html" class="reportes-nav-link active"><i class="fas fa-boxes fa-fw"></i> INVENTARIO</a></li>
+                    <li><a href="equipos-obra.html" class="reportes-nav-link"><i class="fas fa-hard-hat fa-fw"></i> EQUIPOS EN OBRA</a></li>
+                    <li><a href="saldo-proveedores.html" class="reportes-nav-link"><i class="fas fa-dollar-sign fa-fw"></i> SALDO DE PROVEEDORES</a></li>
+                </ul>
+            </nav>
             <!-- Page header -->
-            <div class="full-box page-header">
-                <h3 class="text-left">
-                    <i class="fas fa-boxes fa-fw"></i> &nbsp; INVENTARIO
-                </h3>
-                <p class="text-justify">
-                    En esta sección puedes gestionar todos los productos del sistema, incluyendo su stock, precios y categorías.
-                </p>
+            <div class="content-header">
+                <h3>Equipos en Alquiler</h3>
             </div>
 
             <!-- Content -->
             <div class="container-fluid">
-                <!-- Filtros y Búsqueda -->
-                <div class="filter-section">
-                    <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="form-group search-box">
-                                <i class="fas fa-search"></i>
-                                <input type="text" class="form-control form-input" id="searchProduct" placeholder="Buscar producto...">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <select class="form-control form-input" id="categoryFilter">
-                                    <option value="">Todas las categorías</option>
-                                    <option value="1">Materiales de Construcción</option>
-                                    <option value="2">Herramientas</option>
-                                    <option value="3">Pinturas</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <select class="form-control form-input" id="stockFilter">
-                                    <option value="">Todos los estados</option>
-                                    <option value="stock">En Stock</option>
-                                    <option value="low">Stock Bajo</option>
-                                    <option value="out">Sin Stock</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <button type="button" class="btn btn-primary btn-custom btn-block" onclick="agregarProducto()">
-                                <i class="fas fa-plus"></i> &nbsp; NUEVO
-                            </button>
+                <!-- Filtros -->
+                <div class="row mb-4">
+                    <div class="col-12 col-md-5">
+                        <div class="form-group">
+                            <label class="filter-label" for="proveedor">Proveedor</label>
+                            <select class="form-control filter-select" id="proveedor">
+                                <option value="" selected>TODOS</option>
+                            </select>
                         </div>
                     </div>
-                </div>
-
-                <!-- Productos Destacados -->
-                <div class="row">
-                    <div class="col-12 col-md-4">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div>
-                                    <div class="product-title">Cemento Portland</div>
-                                    <div class="product-info">
-                                        <i class="fas fa-tag"></i> Materiales<br>
-                                        <i class="fas fa-barcode"></i> PROD-001
-                                    </div>
-                                </div>
-                                <span class="badge badge-stock">En Stock</span>
-                            </div>
-                            <div class="product-stats">
-                                <div class="product-stat">
-                                    <div class="product-stat-value">150</div>
-                                    <div class="product-stat-label">Stock</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$25.00</div>
-                                    <div class="product-stat-label">Precio</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$3,750.00</div>
-                                    <div class="product-stat-label">Total</div>
-                                </div>
-                            </div>
-                            <div class="text-right mt-3">
-                                <button class="btn btn-info btn-sm" onclick="editarProducto('PROD-001')">
-                                    <i class="fas fa-edit"></i> Editar
-                                </button>
-                                <button class="btn btn-danger btn-sm ml-2" onclick="eliminarProducto('PROD-001')">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </button>
-                            </div>
+                    <div class="col-12 col-md-5">
+                        <div class="form-group">
+                            <label class="filter-label" for="tipoProducto">Tipo Producto</label>
+                            <select class="form-control filter-select" id="tipoProducto">
+                                <option value="" selected>TODOS</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div>
-                                    <div class="product-title">Martillo Demoledor</div>
-                                    <div class="product-info">
-                                        <i class="fas fa-tag"></i> Herramientas<br>
-                                        <i class="fas fa-barcode"></i> PROD-002
-                                    </div>
-                                </div>
-                                <span class="badge badge-low">Stock Bajo</span>
-                            </div>
-                            <div class="product-stats">
-                                <div class="product-stat">
-                                    <div class="product-stat-value">5</div>
-                                    <div class="product-stat-label">Stock</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$350.00</div>
-                                    <div class="product-stat-label">Precio</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$1,750.00</div>
-                                    <div class="product-stat-label">Total</div>
-                                </div>
-                            </div>
-                            <div class="text-right mt-3">
-                                <button class="btn btn-info btn-sm" onclick="editarProducto('PROD-002')">
-                                    <i class="fas fa-edit"></i> Editar
-                                </button>
-                                <button class="btn btn-danger btn-sm ml-2" onclick="eliminarProducto('PROD-002')">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <div>
-                                    <div class="product-title">Pintura Acrílica</div>
-                                    <div class="product-info">
-                                        <i class="fas fa-tag"></i> Pinturas<br>
-                                        <i class="fas fa-barcode"></i> PROD-003
-                                    </div>
-                                </div>
-                                <span class="badge badge-out">Sin Stock</span>
-                            </div>
-                            <div class="product-stats">
-                                <div class="product-stat">
-                                    <div class="product-stat-value">0</div>
-                                    <div class="product-stat-label">Stock</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$45.00</div>
-                                    <div class="product-stat-label">Precio</div>
-                                </div>
-                                <div class="product-stat">
-                                    <div class="product-stat-value">$0.00</div>
-                                    <div class="product-stat-label">Total</div>
-                                </div>
-                            </div>
-                            <div class="text-right mt-3">
-                                <button class="btn btn-info btn-sm" onclick="editarProducto('PROD-003')">
-                                    <i class="fas fa-edit"></i> Editar
-                                </button>
-                                <button class="btn btn-danger btn-sm ml-2" onclick="eliminarProducto('PROD-003')">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </button>
-                            </div>
-                        </div>
+                    <div class="col-12 col-md-2 text-right align-self-end">
+                        <button class="btn-export">PDF</button>
+                        <button class="btn-export">XLS</button>
                     </div>
                 </div>
 
                 <!-- Tabla de Productos -->
-                <div class="table-container">
-                    <h5 class="mb-4">Lista de Productos</h5>
-                    <div class="table-responsive">
-                        <table class="table-custom">
-                            <thead>
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Producto</th>
-                                    <th>Categoría</th>
-                                    <th>Stock</th>
-                                    <th>Precio</th>
-                                    <th>Total</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>PROD-001</td>
-                                    <td>Cemento Portland</td>
-                                    <td>Materiales</td>
-                                    <td>150</td>
-                                    <td>$25.00</td>
-                                    <td>$3,750.00</td>
-                                    <td><span class="badge badge-stock">En Stock</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="editarProducto('PROD-001')">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm ml-2" onclick="eliminarProducto('PROD-001')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>PROD-002</td>
-                                    <td>Martillo Demoledor</td>
-                                    <td>Herramientas</td>
-                                    <td>5</td>
-                                    <td>$350.00</td>
-                                    <td>$1,750.00</td>
-                                    <td><span class="badge badge-low">Stock Bajo</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="editarProducto('PROD-002')">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm ml-2" onclick="eliminarProducto('PROD-002')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>PROD-003</td>
-                                    <td>Pintura Acrílica</td>
-                                    <td>Pinturas</td>
-                                    <td>0</td>
-                                    <td>$45.00</td>
-                                    <td>$0.00</td>
-                                    <td><span class="badge badge-out">Sin Stock</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="editarProducto('PROD-003')">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm ml-2" onclick="eliminarProducto('PROD-003')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Tipo</th>
+                                <th>Saldo proveedor</th>
+                                <th>Remisión</th>
+                                <th>Devolución</th>
+                                <th>Reposición</th>
+                                <th>Equipos en alquiler</th>
+                                <th>Existencia Bodega</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>RM-136</td>
+                                <td>ABRAZADERAS RM</td>
+                                <td>ANDAMIOS CERTIFICADOS</td>
+                                <td>85</td>
+                                <td>192</td>
+                                <td>107</td>
+                                <td>0</td>
+                                <td>85</td>
+                                <td><span class="green-badge">0</span></td>
+                            </tr>
+                            <tr>
+                                <td>RM-263</td>
+                                <td>Alineadores 0.80 004</td>
+                                <td>ENCOFRADO</td>
+                                <td>0</td>
+                                <td>99</td>
+                                <td>99</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><span class="green-badge">0</span></td>
+                            </tr>
+                            <tr>
+                                <td>RM-232</td>
+                                <td>Alineadores 0.80 RM</td>
+                                <td>ENCOFRADO</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><span class="green-badge">1</span></td>
+                            </tr>
+                            <tr>
+                                <td>RM-101</td>
+                                <td>Alineadores 1.00 RM</td>
+                                <td>ENCOFRADO</td>
+                                <td>29</td>
+                                <td>43</td>
+                                <td>41</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td><span class="yellow-badge">27</span></td>
+                            </tr>
+                            <tr>
+                                <td>RM-230</td>
+                                <td>Alineadores 1.20 RM</td>
+                                <td>ENCOFRADO</td>
+                                <td>17</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><span class="yellow-badge">17</span></td>
+                            </tr>
+                            <tr>
+                                <td>RM-100</td>
+                                <td>Alineadores 1.25 RM</td>
+                                <td>ENCOFRADO</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><span class="green-badge">0</span></td>
+                            </tr>
+                            <tr>
+                                <td>RM-99</td>
+                                <td>Alineadores 1.30 RM</td>
+                                <td>ENCOFRADO</td>
+                                <td>1</td>
+                                <td>5</td>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><span class="green-badge">1</span></td>
+                            </tr>
+                            <tr>
+                                <td>RM-98</td>
+                                <td>Alineadores 1.40 RM</td>
+                                <td>ENCOFRADO</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><span class="green-badge">0</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Scripts necesarios -->
+    <!-- Scripts -->
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="./js/bootstrap-material-design.min.js"></script>
-    <script src="./js/sweetalert2.min.js"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para funciones de productos -->
     <script>
-        $(document).ready(function() {
-            $('body').bootstrapMaterialDesign();
-
-            // Manejo de la búsqueda
-            $('#searchProduct').on('keyup', function() {
-                const searchText = $(this).val().toLowerCase();
-                $('.table-custom tbody tr').each(function() {
-                    const rowText = $(this).text().toLowerCase();
-                    $(this).toggle(rowText.indexOf(searchText) > -1);
-                });
-            });
-
-            // Manejo de filtros
-            $('#categoryFilter, #stockFilter').change(function() {
-                const category = $('#categoryFilter').val();
-                const stock = $('#stockFilter').val();
-                
-                $('.table-custom tbody tr').each(function() {
-                    const rowCategory = $(this).find('td:eq(2)').text();
-                    const rowStock = $(this).find('td:eq(3)').text();
-                    const rowStatus = $(this).find('.badge').text();
-                    
-                    const categoryMatch = !category || rowCategory === category;
-                    const stockMatch = !stock || 
-                        (stock === 'stock' && rowStatus === 'En Stock') ||
-                        (stock === 'low' && rowStatus === 'Stock Bajo') ||
-                        (stock === 'out' && rowStatus === 'Sin Stock');
-                    
-                    $(this).toggle(categoryMatch && stockMatch);
-                });
-            });
-        });
-
-        // Función para agregar nuevo producto
-        function agregarProducto() {
-            Swal.fire({
-                title: 'Nuevo Producto',
-                html: `
-                    <div class="text-left">
-                        <div class="form-group">
-                            <label>Código</label>
-                            <input type="text" class="form-control" id="codigo" placeholder="PROD-XXX">
-                        </div>
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre del producto">
-                        </div>
-                        <div class="form-group">
-                            <label>Categoría</label>
-                            <select class="form-control" id="categoria">
-                                <option value="1">Materiales de Construcción</option>
-                                <option value="2">Herramientas</option>
-                                <option value="3">Pinturas</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Stock Inicial</label>
-                            <input type="number" class="form-control" id="stock" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Precio Unitario</label>
-                            <input type="number" class="form-control" id="precio" min="0.01" step="0.01">
-                        </div>
-                    </div>
-                `,
-                showCancelButton: true,
-                confirmButtonText: 'Guardar',
-                cancelButtonText: 'Cancelar',
-                showLoaderOnConfirm: true,
-                preConfirm: () => {
-                    return new Promise((resolve) => {
-                        setTimeout(() => {
-                            resolve();
-                        }, 1500);
-                    });
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        '¡Guardado!',
-                        'El producto ha sido agregado correctamente.',
-                        'success'
-                    );
-                }
-            });
-        }
-
         // Función para editar producto
         function editarProducto(id) {
             Swal.fire({
@@ -512,24 +339,23 @@
                             <input type="text" class="form-control" id="codigo" value="${id}" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Nombre</label>
-                            <input type="text" class="form-control" id="nombre" value="Cemento Portland">
+                            <label>Descripción</label>
+                            <input type="text" class="form-control" id="nombre" value="">
                         </div>
                         <div class="form-group">
-                            <label>Categoría</label>
+                            <label>Tipo</label>
                             <select class="form-control" id="categoria">
-                                <option value="1" selected>Materiales de Construcción</option>
-                                <option value="2">Herramientas</option>
-                                <option value="3">Pinturas</option>
+                                <option value="1">ANDAMIOS CERTIFICADOS</option>
+                                <option value="2">ENCOFRADO</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Stock</label>
-                            <input type="number" class="form-control" id="stock" value="150" min="0">
+                            <label>Saldo Proveedor</label>
+                            <input type="number" class="form-control" id="saldoProveedor" value="0" min="0">
                         </div>
                         <div class="form-group">
-                            <label>Precio Unitario</label>
-                            <input type="number" class="form-control" id="precio" value="25.00" min="0.01" step="0.01">
+                            <label>Remisión</label>
+                            <input type="number" class="form-control" id="remision" value="0" min="0">
                         </div>
                     </div>
                 `,
@@ -577,15 +403,79 @@
                 }
             });
         }
+
+        // Función para agregar producto
+        function agregarProducto() {
+            Swal.fire({
+                title: 'Nuevo Equipo',
+                html: `
+                    <div class="text-left">
+                        <div class="form-group">
+                            <label>Código</label>
+                            <input type="text" class="form-control" id="codigo" placeholder="Ingrese código">
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Ingrese descripción">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo</label>
+                            <select class="form-control" id="categoria">
+                                <option value="">Seleccione tipo</option>
+                                <option value="1">ANDAMIOS CERTIFICADOS</option>
+                                <option value="2">ENCOFRADO</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Saldo Proveedor</label>
+                            <input type="number" class="form-control" id="saldoProveedor" value="0" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Remisión</label>
+                            <input type="number" class="form-control" id="remision" value="0" min="0">
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                cancelButtonText: 'Cancelar',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve();
+                        }, 1500);
+                    });
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        '¡Guardado!',
+                        'El equipo ha sido guardado correctamente.',
+                        'success'
+                    );
+                }
+            });
+        }
     </script>
-    <script src="./js/components.js"></script>
-    <script src="./js/main.js"></script>
 
     <!-- Script para manejar la precarga -->
     <script>
         window.addEventListener('load', function() {
             document.body.classList.add('loaded');
         });
+
+        // Añadir eventos de clic a las filas para poder editarlas
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('.data-table tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('click', function() {
+                    const codigo = this.cells[0].textContent;
+                    editarProducto(codigo);
+                });
+            });
+        });
     </script>
 </body>
-</html> 
+</html>

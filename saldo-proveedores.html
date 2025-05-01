@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Saldo de Proveedores</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* Barra de navegación minimalista estilo clientes */
+        .reportes-nav-list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            margin: 0 0 2rem 0;
+            padding: 0;
+            gap: 3rem;
+        }
+        .reportes-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            font-weight: 400;
+            color: #34495e;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .reportes-nav-link i {
+            font-size: 1.1em;
+        }
+        .reportes-nav-link.active {
+            color: #ec7063 !important; /* Rojo suave */
+            font-weight: 500;
+        }
+        .reportes-nav-link:hover {
+            color: #2ecc71;
+            text-decoration: none;
+        }
+        .reportes-nav-list li {
+            margin: 0;
+        }
+        /* Fin barra de navegación minimalista */
+        .nav-link.active.reporte-tab-saldo {
+            color: #2ecc71 !important;
+            border: 2px solid #2ecc71;
+            font-weight: bold;
+            border-radius: 0 10px 10px 0;
+        }
+        .nav-link.active.reporte-tab-saldo,
+        .nav-link.reporte-tab-saldo:hover {
+            background: #27ae60 !important;
+            color: #fff !important;
+        }
+        .nav-link.reporte-tab-inventario:hover {
+            background: #27ae60 !important;
+            color: #fff !important;
+        }
+        .nav-link.reporte-tab-equipos:hover {
+            background: #e0a800 !important;
+            color: #fff !important;
+        }
+    </style>
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Barra de navegación de reportes estilo clientes -->
+        <nav class="mb-4">
+            <ul class="reportes-nav-list">
+                <li><a href="inventario.html" class="reportes-nav-link"><i class="fas fa-boxes fa-fw"></i> INVENTARIO</a></li>
+                <li><a href="equipos-obra.html" class="reportes-nav-link"><i class="fas fa-hard-hat fa-fw"></i> EQUIPOS EN OBRA</a></li>
+                <li><a href="saldo-proveedores.html" class="reportes-nav-link active"><i class="fas fa-dollar-sign fa-fw"></i> SALDO DE PROVEEDORES</a></li>
+            </ul>
+        </nav>
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-dollar-sign fa-fw"></i> &nbsp; SALDO DE PROVEEDORES
+                </h3>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" value="2025-05-01">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="proveedor">Proveedor</label>
+                            <select class="form-control" id="proveedor" name="proveedor">
+                                <option value="" selected>Seleccionar *</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 text-right align-self-end">
+                        <button class="btn btn-success"><i class="fas fa-file-pdf"></i> PDF</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr class="text-center roboto-medium">
+                                <th>Código</th>
+                                <th>Descripción del Equipo</th>
+                                <th>Saldo abril 2025</th>
+                                <th>Saldo mayo 2025</th>
+                                <th>Movimientos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Los datos se cargarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="container-fluid mt-4">
+                <p class="text-muted">
+                    ADMINISTECH Tecnología avanzada para tus necesidades. Términos de uso y privacidad.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script para manejar la precarga -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

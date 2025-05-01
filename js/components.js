@@ -30,12 +30,6 @@ function loadSidebar() {
                                 <li>
                                     <a href="client-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar cliente</a>
                                 </li>
-                                <li>
-                                    <a href="cliente-saldo.html"><i class="fas fa-dollar-sign fa-fw"></i> &nbsp; Consultar saldo</a>
-                                </li>
-                                <li>
-                                    <a href="cliente-kardex.html"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Kardex</a>
-                                </li>
                             </ul>
                         </li>
 
@@ -184,19 +178,16 @@ function loadSidebar() {
                         </li>
 
                         <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-chart-bar fa-fw"></i> &nbsp; Reportes <i class="fas fa-chevron-down"></i></a>
+                            <a href="#" class="nav-btn-submenu"><i class="fas fa-chart-bar fa-fw"></i> &nbsp; reportes <i class="fas fa-chevron-down"></i></a>
                             <ul>
                                 <li>
-                                    <a href="reporte-ventas.html"><i class="fas fa-chart-line fa-fw"></i> &nbsp; Reporte de Ventas</a>
+                                    <a href="inventario.html"><i class="fas fa-boxes fa-fw"></i> &nbsp; inventario </a>
                                 </li>
                                 <li>
-                                    <a href="reporte-clientes.html"><i class="fas fa-users fa-fw"></i> &nbsp; Reporte de Clientes</a>
+                                    <a href="equipos-obra.html"><i class="fas fa-hard-hat fa-fw"></i> &nbsp; equipos en obra </a>
                                 </li>
                                 <li>
-                                    <a href="reporte-productos.html"><i class="fas fa-boxes fa-fw"></i> &nbsp; Reporte de Productos</a>
-                                </li>
-                                <li>
-                                    <a href="reporte-finanzas.html"><i class="fas fa-dollar-sign fa-fw"></i> &nbsp; Reporte Financiero</a>
+                                    <a href="saldo-proveedores.html"><i class="fas fa-dollar-sign fa-fw"></i> &nbsp; saldo de proveedores </a>
                                 </li>
                             </ul>
                         </li>
