@@ -205,27 +205,7 @@ function loadSidebar() {
                             </ul>
                         </li>
 
-                        <li>
-                            <a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
-                            <ul>
-                                <li>
-                                    <a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a>
-                                </li>
-                                <li>
-                                    <a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de items</a>
-                                </li>
-                                <li>
-                                    <a href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar item</a>
-                                </li>
-                                <li>
-                                    <a href="inventario.html"><i class="fas fa-boxes fa-fw"></i> &nbsp; Inventario</a>
-                                </li>
-                                <li>
-                                    <a href="ventas.html"><i class="fas fa-chart-line fa-fw"></i> &nbsp; Ventas</a>
-                                </li>
-                            </ul>
-                        </li>
-
+                       
                       
 
                         <li>
@@ -255,7 +235,9 @@ function loadSidebar() {
                             </ul>
                         </li>
 
-
+     <li>
+<a href="empresa-nuevo.html"><i class="fas fa-chart-line fa-fw"></i> &nbsp; Empresa</a>
+</li>
                        
                     </ul>
                 </nav>

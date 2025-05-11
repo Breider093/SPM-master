@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Nueva Empresa</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <!-- Preloader CSS -->
+    <style>
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+            transition: opacity 0.3s;
+        }
+        body:not(.loaded) .main-container {
+            display: none;
+        }
+        body.loaded .preloader {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <!-- Spinner de carga -->
+        </div>
+    </div>
+
+    <!-- Main container -->
+    <main class="full-box main-container">
+
+
+       
+
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-building fa-fw"></i> &nbsp; NUEVA EMPRESA
+                </h3>
+                <p class="text-justify">
+                    En esta sección podrás registrar una nueva empresa en el sistema.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a class="active" href="empresa-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR EMPRESA</a>
+                    </li>
+                    <li>
+                        <a href="empresa.html"><i class="fas fa-list fa-fw"></i> &nbsp; LISTA DE EMPRESAS</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form class="form-neon shadow-sm" id="empresaForm">
+                    <div class="form-card bg-white rounded">
+                        <h4 class="section-title text-primary border-bottom pb-2">
+                            <i class="fas fa-building text-primary"></i> &nbsp; Información de Empresa
+                        </h4>
+
+                        <div class="row">
+                            <!-- Nombre de Empresa -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label for="nombre" class="bmd-label-floating text-primary">Nombre de Empresa *</label>
+                                    <input type="text" class="form-control border-primary" id="nombre" name="nombre" required>
+                                </div>
+                            </div>
+
+                            <!-- RUC/NIT -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label for="ruc" class="bmd-label-floating text-primary">RUC/NIT *</label>
+                                    <input type="text" class="form-control border-primary" id="ruc" name="ruc" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <!-- Dirección -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label for="direccion" class="bmd-label-floating text-primary">Dirección *</label>
+                                    <input type="text" class="form-control border-primary" id="direccion" name="direccion" required>
+                                </div>
+                            </div>
+
+                            <!-- Teléfono -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label for="telefono" class="bmd-label-floating text-primary">Teléfono *</label>
+                                    <input type="tel" class="form-control border-primary" id="telefono" name="telefono" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <!-- Email -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label for="email" class="bmd-label-floating text-primary">Email *</label>
+                                    <input type="email" class="form-control border-primary" id="email" name="email" required>
+                                </div>
+                            </div>
+
+                            <!-- Tipo de Empresa -->
+                            <div class="col-12 col-md-6">
+                                <div class="form-group bmd-form-group">
+                                    <label for="tipoEmpresa" class="bmd-label-floating text-primary">Tipo de Empresa *</label>
+                                    <select class="form-control border-primary" id="tipoEmpresa" name="tipoEmpresa" required>
+                                        <option value="">Seleccionar Tipo</option>
+                                        <option value="constructora">Constructora</option>
+                                        <option value="proveedora">Proveedora</option>
+                                        <option value="cliente">Cliente</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-raised btn-primary btn-sm shadow-sm">
+                                <i class="fas fa-save"></i> &nbsp; GUARDAR EMPRESA
+                            </button>
+                            &nbsp; &nbsp;
+                            <button type="button" class="btn btn-raised btn-outline-secondary btn-sm shadow-sm" id="btnLimpiar">
+                                <i class="fas fa-paint-roller"></i> &nbsp; LIMPIAR FORMULARIO
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+
+    <!-- Script de Precarga y Funcionalidad -->
+    <script>
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+
+        $(document).ready(function() {
+            // Inicializar componentes
+            if (typeof initComponents === 'function') {
+                initComponents();
+            }
+        });
+    </script>
+</body>
+</html>
