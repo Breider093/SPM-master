@@ -1,0 +1,41 @@
+.proveedores-grid {
+    min-width: 900px;
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.proveedores-grid-wrapper {
+    max-height: 65vh;
+    overflow: auto;
+    border: 1px solid #cfd8dc;
+    background: #fff;
+}
+
+.proveedores-grid thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #263238;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.proveedores-grid tbody td {
+    vertical-align: middle;
+    white-space: nowrap;
+    border-color: #cfd8dc;
+}
+
+.proveedores-grid tbody tr:nth-child(even) {
+    background: #f7fafb;
+}
+
+.proveedores-grid tbody tr:hover {
+    background: #e3f2fd;
+}
+
+.proveedor-form {
+    max-width: 900px;
+    margin: 0 auto;
+}

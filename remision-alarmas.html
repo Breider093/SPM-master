@@ -189,78 +189,6 @@
                     </form>
                 </div>
 
-                <!-- Lista de Alarmas -->
-                <div class="alarm-card urgent">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <i class="fas fa-exclamation-triangle alarm-icon text-danger"></i>
-                        </div>
-                        <div class="col-8">
-                            <h5 class="alarm-title">Entrega Pendiente - REM-2024-001</h5>
-                            <p class="mb-0">La remisión debe ser entregada hoy. Cliente: Constructora XYZ</p>
-                            <small class="alarm-date"><i class="fas fa-clock"></i> Fecha límite: 2024-04-15</small>
-                        </div>
-                        <div class="col-3 text-right alarm-actions">
-                            <button class="btn btn-info action-btn" title="Ver Detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-success action-btn" title="Marcar como Resuelta">
-                                <i class="fas fa-check"></i>
-                            </button>
-                            <button class="btn btn-danger action-btn" title="Eliminar Alarma">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="alarm-card warning">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <i class="fas fa-clock alarm-icon text-warning"></i>
-                        </div>
-                        <div class="col-8">
-                            <h5 class="alarm-title">Factura Pendiente - REM-2024-002</h5>
-                            <p class="mb-0">La remisión no ha sido facturada. Cliente: Ferretería ABC</p>
-                            <small class="alarm-date"><i class="fas fa-clock"></i> Fecha límite: 2024-04-20</small>
-                        </div>
-                        <div class="col-3 text-right alarm-actions">
-                            <button class="btn btn-info action-btn" title="Ver Detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-success action-btn" title="Marcar como Resuelta">
-                                <i class="fas fa-check"></i>
-                            </button>
-                            <button class="btn btn-danger action-btn" title="Eliminar Alarma">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="alarm-card info">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <i class="fas fa-info-circle alarm-icon text-info"></i>
-                        </div>
-                        <div class="col-8">
-                            <h5 class="alarm-title">Recordatorio de Pago - REM-2024-003</h5>
-                            <p class="mb-0">Recordatorio de pago pendiente. Cliente: Materiales S.A.</p>
-                            <small class="alarm-date"><i class="fas fa-clock"></i> Fecha límite: 2024-04-25</small>
-                        </div>
-                        <div class="col-3 text-right alarm-actions">
-                            <button class="btn btn-info action-btn" title="Ver Detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-success action-btn" title="Marcar como Resuelta">
-                                <i class="fas fa-check"></i>
-                            </button>
-                            <button class="btn btn-danger action-btn" title="Eliminar Alarma">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
@@ -370,6 +298,8 @@
             });
         });
     </script>
+    <script src="./js/transportadores/transportadores-api.js"></script>
+    <script src="./js/remisiones/remisiones-paneles.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

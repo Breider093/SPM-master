@@ -200,7 +200,7 @@
 									<div class="col-12 col-md-6">
 										<div class="form-group">
 											<label for="cliente_documento" class="required">Documento</label>
-											<input type="text" pattern="[a-zA-Z0-9-]{1,27}" class="form-input" id="cliente_documento" name="cliente_documento" maxlength="27" required>
+											<input type="text" pattern="[a-zA-Z0-9\-]{1,27}" class="form-input" id="cliente_documento" name="documento" maxlength="27" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
@@ -225,25 +225,25 @@
 									<div class="col-12 col-md-6">
 										<div class="form-group">
 											<label for="cliente_direccion" class="required">Dirección</label>
-											<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" class="form-input" name="cliente_direccion" id="cliente_direccion" maxlength="150" required>
+											<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#\- ]{1,150}" class="form-input" name="direccion" id="cliente_direccion" maxlength="150" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
 										<div class="form-group">
 											<label for="cliente_email" class="required">Email</label>
-											<input type="email" class="form-input" name="cliente_email" id="cliente_email" maxlength="70" required>
+											<input type="email" class="form-input" name="email" id="cliente_email" maxlength="70" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
 										<div class="form-group">
 											<label for="cliente_telefono">Teléfono</label>
-											<input type="text" pattern="[0-9()+]{1,20}" class="form-input" name="cliente_telefono" id="cliente_telefono" maxlength="20">
+											<input type="text" pattern="[0-9\(\)\+\- ]{1,20}" class="form-input" name="telefono" id="cliente_telefono" maxlength="20">
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
 										<div class="form-group">
 											<label for="cliente_celular" class="required">Celular</label>
-											<input type="text" pattern="[0-9()+]{1,20}" class="form-input" name="cliente_celular" id="cliente_celular" maxlength="20" required>
+											<input type="text" pattern="[0-9\(\)\+\- ]{1,20}" class="form-input" name="celular" id="cliente_celular" maxlength="20" required>
 										</div>
 									</div>
 								</div>
@@ -323,7 +323,7 @@
 					</div>
 
 					<p class="text-center" style="margin-top: 40px;">
-						<button type="submit" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; Crear cliente</button>
+						<button type="submit" id="btnCrearCliente" class="btn btn-raised btn-info btn-sm"><i class="far fa-save"></i> &nbsp; Crear cliente</button>
 						&nbsp; &nbsp;
 						<button type="reset" class="btn btn-raised btn-secondary btn-sm"><i class="fas fa-paint-roller"></i> &nbsp; Cancelar</button>
 					</p>
@@ -350,78 +350,15 @@
 
 	<!-- Bootstrap Material Design V4.0 -->
 	<script src="./js/bootstrap-material-design.min.js"></script>
+	<script src="./js/sweetalert2.min.js"></script>
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 
 	<!-- Componentes -->
 	<script src="./js/components.js"></script>
 
 	<script src="./js/main.js"></script>
+	<script src="./js/clientes/clientes-api.js"></script>
+	<script src="./js/clientes/clientes-nuevo.js"></script>
 
-	<!-- Script para manejar la precarga -->
-	<script>
-		$(document).ready(function() {
-			// Manejo de la precarga
-			window.addEventListener('load', function() {
-				document.body.classList.add('loaded');
-			});
-
-			// Actualizar el nombre del archivo seleccionado en los campos de tipo file
-			$('.custom-file-input').on('change', function() {
-				let fileName = $(this).val().split('\\').pop();
-				$(this).next('.custom-file-label').addClass("selected").html(fileName || 'Ningún archivo seleccionado');
-			});
-
-			// Manejo del formulario
-			$('#formCliente').on('submit', function(e) {
-				e.preventDefault();
-				
-				// Validar campos requeridos
-				let camposRequeridos = $(this).find('[required]');
-				let todosValidos = true;
-
-				camposRequeridos.each(function() {
-					if (!$(this).val()) {
-						todosValidos = false;
-						$(this).addClass('is-invalid');
-					} else {
-						$(this).removeClass('is-invalid');
-					}
-				});
-
-				if (!todosValidos) {
-					Swal.fire({
-						icon: 'error',
-						title: 'Error de validación',
-						text: 'Por favor, complete todos los campos requeridos'
-					});
-					return;
-				}
-
-				// Confirmación antes de enviar
-				Swal.fire({
-					title: '¿Estás seguro?',
-					text: "¿Deseas guardar este cliente?",
-					icon: 'question',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Sí, guardar',
-					cancelButtonText: 'Cancelar'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						// Aquí iría el código para guardar el cliente
-						Swal.fire(
-							'¡Guardado!',
-							'El cliente ha sido registrado correctamente.',
-							'success'
-						).then(() => {
-							$('#formCliente')[0].reset();
-							$('.custom-file-label').html('Ningún archivo seleccionado');
-						});
-					}
-				});
-			});
-		});
-	</script>
 </body>
 </html>

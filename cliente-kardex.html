@@ -132,10 +132,6 @@
             background: #2ECC71;
             color: #fff;
         }
-        .badge-prestamo {
-            background: #3498DB;
-            color: #fff;
-        }
         .badge-devolucion {
             background: #E74C3C;
             color: #fff;
@@ -185,7 +181,7 @@
                     <i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; KARDEX DE CLIENTE
                 </h3>
                 <p class="text-justify">
-                    En esta sección puedes consultar el historial completo de transacciones de un cliente, incluyendo ventas, préstamos, devoluciones y pagos.
+                    En esta sección puedes consultar el historial completo de transacciones de un cliente, incluyendo ventas, devoluciones y pagos.
                 </p>
             </div>
 
@@ -244,9 +240,16 @@
                             <h4 class="mb-4">Datos de la Obra</h4>
                             <div class="form-group">
                                 <label for="selectObra" class="bmd-label-floating">Obra</label>
-                                <select class="form-control form-input" id="selectObra" name="selectObra">
-                                    <option value="">Seleccionar *</option>
-                                </select>
+                                <div class="input-group">
+                                    <select class="form-control form-input" id="selectObra" name="selectObra">
+                                        <option value="">Seleccionar *</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-primary" id="btnOtraObra" title="Crear otra obra">
+                                            Otra
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="direccionObra" class="bmd-label-floating">Dirección</label>
@@ -267,7 +270,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12 text-center">
-                            <button type="button" class="btn btn-raised btn-info btn-custom" onclick="procesarKardex()">
+                            <button type="button" class="btn btn-raised btn-info btn-custom" id="btnProcesarKardex">
                                 <i class="fas fa-sync-alt"></i> &nbsp; PROCESAR
                             </button>
                         </div>
@@ -319,6 +322,47 @@
         </section>
     </main>
 
+    <div class="modal fade" id="modalCrearObra" tabindex="-1" role="dialog" aria-labelledby="modalCrearObraTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCrearObraTitulo">Crear obra</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formCrearObra">
+                    <div class="modal-body">
+                        <p class="text-muted">La obra se asociará al cliente seleccionado.</p>
+                        <div class="form-group">
+                            <label for="obraNombre">Nombre</label>
+                            <input type="text" class="form-control" id="obraNombre" name="nombre" maxlength="150" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="obraDireccion">Dirección</label>
+                            <input type="text" class="form-control" id="obraDireccion" name="direccion" maxlength="150" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="obraTelefono">Teléfono</label>
+                            <input type="text" class="form-control" id="obraTelefono" name="telefono" maxlength="20">
+                        </div>
+                        <div class="form-group">
+                            <label for="obraEstado">Estado</label>
+                            <select class="form-control" id="obraEstado" name="estado">
+                                <option value="ACTIVA">Activa</option>
+                                <option value="INACTIVA">Inactiva</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar obra</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!--=============================================
     =            Include JavaScript files           =
     ==============================================-->
@@ -345,136 +389,7 @@
     <script src="./js/components.js"></script>
 
     <script src="./js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            // Cargar datos de ejemplo en los selects
-            cargarDatosEjemplo();
-        });
-
-        function cargarDatosEjemplo() {
-            // Simulación de carga de clientes
-            const clientes = [
-                { id: '1', nombre: 'Juan Pérez' },
-                { id: '2', nombre: 'María García' }
-            ];
-
-            // Simulación de carga de obras
-            const obras = [
-                { id: '1', nombre: 'Proyecto Residencial Los Pinos' },
-                { id: '2', nombre: 'Edificio Comercial Centro' }
-            ];
-
-            // Cargar clientes en el select
-            let clientesHtml = '<option value="">Seleccionar *</option>';
-            clientes.forEach(cliente => {
-                clientesHtml += `<option value="${cliente.id}">${cliente.nombre}</option>`;
-            });
-            $('#selectCliente').html(clientesHtml);
-
-            // Cargar obras en el select
-            let obrasHtml = '<option value="">Seleccionar *</option>';
-            obras.forEach(obra => {
-                obrasHtml += `<option value="${obra.id}">${obra.nombre}</option>`;
-            });
-            $('#selectObra').html(obrasHtml);
-        }
-
-        function procesarKardex() {
-            const cliente = $('#selectCliente').val();
-            const obra = $('#selectObra').val();
-            const fechaInicio = $('#fechaInicio').val();
-            const fechaCorte = $('#fechaCorte').val();
-
-            if (!cliente || !obra || !fechaInicio || !fechaCorte) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Campos incompletos',
-                    text: 'Por favor complete todos los campos requeridos',
-                    confirmButtonText: 'Entendido'
-                });
-                return;
-            }
-
-            // Simulación de datos
-            const datosCliente = {
-                nombre: 'Juan Pérez',
-                nit: '123456789',
-                direccion: 'Calle Principal #123',
-                obra: 'Proyecto Residencial Los Pinos',
-                saldo: 2500.00
-            };
-
-            const transacciones = [
-                {
-                    fecha: '2024-03-15',
-                    codigo: 'VEN-001',
-                    cantidad: 5,
-                    tipo: 'Venta',
-                    documento: 'FAC-001',
-                    descripcion: 'Venta de materiales',
-                    saldo: 1500.00
-                },
-                {
-                    fecha: '2024-03-16',
-                    codigo: 'PRE-001',
-                    cantidad: 3,
-                    tipo: 'Préstamo',
-                    documento: 'PRE-001',
-                    descripcion: 'Préstamo de equipos',
-                    saldo: 2000.00
-                },
-                {
-                    fecha: '2024-03-17',
-                    codigo: 'PAG-001',
-                    cantidad: 1,
-                    tipo: 'Pago',
-                    documento: 'REC-001',
-                    descripcion: 'Pago parcial',
-                    saldo: 1500.00
-                }
-            ];
-
-            // Mostrar información del cliente
-            $('#nombreClienteInfo').text(datosCliente.nombre);
-            $('#nitClienteInfo').text(datosCliente.nit);
-            $('#direccionClienteInfo').text(datosCliente.direccion);
-            $('#obraClienteInfo').text(datosCliente.obra);
-            $('#saldoActual').text('$' + datosCliente.saldo.toLocaleString());
-            $('#infoCliente').show();
-
-            // Generar tabla de transacciones
-            let tablaHtml = '';
-            transacciones.forEach(trans => {
-                let badgeClass = '';
-                switch(trans.tipo) {
-                    case 'Venta': badgeClass = 'badge-venta'; break;
-                    case 'Préstamo': badgeClass = 'badge-prestamo'; break;
-                    case 'Devolución': badgeClass = 'badge-devolucion'; break;
-                    case 'Pago': badgeClass = 'badge-pago'; break;
-                }
-
-                tablaHtml += `
-                    <tr>
-                        <td>${trans.fecha}</td>
-                        <td>${trans.codigo}</td>
-                        <td>${trans.cantidad}</td>
-                        <td><span class="badge badge-custom ${badgeClass}">${trans.tipo}</span></td>
-                        <td>${trans.documento}</td>
-                        <td>${trans.descripcion}</td>
-                        <td>$${trans.saldo.toLocaleString()}</td>
-                    </tr>
-                `;
-            });
-
-            $('#tablaKardex').html(tablaHtml);
-            $('#tablaTransacciones').show();
-        }
-
-        // Script para manejar la precarga
-        window.addEventListener('load', function() {
-            document.body.classList.add('loaded');
-        });
-    </script>
+    <script src="./js/clientes/clientes-api.js"></script>
+    <script src="./js/clientes/clientes-kardex.js"></script>
 </body>
 </html>

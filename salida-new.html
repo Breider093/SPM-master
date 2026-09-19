@@ -155,9 +155,6 @@
                                     </label>
                                     <select class="form-control form-input" id="cliente" name="cliente" required>
                                         <option value="">Seleccione un cliente</option>
-                                        <option value="1">Cliente A</option>
-                                        <option value="2">Cliente B</option>
-                                        <option value="3">Cliente C</option>
                                     </select>
                                 </div>
                             </div>
@@ -169,7 +166,6 @@
                                     <select class="form-control form-input" id="tipo" name="tipo" required>
                                         <option value="">Seleccione un tipo</option>
                                         <option value="venta">Venta</option>
-                                        <option value="prestamo">Préstamo</option>
                                         <option value="devolucion">Devolución</option>
                                     </select>
                                 </div>
@@ -179,10 +175,8 @@
                                     <label for="responsable">
                                         <i class="fas fa-user-tie"></i> Responsable
                                     </label>
-                                    <select class="form-control form-input" id="responsable" name="responsable" required>
+                                    <select class="form-control form-input" id="responsable" name="responsable">
                                         <option value="">Seleccione un responsable</option>
-                                        <option value="1">Usuario A</option>
-                                        <option value="2">Usuario B</option>
                                     </select>
                                 </div>
                             </div>
@@ -201,8 +195,6 @@
                                         </label>
                                         <select class="form-control form-input" id="producto" name="producto">
                                             <option value="">Seleccione un producto</option>
-                                            <option value="1">Producto A</option>
-                                            <option value="2">Producto B</option>
                                         </select>
                                     </div>
                                 </div>
@@ -428,6 +420,8 @@
             $('#total').text('$' + total.toFixed(2));
         }
     </script>
+    <script src="./js/inventario/entradas-salidas-api.js"></script>
+    <script src="./js/inventario/salida-new.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

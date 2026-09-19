@@ -142,7 +142,7 @@
 
             <!-- Content -->
             <div class="container-fluid">
-                <form class="form-neon" id="ordenForm">
+                <form class="form-neon" id="ordenForm" novalidate>
                     <!-- Información General -->
                     <div class="form-card">
                         <h4 class="section-title">
@@ -156,9 +156,6 @@
                                     </label>
                                     <select class="form-control form-input" id="proveedor" name="proveedor" required>
                                         <option value="">Seleccione un proveedor</option>
-                                        <option value="1">Constructora XYZ</option>
-                                        <option value="2">Ferretería ABC</option>
-                                        <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
                             </div>
@@ -196,10 +193,6 @@
                                     </label>
                                     <select class="form-control form-input" id="producto" name="producto">
                                         <option value="">Seleccione un producto</option>
-                                        <option value="1">Cemento</option>
-                                        <option value="2">Arena</option>
-                                        <option value="3">Grava</option>
-                                        <option value="4">Varilla</option>
                                     </select>
                                 </div>
                             </div>
@@ -397,5 +390,6 @@
             document.body.classList.add('loaded');
         });
     </script>
+    <script src="./js/orden-compra/ordenes-compra.js"></script>
 </body>
 </html> 

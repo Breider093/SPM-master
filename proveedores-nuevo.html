@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Proveedor</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/preload.css">
+    <link rel="stylesheet" href="./css/proveedores.css">
+</head>
+<body>
+    <main class="full-box main-container"><section class="full-box page-content">
+        <div class="full-box page-header"><h3><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO PROVEEDOR</h3><p>Registra un proveedor en el sistema.</p></div>
+        <div class="container-fluid"><ul class="full-box list-unstyled page-nav-tabs"><li><a class="active" href="proveedores-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO PROVEEDOR</a></li><li><a href="proveedores-lista.html"><i class="fas fa-list fa-fw"></i> &nbsp; LISTA DE PROVEEDORES</a></li></ul></div>
+        <div class="container-fluid"><form id="formProveedor" class="form-neon proveedor-form" autocomplete="off"><fieldset><legend><i class="fas fa-truck"></i> &nbsp; Datos del proveedor</legend><div class="row">
+            <div class="col-12 col-md-6"><label for="nombre">Nombre *</label><input class="form-control" id="nombre" required></div>
+            <div class="col-12 col-md-6"><label for="nit">NIT</label><input class="form-control" id="nit"></div>
+            <div class="col-12"><label for="direccion">Dirección</label><input class="form-control" id="direccion"></div>
+            <div class="col-12 col-md-6"><label for="telefono">Teléfono</label><input class="form-control" id="telefono"></div>
+            <div class="col-12 col-md-6"><label for="email">Email</label><input class="form-control" id="email" type="email"></div>
+        </div></fieldset><p class="text-center mt-4"><button class="btn btn-info" type="submit"><i class="fas fa-save"></i> Guardar</button><a class="btn btn-secondary" href="proveedores-lista.html">Cancelar</a></p></form></div>
+    </section></main>
+    <script src="./js/jquery-3.4.1.min.js"></script><script src="./js/popper.min.js"></script><script src="./js/bootstrap.min.js"></script><script src="./js/bootstrap-material-design.min.js"></script><script src="./js/sweetalert2.min.js"></script><script src="./js/proveedores/proveedores-api.js"></script><script src="./js/proveedores/proveedores-nuevo.js"></script><script src="./js/components.js"></script><script src="./js/main.js"></script>
+</body>
+</html>

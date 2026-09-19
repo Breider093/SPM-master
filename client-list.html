@@ -227,6 +227,11 @@
 							Filtrar
 						</button>
 					</div>
+					<div class="col-12 col-md-6 text-right">
+						<button id="btnExportarPdfClientes" type="button" class="btn mt-4" style="background: linear-gradient(135deg, #000000 0%, #1f1f1f 55%, #d62828 100%); color: white; border: none; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.25);">
+							<i class="fas fa-file-pdf"></i> PDF
+						</button>
+					</div>
 				</div>
 			</div>
 
@@ -253,35 +258,7 @@
 					</div>
 
 					<nav aria-label="Page navigation">
-						<ul class="pagination">
-							<li class="page-item">
-								<a class="page-link" href="#">Primera</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">«</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item active">
-								<a class="page-link" href="#">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">4</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">5</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">»</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">Última</a>
-							</li>
-						</ul>
+						<ul class="pagination" id="clientesPagination"></ul>
 					</nav>
 				</div>
 			</div>
@@ -306,206 +283,15 @@
 
 	<!-- Bootstrap Material Design V4.0 -->
 	<script src="./js/bootstrap-material-design.min.js"></script>
+	<script src="./js/sweetalert2.min.js"></script>
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 
 	<!-- Componentes -->
 	<script src="./js/components.js"></script>
 
 	<script src="./js/main.js"></script>
+	<script src="./js/clientes/clientes-api.js"></script>
+	<script src="./js/clientes/clientes-lista.js"></script>
 
-	<!-- Script para manejar la precarga -->
-	<script>
-		window.addEventListener('load', function() {
-			document.body.classList.add('loaded');
-		});
-	</script>
-
-	<script>
-		$(document).ready(function() {
-			// Datos de ejemplo - En producción, estos vendrían de una API
-			const clientesEjemplo = [
-				{
-					documento: '900290940-6',
-					razonSocial: 'GIV SEGURIDAD TECNOLOGICA',
-					direccion: 'CALLE 110 #43C-91 LOCAL A2',
-					celular: '3162492868',
-					telefono: '3162492868',
-					habilitado: true
-				},
-				{
-					documento: '900979995-1',
-					razonSocial: 'GLASS METAL',
-					direccion: 'CALLE 56 #43',
-					celular: 'X',
-					telefono: 'X',
-					habilitado: true
-				},
-				{
-					documento: '829002160-7',
-					razonSocial: 'GLOBAL ENGINEERING AND DESIGN',
-					direccion: 'PALMAR DE VALERA',
-					celular: '3004369445',
-					telefono: '3004369445',
-					habilitado: true
-				},
-				{
-					documento: '900928262-1',
-					razonSocial: 'GMASS SERVICES SAS',
-					direccion: 'X',
-					celular: 'X',
-					telefono: 'X',
-					habilitado: true
-				},
-				{
-					documento: '8532294',
-					razonSocial: 'GONZALO PARRA',
-					direccion: 'CALLE 45 #8D-07',
-					celular: '3232898069',
-					telefono: '3232898069',
-					habilitado: true
-				},
-				{
-					documento: '900340618-4',
-					razonSocial: 'GRUAS BLANCAS LTDA',
-					direccion: 'CALLE 88 #70-08 OF 1',
-					celular: '3162203335',
-					telefono: '3117227227',
-					habilitado: true
-				},
-				{
-					documento: '901273808-3',
-					razonSocial: 'GRUPO OZONO SAS',
-					direccion: 'CRA 598 #81-156',
-					celular: 'X',
-					telefono: 'X',
-					habilitado: true
-				},
-				{
-					documento: '72264609',
-					razonSocial: 'HERNAN MEÑACA',
-					direccion: 'CRA 7F # 47-121',
-					celular: '3054112039',
-					telefono: '3054112039',
-					habilitado: true
-				},
-				{
-					documento: '7310184',
-					razonSocial: 'HERNANDO FORERO',
-					direccion: 'CARRERA 45 D # 68',
-					celular: '3107365086',
-					telefono: '3107365086',
-					habilitado: true
-				},
-				{
-					documento: '1111151',
-					razonSocial: 'HERNANDO LUIS CACERES',
-					direccion: 'CALLE 34B #1B-100',
-					celular: '3005911289',
-					telefono: '3005911289',
-					habilitado: true
-				}
-			];
-
-			function renderClientes(clientes) {
-				const tbody = $('#clientesTableBody');
-				tbody.empty();
-
-				clientes.forEach(cliente => {
-					const row = `
-						<tr>
-							<td>${cliente.documento}</td>
-							<td>${cliente.razonSocial}</td>
-							<td>${cliente.direccion}</td>
-							<td>${cliente.celular}</td>
-							<td>${cliente.telefono}</td>
-							<td>${cliente.habilitado ? 'true' : 'false'}</td>
-							<td>
-								<div class="btn-group">
-									<button class="btn btn-action" title="Vincular Obra">
-										<i class="fas fa-link"></i>
-									</button>
-									<button class="btn btn-action" title="Obras">
-										<i class="fas fa-building"></i>
-									</button>
-									<button class="btn btn-action" title="Editar">
-										<i class="fas fa-edit"></i>
-									</button>
-									<button class="btn btn-action" title="Eliminar">
-										<i class="fas fa-trash"></i>
-									</button>
-									<button class="btn btn-action" title="Ver Anexos">
-										<i class="fas fa-paperclip"></i>
-									</button>
-									<button class="btn btn-action" title="Más opciones">
-										<i class="fas fa-ellipsis-v"></i>
-									</button>
-								</div>
-							</td>
-						</tr>
-					`;
-					tbody.append(row);
-				});
-			}
-
-			// Filtrado de clientes
-			$('#searchRazonSocial').on('keyup', function() {
-				const searchTerm = $(this).val().toLowerCase();
-				const filteredClientes = clientesEjemplo.filter(cliente => 
-					cliente.razonSocial.toLowerCase().includes(searchTerm)
-				);
-				renderClientes(filteredClientes);
-			});
-
-			// Botón de filtrar
-			$('.btn-filter').on('click', function() {
-				const searchTerm = $('#searchRazonSocial').val().toLowerCase();
-				const filteredClientes = clientesEjemplo.filter(cliente => 
-					cliente.razonSocial.toLowerCase().includes(searchTerm)
-				);
-				renderClientes(filteredClientes);
-			});
-
-			// Exportar a XLS
-			$('.btn-export').on('click', function() {
-				// Implementar la funcionalidad de exportación
-				alert('Exportando a XLS...');
-			});
-
-			// Inicializar la tabla con los datos de ejemplo
-			renderClientes(clientesEjemplo);
-
-			// Manejadores para los botones de acción
-			$(document).on('click', '.btn-action', function() {
-				const action = $(this).attr('title');
-				switch(action) {
-					case 'Vincular Obra':
-						// Implementar vinculación de obra
-						break;
-					case 'Obras':
-						// Mostrar obras
-						break;
-					case 'Editar':
-						// Implementar edición
-						break;
-					case 'Eliminar':
-						Swal.fire({
-							title: '¿Estás seguro?',
-							text: "Esta acción no se puede deshacer",
-							icon: 'warning',
-							showCancelButton: true,
-							confirmButtonColor: '#3085d6',
-							cancelButtonColor: '#d33',
-							confirmButtonText: 'Sí, eliminar',
-							cancelButtonText: 'Cancelar'
-						});
-						break;
-					case 'Ver Anexos':
-						// Mostrar anexos
-						break;
-				}
-			});
-		});
-	</script>
 </body>
-</html>
 </html>

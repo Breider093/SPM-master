@@ -167,9 +167,10 @@
                                     </label>
                                     <select class="form-control form-input" id="estadoDevolucion" name="estadoDevolucion">
                                         <option value="">Todos los estados</option>
-                                        <option value="pendiente">Pendiente</option>
-                                        <option value="procesada">Procesada</option>
-                                        <option value="rechazada">Rechazada</option>
+                                        <option value="PENDIENTE">Pendiente</option>
+                                        <option value="PROCESADA">Procesada</option>
+                                        <option value="RECHAZADA">Rechazada</option>
+                                        <option value="CANCELADA">Cancelada</option>
                                     </select>
                                 </div>
                             </div>
@@ -196,9 +197,6 @@
                                     </label>
                                     <select class="form-control form-input" id="cliente" name="cliente">
                                         <option value="">Todos los clientes</option>
-                                        <option value="1">Constructora XYZ</option>
-                                        <option value="2">Ferretería ABC</option>
-                                        <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
                             </div>
@@ -215,20 +213,18 @@
                 </div>
 
                 <!-- Lista de Devoluciones -->
+                <div id="devolucionesContainer"></div>
+                <!--
                 <div class="devolucion-card pendiente">
                     <div class="row align-items-center">
                         <div class="col-1">
                             <i class="fas fa-undo devolucion-icon text-warning"></i>
                         </div>
                         <div class="col-8">
-                            <h5 class="devolucion-title">DEV-2024-001</h5>
-                            <p class="mb-0">Cliente: Constructora XYZ</p>
                             <small class="devolucion-date">
                                 <i class="fas fa-calendar"></i> Fecha: 2024-04-15
                             </small>
                             <ul class="product-list">
-                                <li>Cemento - 10 unidades (Defectuoso)</li>
-                                <li>Arena - 5 m³ (Exceso de pedido)</li>
                             </ul>
                         </div>
                         <div class="col-3 text-right devolucion-actions">
@@ -244,36 +240,8 @@
                         </div>
                     </div>
                 </div>
+                -->
 
-                <div class="devolucion-card procesada">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <i class="fas fa-check-circle devolucion-icon text-success"></i>
-                        </div>
-                        <div class="col-8">
-                            <h5 class="devolucion-title">DEV-2024-002</h5>
-                            <p class="mb-0">Cliente: Ferretería ABC</p>
-                            <small class="devolucion-date">
-                                <i class="fas fa-calendar"></i> Fecha: 2024-04-10
-                            </small>
-                            <ul class="product-list">
-                                <li>Grava - 3 m³ (Cambio de producto)</li>
-                                <li>Varilla - 5 unidades (Defectuoso)</li>
-                            </ul>
-                        </div>
-                        <div class="col-3 text-right devolucion-actions">
-                            <button class="btn btn-info action-btn" title="Ver Detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-warning action-btn" title="Editar">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-secondary action-btn" title="Imprimir">
-                                <i class="fas fa-print"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
@@ -286,6 +254,7 @@
     <script src="./js/bootstrap-material-design.min.js"></script>
     <script src="./js/sweetalert2.min.js"></script>
     <script>
+        if (false) {
         $(document).ready(function() {
             $('body').bootstrapMaterialDesign();
 
@@ -374,14 +343,10 @@
                     title: 'Detalles de la Devolución',
                     html: `
                         <div class="text-left">
-                            <p><strong>Número de Devolución:</strong> DEV-2024-001</p>
-                            <p><strong>Cliente:</strong> Constructora XYZ</p>
                             <p><strong>Fecha:</strong> 2024-04-15</p>
                             <p><strong>Estado:</strong> Pendiente</p>
                             <p><strong>Productos:</strong></p>
                             <ul>
-                                <li>Cemento - 10 unidades (Defectuoso)</li>
-                                <li>Arena - 5 m³ (Exceso de pedido)</li>
                             </ul>
                             <p><strong>Observaciones:</strong> Productos recibidos en mal estado</p>
                         </div>
@@ -474,7 +439,10 @@
                 });
             });
         });
+        }
     </script>
+    <script src="./js/devoluciones/devoluciones-api.js"></script>
+    <script src="./js/devoluciones/devoluciones-consulta.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

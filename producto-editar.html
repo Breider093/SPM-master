@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Editar Producto</title>
+
+    <!-- Normalize V8.0.1 -->
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- Bootstrap V4.3 -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design V4.0 -->
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+
+    <!-- Font Awesome V5.9.0 -->
+    <link rel="stylesheet" href="./css/all.css">
+
+    <!-- Sweet Alerts V8.13.0 CSS file -->
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+    <!-- jQuery Custom Content Scroller V3.1.5 -->
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+
+    <!-- General Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Preload Styles -->
+    <link rel="stylesheet" href="./css/preload.css">
+
+    <style>
+        .form-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .form-card:hover {
+            transform: translateY(-5px);
+        }
+        .form-section-icon {
+            font-size: 2rem;
+            color: #2C3E50;
+            margin-right: 10px;
+        }
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+            padding: 8px 12px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #2C3E50;
+            box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
+        }
+        .btn-custom {
+            border-radius: 25px;
+            padding: 10px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .category-badge {
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+            background: #f8f9fa;
+            color: #2C3E50;
+            transition: all 0.3s ease;
+        }
+        .category-badge:hover {
+            background: #2C3E50;
+            color: #fff;
+            cursor: pointer;
+        }
+        .input-group-text {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+        }
+        .form-section {
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff;
+            margin-bottom: 30px;
+        }
+        .form-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 20px;
+            height: calc(100% - 40px);
+            width: 3px;
+            background: #2C3E50;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container -->
+    <main class="full-box main-container">
+        <!-- Page content -->
+        <section class="full-box page-content">
+            <!-- Page header -->
+            <div class="full-box page-header">
+                <h3 class="text-left">
+                    <i class="fas fa-edit fa-fw"></i> &nbsp; EDITAR PRODUCTO
+                </h3>
+                <p class="text-justify">
+                    En esta sección puedes editar la información de un producto existente. Modifica los campos necesarios y guarda los cambios para actualizar la información en el sistema.
+                </p>
+            </div>
+
+            <!-- Navigation tabs -->
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li>
+                        <a href="producto-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; AGREGAR PRODUCTO</a>
+                    </li>
+                    <li>
+                        <a href="producto-lista.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; LISTA DE PRODUCTOS</a>
+                    </li>
+                    <li>
+                        <a href="producto-buscar.html"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR PRODUCTO</a>
+                    </li>
+                    <li>
+                        <a href="producto-vincular.html"><i class="fas fa-link fa-fw"></i> &nbsp; VINCULAR PRODUCTO</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="container-fluid">
+                <form action="" class="form-neon" autocomplete="off" id="formEditarProducto">
+                    <input type="hidden" id="producto_id" name="producto_id" value="">
+                    <fieldset>
+                        <legend><i class="fas fa-box"></i> &nbsp; Información del Producto</legend>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripción</label>
+                                        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="tipo_producto">Tipo Producto</label>
+                                        <select class="form-control" id="tipo_producto" name="tipo_producto" required>
+                                            <option value="" selected disabled>Seleccionar *</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="proveedoresVinculados">Proveedor(es) vinculado(s)</label>
+                                        <select id="proveedoresVinculados" class="form-control" multiple size="4" aria-label="Proveedores vinculados">
+                                            <option disabled>Cargando...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="peso">Peso (Kg)</label>
+                                        <input type="number" class="form-control" id="peso" name="peso_kg" value="0.26" step="0.1" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="precio_alquiler">Precio Alquiler</label>
+                                        <input type="number" class="form-control" id="precio_alquiler" name="precio_alquiler" value="0" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="precio_reposicion">Precio Reposición</label>
+                                        <input type="number" class="form-control" id="precio_reposicion" name="precio_reposicion" value="0" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="manual">Manual</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="manual" name="manual">
+                                            <label class="custom-file-label" for="manual">Seleccionar archivo</label>
+                                        </div>
+                                        <small class="text-muted">Ningún archivo seleccionado</small>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="ficha_tecnica">Ficha Técnica</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="ficha_tecnica" name="ficha_tecnica">
+                                            <label class="custom-file-label" for="ficha_tecnica">Seleccionar archivo</label>
+                                        </div>
+                                        <small class="text-muted">Ningún archivo seleccionado</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row justify-content-between mt-4">
+                        <div class="col-md-6">
+                            <a href="producto-lista.html" class="btn btn-raised btn-secondary btn-sm">
+                                <i class="fas fa-arrow-left"></i> &nbsp; Cancelar
+                            </a>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button type="submit" class="btn btn-raised btn-info btn-sm">
+                                <i class="far fa-save"></i> &nbsp; Actualizar Producto
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts necesarios -->
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/productos/producto-editar.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

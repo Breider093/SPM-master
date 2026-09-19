@@ -197,7 +197,7 @@
 			
 			<!-- Content here-->
 			<div class="container-fluid">
-				<form action="" class="form-neon" autocomplete="off">
+				<form action="" class="form-neon" autocomplete="off" id="formCliente">
 					<div class="form-section">
 						<fieldset>
 							<legend><i class="fas fa-user"></i> &nbsp; Información básica</legend>
@@ -205,32 +205,32 @@
 								<div class="row">
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_dni" class="bmd-label-floating">DNI</label>
-											<input type="text" pattern="[a-zA-Z0-9-]{1,27}" class="form-control form-input" id="cliente_dni" name="cliente_dni" maxlength="27">
+											<label for="cliente_documento" class="bmd-label-floating">Documento</label>
+											<input type="text" pattern="[a-zA-Z0-9\-]{1,27}" class="form-control form-input" id="cliente_documento" name="documento" maxlength="27" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_nombre" class="bmd-label-floating">Nombre</label>
-											<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control form-input" name="cliente_nombre" id="cliente_nombre" maxlength="40">
+											<label for="razon_social" class="bmd-label-floating">Razón social</label>
+											<input type="text" class="form-control form-input" name="razon_social" id="razon_social" maxlength="150" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-4">
 										<div class="form-group">
-											<label for="cliente_apellido" class="bmd-label-floating">Apellido</label>
-											<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,40}" class="form-control form-input" name="cliente_apellido" id="cliente_apellido" maxlength="40">
+											<label for="ciudad" class="bmd-label-floating">Ciudad</label>
+											<input type="text" class="form-control form-input" name="ciudad" id="ciudad" maxlength="50" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-4">
 										<div class="form-group">
 											<label for="cliente_telefono" class="bmd-label-floating">Teléfono</label>
-											<input type="text" pattern="[0-9()+]{1,20}" class="form-control form-input" name="cliente_telefono" id="cliente_telefono" maxlength="20">
+											<input type="text" pattern="[0-9\(\)\+\- ]{1,20}" class="form-control form-input" name="telefono" id="cliente_telefono" maxlength="20">
 										</div>
 									</div>
 									<div class="col-12 col-md-4">
 										<div class="form-group">
 											<label for="cliente_direccion" class="bmd-label-floating">Dirección</label>
-											<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#- ]{1,150}" class="form-control form-input" name="cliente_direccion" id="cliente_direccion" maxlength="150">
+											<input type="text" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ#\- ]{1,150}" class="form-control form-input" name="direccion" id="cliente_direccion" maxlength="150" required>
 										</div>
 									</div>
 								</div>
@@ -246,18 +246,22 @@
 									<div class="col-12 col-md-6">
 										<div class="form-group">
 											<label for="cliente_email" class="bmd-label-floating">Email</label>
-											<input type="email" class="form-control form-input" name="cliente_email" id="cliente_email" maxlength="70">
+											<input type="email" class="form-control form-input" name="email" id="cliente_email" maxlength="70" required>
 										</div>
 									</div>
 									<div class="col-12 col-md-6">
 										<div class="form-group">
-											<label for="cliente_empresa" class="bmd-label-floating">Empresa</label>
-											<input type="text" class="form-control form-input" name="cliente_empresa" id="cliente_empresa" maxlength="70">
+											<label for="cliente_celular" class="bmd-label-floating">Celular</label>
+											<input type="text" pattern="[0-9\(\)\+\- ]{1,20}" class="form-control form-input" name="celular" id="cliente_celular" maxlength="20" required>
 										</div>
 									</div>
 								</div>
 							</div>
 						</fieldset>
+					</div>
+					<input type="hidden" name="tipo_documento" id="tipo_documento" value="">
+					<div class="text-center">
+						<label><input type="checkbox" name="habilitado" id="habilitado" checked> Habilitado</label>
 					</div>
 
 					<p class="text-center" style="margin-top: 40px;">
@@ -286,46 +290,15 @@
 
 	<!-- Bootstrap Material Design V4.0 -->
 	<script src="./js/bootstrap-material-design.min.js"></script>
+	<script src="./js/sweetalert2.min.js"></script>
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 
 	<!-- Componentes -->
 	<script src="./js/components.js"></script>
 
 	<script src="./js/main.js"></script>
+	<script src="./js/clientes/clientes-api.js"></script>
+	<script src="./js/clientes/clientes-actualizar.js"></script>
 
-	<!-- Script para manejar la precarga -->
-	<script>
-		window.addEventListener('load', function() {
-			document.body.classList.add('loaded');
-		});
-	</script>
-
-	<script>
-		$(document).ready(function() {
-			$('#formCliente').on('submit', function(e) {
-				e.preventDefault();
-				
-				Swal.fire({
-					title: '¿Estás seguro?',
-					text: "¿Deseas actualizar este cliente?",
-					icon: 'question',
-					showCancelButton: true,
-					confirmButtonColor: '#3085d6',
-					cancelButtonColor: '#d33',
-					confirmButtonText: 'Sí, actualizar',
-					cancelButtonText: 'Cancelar'
-				}).then((result) => {
-					if (result.isConfirmed) {
-						// Aquí iría el código para actualizar el cliente
-						Swal.fire(
-							'¡Actualizado!',
-							'El cliente ha sido actualizado correctamente.',
-							'success'
-						);
-					}
-				});
-			});
-		});
-	</script>
 </body>
 </html>

@@ -69,39 +69,6 @@
 						</li>
 
 						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a>
-								</li>
-								<li>
-									<a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de items</a>
-								</li>
-								<li>
-									<a href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar item</a>
-								</li>
-							</ul>
-						</li>
-
-						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Préstamos <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="reservation-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo préstamo</a>
-								</li>
-								<li>
-									<a href="reservation-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de préstamos</a>
-								</li>
-								<li>
-									<a href="reservation-search.html"><i class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar préstamos</a>
-								</li>
-								<li>
-									<a href="reservation-pending.html"><i class="fas fa-hand-holding-usd fa-fw"></i> &nbsp; Préstamos pendientes</a>
-								</li>
-							</ul>
-						</li>
-
-						<li>
 							<a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
@@ -287,7 +254,72 @@
 	<!-- Bootstrap Material Design V4.0 -->
 	<script src="./js/bootstrap-material-design.min.js" ></script>
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+	<script src="./js/usuarios/usuarios-api.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('form.form-neon').on('submit', async function(evento) {
+				evento.preventDefault();
 
+				const username = $('#usuario_usuario').val().trim();
+				const email = $('#usuario_email').val().trim();
+				const password = $('#usuario_clave_1').val();
+				const confirmPassword = $('#usuario_clave_2').val();
+				const firstName = $('#usuario_nombre').val().trim();
+				const lastName = $('#usuario_apellido').val().trim();
+				const documento = $('#usuario_dni').val().trim();
+				const telefono = $('#usuario_telefono').val().trim();
+				const direccion = $('#usuario_direccion').val().trim();
+				const privilegio = $('select[name="usuario_privilegio"]').val();
+
+				if (!username || !email || !password || !firstName || !lastName) {
+					Swal.fire({ icon: 'error', title: 'Error', text: 'Complete los campos obligatorios.' });
+					return;
+				}
+
+				if (password !== confirmPassword) {
+					Swal.fire({ icon: 'error', title: 'Error', text: 'Las contraseñas no coinciden.' });
+					return;
+				}
+
+				try {
+					const payload = {
+						username,
+						email,
+						password,
+						first_name: firstName,
+						last_name: lastName,
+						perfil: {
+							documento: documento || '',
+							telefono: telefono || '',
+							direccion: direccion || '',
+							cargo: privilegio || 'Operador',
+							estado: 'ACTIVO',
+							empresa: 'Mi Empresa'
+						}
+					};
+
+					await crearUsuario(payload);
+					Swal.fire({
+						icon: 'success',
+						title: 'Usuario creado',
+						text: 'El usuario fue registrado correctamente.'
+					});
+					$('form.form-neon')[0].reset();
+					window.location.href = 'user-list.html';
+				} catch (error) {
+					console.error(error);
+					let mensaje = 'No se pudo crear el usuario.';
+					try {
+						const errores = JSON.parse(error.message);
+						mensaje = Object.entries(errores)
+							.map(([campo, valores]) => `${campo}: ${[].concat(valores).join(', ')}`)
+							.join('<br>');
+					} catch (e) {}
+					Swal.fire({ icon: 'error', title: 'Error', html: mensaje });
+				}
+			});
+		});
+	</script>
 	<script src="./js/main.js" ></script>
 </body>
 </html>

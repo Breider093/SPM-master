@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/preload.css">
+    <link rel="stylesheet" href="./css/proveedores.css">
+</head>
+<body>
+    <main class="full-box main-container">
+        <section class="full-box page-content">
+            <div class="full-box page-header">
+                <h3><i class="fas fa-truck fa-fw"></i> &nbsp; PROVEEDORES</h3>
+                <p>Consulta y administra los proveedores registrados.</p>
+            </div>
+            <div class="container-fluid">
+                <ul class="full-box list-unstyled page-nav-tabs">
+                    <li><a href="proveedores-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO PROVEEDOR</a></li>
+                    <li><a class="active" href="proveedores-lista.html"><i class="fas fa-list fa-fw"></i> &nbsp; LISTA DE PROVEEDORES</a></li>
+                </ul>
+            </div>
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12 col-md-6">
+                        <input class="form-control" id="buscarProveedor" type="search" placeholder="Buscar proveedor...">
+                    </div>
+                </div>
+                <div class="proveedores-grid-wrapper">
+                    <table class="table table-bordered table-sm proveedores-grid">
+                        <thead><tr><th>ID</th><th>Nombre</th><th>NIT</th><th>Dirección</th><th>Teléfono</th><th>Email</th><th>Acciones</th></tr></thead>
+                        <tbody id="tablaProveedores"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="./js/bootstrap-material-design.min.js"></script>
+    <script src="./js/sweetalert2.min.js"></script>
+    <script src="./js/proveedores/proveedores-api.js"></script>
+    <script src="./js/proveedores/proveedores-lista.js"></script>
+    <script src="./js/components.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>

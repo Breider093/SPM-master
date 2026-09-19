@@ -1,0 +1,193 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam usecase {
+    BackgroundColor #F7F9FC
+    BorderColor #34495E
+    ArrowColor #34495E
+}
+skinparam actor {
+    BorderColor #34495E
+    BackgroundColor #ECF0F1
+}
+
+actor "Administrador\n(operador unico)" as Usuario
+actor "Backend REST\nDjango API" as API
+actor "Servicio de archivos" as Archivos
+
+rectangle "Sistema SPM" {
+    package "Acceso y administracion" {
+        usecase "Iniciar sesion" as UC_Login
+        usecase "Gestionar usuarios" as UC_Usuarios
+        usecase "Gestionar empresa" as UC_Empresa
+    }
+
+    package "Clientes" {
+        usecase "Crear cliente" as UC_CrearCliente
+        usecase "Consultar clientes" as UC_ConsultarClientes
+        usecase "Buscar cliente" as UC_BuscarCliente
+        usecase "Actualizar cliente" as UC_ActualizarCliente
+        usecase "Consultar saldo" as UC_Saldo
+        usecase "Consultar kardex del cliente" as UC_KardexCliente
+        usecase "Gestionar documentos del cliente" as UC_DocumentosCliente
+    }
+
+    package "Catalogos" {
+        usecase "Gestionar productos" as UC_Productos
+        usecase "Gestionar proveedores" as UC_Proveedores
+        usecase "Vincular producto con proveedor" as UC_VincularProducto
+        usecase "Gestionar responsables" as UC_Responsables
+    }
+
+    package "Compras e inventario" {
+        usecase "Crear orden de compra" as UC_CrearOrden
+        usecase "Consultar ordenes de compra" as UC_ConsultarOrdenes
+        usecase "Consultar reportes de compra" as UC_ReportesCompra
+        usecase "Registrar entrada" as UC_Entrada
+        usecase "Agregar detalle de entrada" as UC_DetalleEntrada
+        usecase "Confirmar entrada" as UC_ConfirmarEntrada
+        usecase "Actualizar stock por entrada" as UC_StockEntrada
+        usecase "Registrar salida" as UC_Salida
+        usecase "Agregar detalle de salida" as UC_DetalleSalida
+        usecase "Completar salida" as UC_CompletarSalida
+        usecase "Validar stock disponible" as UC_ValidarStock
+        usecase "Descontar stock por salida" as UC_StockSalida
+        usecase "Registrar movimiento de inventario" as UC_Movimiento
+        usecase "Gestionar lotes" as UC_Lotes
+        usecase "Consultar inventario" as UC_Inventario
+        usecase "Consultar equipos en obra" as UC_EquiposObra
+    }
+
+    package "Documentos comerciales" {
+        usecase "Crear cotizacion" as UC_CrearCotizacion
+        usecase "Consultar cotizaciones" as UC_ConsultarCotizaciones
+        usecase "Crear proforma" as UC_CrearProforma
+        usecase "Consultar proformas" as UC_ConsultarProformas
+        usecase "Convertir proforma en factura" as UC_ConvertirFactura
+        usecase "Crear factura" as UC_CrearFactura
+        usecase "Consultar facturas" as UC_ConsultarFacturas
+        usecase "Gestionar pagos de factura" as UC_PagosFactura
+        usecase "Crear devolucion" as UC_CrearDevolucion
+        usecase "Consultar devoluciones" as UC_ConsultarDevoluciones
+    }
+
+    package "Transporte y remisiones" {
+        usecase "Gestionar transportadores" as UC_Transportadores
+        usecase "Gestionar vehiculos" as UC_Vehiculos
+        usecase "Crear viaje" as UC_Viaje
+        usecase "Asignar remisiones a viaje" as UC_AsignarRemision
+        usecase "Crear remision" as UC_Remision
+        usecase "Consultar reservas y alarmas" as UC_Alarmas
+    }
+
+    package "Reportes" {
+        usecase "Consultar ingresos" as UC_Ingresos
+        usecase "Consultar resumen de proformas" as UC_ResumenProforma
+    }
+}
+
+Usuario --> UC_Login
+Usuario --> UC_Usuarios
+Usuario --> UC_Empresa
+Usuario --> UC_CrearCliente
+Usuario --> UC_ConsultarClientes
+Usuario --> UC_BuscarCliente
+Usuario --> UC_ActualizarCliente
+Usuario --> UC_Saldo
+Usuario --> UC_KardexCliente
+Usuario --> UC_DocumentosCliente
+Usuario --> UC_Productos
+Usuario --> UC_Proveedores
+Usuario --> UC_VincularProducto
+Usuario --> UC_Responsables
+Usuario --> UC_CrearOrden
+Usuario --> UC_ConsultarOrdenes
+Usuario --> UC_ReportesCompra
+Usuario --> UC_Entrada
+Usuario --> UC_Salida
+Usuario --> UC_Lotes
+Usuario --> UC_Inventario
+Usuario --> UC_EquiposObra
+Usuario --> UC_CrearCotizacion
+Usuario --> UC_ConsultarCotizaciones
+Usuario --> UC_CrearProforma
+Usuario --> UC_ConsultarProformas
+Usuario --> UC_ConvertirFactura
+Usuario --> UC_CrearFactura
+Usuario --> UC_ConsultarFacturas
+Usuario --> UC_PagosFactura
+Usuario --> UC_CrearDevolucion
+Usuario --> UC_ConsultarDevoluciones
+Usuario --> UC_Transportadores
+Usuario --> UC_Vehiculos
+Usuario --> UC_Viaje
+Usuario --> UC_AsignarRemision
+Usuario --> UC_Remision
+Usuario --> UC_Alarmas
+Usuario --> UC_Ingresos
+Usuario --> UC_ResumenProforma
+
+UC_CrearCliente .> UC_DocumentosCliente : <<include>>
+UC_KardexCliente .> UC_Saldo : <<include>>
+UC_CrearOrden .> UC_Productos : <<include>>
+UC_CrearOrden .> UC_Proveedores : <<include>>
+UC_Entrada .> UC_DetalleEntrada : <<include>>
+UC_Entrada .> UC_ConfirmarEntrada : <<include>>
+UC_ConfirmarEntrada .> UC_StockEntrada : <<include>>
+UC_ConfirmarEntrada .> UC_Movimiento : <<include>>
+UC_ConfirmarEntrada .> UC_Lotes : <<include>>
+UC_Salida .> UC_DetalleSalida : <<include>>
+UC_Salida .> UC_CompletarSalida : <<include>>
+UC_CompletarSalida .> UC_ValidarStock : <<include>>
+UC_CompletarSalida .> UC_StockSalida : <<include>>
+UC_CompletarSalida .> UC_Movimiento : <<include>>
+UC_CrearProforma .> UC_Productos : <<include>>
+UC_CrearProforma .> UC_ConsultarClientes : <<include>>
+UC_ConvertirFactura .> UC_CrearFactura : <<include>>
+UC_CrearFactura .> UC_PagosFactura : <<include>>
+UC_CrearDevolucion .> UC_Productos : <<include>>
+UC_Viaje .> UC_Transportadores : <<include>>
+UC_AsignarRemision .> UC_Remision : <<include>>
+
+API --> UC_Login
+API --> UC_CrearCliente
+API --> UC_Productos
+API --> UC_Proveedores
+API --> UC_CrearOrden
+API --> UC_Entrada
+API --> UC_Salida
+API --> UC_Inventario
+API --> UC_CrearCotizacion
+API --> UC_CrearProforma
+API --> UC_CrearFactura
+API --> UC_CrearDevolucion
+API --> UC_Remision
+API --> UC_Viaje
+Archivos --> UC_DocumentosCliente
+
+note right of API
+  Endpoints REST usados por el frontend:
+  /api/clientes/
+  /api/productos/
+  /api/proveedores/
+  /api/ordenes-compra/
+  /api/entradas/
+  /api/salidas/
+  /api/proformas/
+  /api/facturas/
+  /api/devoluciones/
+  /api/remisiones/
+  /api/viajes/
+end note
+
+note bottom of UC_ConfirmarEntrada
+  La confirmacion actualiza inventario
+  y registra movimientos de entrada.
+end note
+
+note bottom of UC_CompletarSalida
+  La finalizacion valida existencia,
+  descuenta stock y registra movimiento.
+end note
+@enduml

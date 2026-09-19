@@ -155,9 +155,6 @@
                                     </label>
                                     <select class="form-control form-input" id="cliente" name="cliente" required>
                                         <option value="">Seleccione un cliente</option>
-                                        <option value="1">Constructora XYZ</option>
-                                        <option value="2">Ferretería ABC</option>
-                                        <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
                             </div>
@@ -185,10 +182,6 @@
                                             <label>Producto</label>
                                             <select class="form-control form-input producto-select" required>
                                                 <option value="">Seleccione producto</option>
-                                                <option value="1">Cemento</option>
-                                                <option value="2">Arena</option>
-                                                <option value="3">Grava</option>
-                                                <option value="4">Varilla</option>
                                             </select>
                                         </div>
                                     </div>
@@ -226,18 +219,19 @@
                             <i class="fas fa-clock"></i> &nbsp; Validez de la Proforma
                         </h4>
                         <div class="validity-section">
-                            <div class="validity-option" onclick="selectValidity(this, '7')">
+                            <div class="validity-option" data-days="7" onclick="selectValidity(this, '7')">
                                 <i class="fas fa-calendar-day fa-2x"></i>
                                 <h5>7 Días</h5>
                             </div>
-                            <div class="validity-option" onclick="selectValidity(this, '15')">
+                            <div class="validity-option" data-days="15" onclick="selectValidity(this, '15')">
                                 <i class="fas fa-calendar-week fa-2x"></i>
                                 <h5>15 Días</h5>
                             </div>
-                            <div class="validity-option" onclick="selectValidity(this, '30')">
+                            <div class="validity-option" data-days="30" onclick="selectValidity(this, '30')">
                                 <i class="fas fa-calendar-alt fa-2x"></i>
                                 <h5>30 Días</h5>
                             </div>
+                            <input type="hidden" id="validez" name="validez" value="30">
                         </div>
                     </div>
 
@@ -290,201 +284,8 @@
     <script src="./js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="./js/bootstrap-material-design.min.js"></script>
     <script src="./js/sweetalert2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('body').bootstrapMaterialDesign();
-
-            // Función para agregar producto
-            window.addProduct = function() {
-                const container = document.getElementById('productosContainer');
-                const newProduct = document.createElement('div');
-                newProduct.className = 'product-item';
-                newProduct.innerHTML = `
-                    <div class="row">
-                        <div class="col-12 col-md-4">
-                            <div class="form-group">
-                                <label>Producto</label>
-                                <select class="form-control form-input producto-select" required>
-                                    <option value="">Seleccione producto</option>
-                                    <option value="1">Cemento</option>
-                                    <option value="2">Arena</option>
-                                    <option value="3">Grava</option>
-                                    <option value="4">Varilla</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <label>Cantidad</label>
-                                <input type="number" class="form-control form-input cantidad-input" placeholder="Cantidad" required>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <label>Precio Unitario</label>
-                                <input type="number" class="form-control form-input precio-input" placeholder="Precio" required>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2">
-                            <div class="form-group">
-                                <label>&nbsp;</label>
-                                <button type="button" class="btn btn-danger btn-block" onclick="removeProduct(this)">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(newProduct);
-            };
-
-            // Función para eliminar producto
-            window.removeProduct = function(button) {
-                button.closest('.product-item').remove();
-                calculateTotals();
-            };
-
-            // Función para seleccionar validez
-            window.selectValidity = function(element, days) {
-                $('.validity-option').removeClass('selected');
-                $(element).addClass('selected');
-                $('#validez').val(days);
-            };
-
-            // Función para calcular totales
-            function calculateTotals() {
-                let subtotal = 0;
-                $('.product-item').each(function() {
-                    const cantidad = parseFloat($(this).find('.cantidad-input').val()) || 0;
-                    const precio = parseFloat($(this).find('.precio-input').val()) || 0;
-                    subtotal += cantidad * precio;
-                });
-
-                const iva = subtotal * 0.19;
-                const total = subtotal + iva;
-
-                $('#subtotal').text('$' + subtotal.toFixed(2));
-                $('#iva').text('$' + iva.toFixed(2));
-                $('#total').text('$' + total.toFixed(2));
-            }
-
-            // Eventos para calcular totales
-            $(document).on('input', '.cantidad-input, .precio-input', calculateTotals);
-
-            // Manejo del formulario
-            $('#proformaForm').on('submit', function(e) {
-                e.preventDefault();
-                
-                // Validación de campos requeridos
-                const cliente = $('#cliente').val();
-                const fecha = $('#fecha').val();
-                const validez = $('#validez').val();
-                const productos = [];
-                
-                $('.producto-select').each(function(index) {
-                    const producto = $(this).val();
-                    const cantidad = $('.cantidad-input').eq(index).val();
-                    const precio = $('.precio-input').eq(index).val();
-                    
-                    if (producto && cantidad && precio) {
-                        productos.push({
-                            producto: producto,
-                            cantidad: cantidad,
-                            precio: precio
-                        });
-                    }
-                });
-
-                if (!cliente || !fecha || !validez || productos.length === 0) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Por favor complete todos los campos requeridos'
-                    });
-                    return;
-                }
-
-                // Confirmación antes de guardar
-                Swal.fire({
-                    title: '¿Guardar proforma?',
-                    text: "¿Está seguro de guardar esta proforma?",
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, guardar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            '¡Guardado!',
-                            'La proforma ha sido registrada correctamente.',
-                            'success'
-                        );
-                    }
-                });
-            });
-
-            // Confirmación para limpiar formulario
-            $('button[type="reset"]').click(function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: '¿Limpiar formulario?',
-                    text: "Se perderán todos los datos ingresados",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, limpiar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $('#proformaForm')[0].reset();
-                        $('.validity-option').removeClass('selected');
-                        $('#productosContainer').html(`
-                            <div class="product-item">
-                                <div class="row">
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label>Producto</label>
-                                            <select class="form-control form-input producto-select" required>
-                                                <option value="">Seleccione producto</option>
-                                                <option value="1">Cemento</option>
-                                                <option value="2">Arena</option>
-                                                <option value="3">Grava</option>
-                                                <option value="4">Varilla</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label>Cantidad</label>
-                                            <input type="number" class="form-control form-input cantidad-input" placeholder="Cantidad" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label>Precio Unitario</label>
-                                            <input type="number" class="form-control form-input precio-input" placeholder="Precio" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-2">
-                                        <div class="form-group">
-                                            <label>&nbsp;</label>
-                                            <button type="button" class="btn btn-danger btn-block" onclick="removeProduct(this)">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `);
-                        calculateTotals();
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="./js/proformas/proformas-api.js"></script>
+    <script src="./js/proformas/proforma-new.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

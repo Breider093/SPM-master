@@ -198,31 +198,15 @@
                                     <input type="date" class="form-control form-input" id="fechaFin" name="fechaFin">
                                 </div>
                             </div>
-                            <div class="col-12 col-md-3">
-                                <div class="form-group">
-                                    <label for="proveedor">
-                                        <i class="fas fa-truck"></i> Proveedor
-                                    </label>
-                                    <select class="form-control form-input" id="proveedor" name="proveedor">
-                                        <option value="">Todos los proveedores</option>
-                                        <option value="1">Proveedor A</option>
-                                        <option value="2">Proveedor B</option>
-                                        <option value="3">Proveedor C</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <div class="form-group">
-                                    <label for="estado">
-                                        <i class="fas fa-check-circle"></i> Estado
-                                    </label>
-                                    <select class="form-control form-input" id="estado" name="estado">
-                                        <option value="">Todos los estados</option>
-                                        <option value="pendiente">Pendiente</option>
-                                        <option value="completado">Completado</option>
-                                        <option value="cancelado">Cancelado</option>
-                                    </select>
-                                </div>
+                                <div class="col-12 col-md-3">
+                                    <div class="form-group">
+                                        <label for="proveedor">
+                                            <i class="fas fa-truck"></i> Proveedor
+                                        </label>
+                                        <select class="form-control form-input" id="proveedor" name="proveedor">
+                                            <option value="">Todos los proveedores</option>
+                                        </select>
+                                    </div>
                             </div>
                         </div>
                         <div class="text-center mt-3">
@@ -326,50 +310,7 @@
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>ENT-001</td>
-                                    <td>15/04/2024</td>
-                                    <td>Proveedor A</td>
-                                    <td>FAC-001</td>
-                                    <td>3</td>
-                                    <td>$1,250.00</td>
-                                    <td><span class="badge badge-completed">Completado</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="verDetalle('ENT-001')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ENT-002</td>
-                                    <td>14/04/2024</td>
-                                    <td>Proveedor B</td>
-                                    <td>FAC-002</td>
-                                    <td>2</td>
-                                    <td>$850.00</td>
-                                    <td><span class="badge badge-pending">Pendiente</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="verDetalle('ENT-002')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>ENT-003</td>
-                                    <td>13/04/2024</td>
-                                    <td>Proveedor C</td>
-                                    <td>FAC-003</td>
-                                    <td>4</td>
-                                    <td>$2,100.00</td>
-                                    <td><span class="badge badge-cancelled">Cancelado</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="verDetalle('ENT-003')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -486,6 +427,8 @@
             });
         }
     </script>
+    <script src="./js/inventario/entradas-salidas-api.js"></script>
+    <script src="./js/inventario/entrada-list.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

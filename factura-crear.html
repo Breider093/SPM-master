@@ -155,9 +155,6 @@
                                     </label>
                                     <select class="form-control form-input" id="cliente" name="cliente" required>
                                         <option value="">Seleccione un cliente</option>
-                                        <option value="1">Constructora XYZ</option>
-                                        <option value="2">Ferretería ABC</option>
-                                        <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
                             </div>
@@ -177,44 +174,7 @@
                         <h4 class="section-title">
                             <i class="fas fa-box"></i> &nbsp; Productos
                         </h4>
-                        <div id="productosContainer">
-                            <div class="product-item">
-                                <div class="row">
-                                    <div class="col-12 col-md-4">
-                                        <div class="form-group">
-                                            <label>Producto</label>
-                                            <select class="form-control form-input producto-select" required>
-                                                <option value="">Seleccione producto</option>
-                                                <option value="1">Cemento</option>
-                                                <option value="2">Arena</option>
-                                                <option value="3">Grava</option>
-                                                <option value="4">Varilla</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label>Cantidad</label>
-                                            <input type="number" class="form-control form-input cantidad-input" placeholder="Cantidad" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-3">
-                                        <div class="form-group">
-                                            <label>Precio Unitario</label>
-                                            <input type="number" class="form-control form-input precio-input" placeholder="Precio" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-2">
-                                        <div class="form-group">
-                                            <label>&nbsp;</label>
-                                            <button type="button" class="btn btn-danger btn-block" onclick="removeProduct(this)">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="productosContainer"></div>
                         <button type="button" class="btn btn-info btn-custom" onclick="addProduct()">
                             <i class="fas fa-plus"></i> &nbsp; AGREGAR PRODUCTO
                         </button>
@@ -291,6 +251,7 @@
     <script src="./js/bootstrap-material-design.min.js"></script>
     <script src="./js/sweetalert2.min.js"></script>
     <script>
+        if (false) {
         $(document).ready(function() {
             $('body').bootstrapMaterialDesign();
 
@@ -306,10 +267,6 @@
                                 <label>Producto</label>
                                 <select class="form-control form-input producto-select" required>
                                     <option value="">Seleccione producto</option>
-                                    <option value="1">Cemento</option>
-                                    <option value="2">Arena</option>
-                                    <option value="3">Grava</option>
-                                    <option value="4">Varilla</option>
                                 </select>
                             </div>
                         </div>
@@ -449,10 +406,6 @@
                                             <label>Producto</label>
                                             <select class="form-control form-input producto-select" required>
                                                 <option value="">Seleccione producto</option>
-                                                <option value="1">Cemento</option>
-                                                <option value="2">Arena</option>
-                                                <option value="3">Grava</option>
-                                                <option value="4">Varilla</option>
                                             </select>
                                         </div>
                                     </div>
@@ -484,7 +437,10 @@
                 });
             });
         });
+        }
     </script>
+    <script src="./js/facturas/facturas-api.js"></script>
+    <script src="./js/facturas/factura-crear.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

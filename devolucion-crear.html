@@ -147,9 +147,6 @@
                                     <label>Cliente *</label>
                                     <select class="form-control form-input" id="cliente" required>
                                         <option value="">SELECCIONAR *</option>
-                                        <option value="1">Constructora XYZ</option>
-                                        <option value="2">Ferretería ABC</option>
-                                        <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -168,8 +165,6 @@
                                     <label>Obra *</label>
                                     <select class="form-control form-input" id="obra" required>
                                         <option value="">SELECCIONAR *</option>
-                                        <option value="1">Obra Norte</option>
-                                        <option value="2">Obra Sur</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -189,8 +184,6 @@
                                     <label>Transportador *</label>
                                     <select class="form-control form-input" id="transportador" required>
                                         <option value="">Seleccionar *</option>
-                                        <option value="1">Transporte A</option>
-                                        <option value="2">Transporte B</option>
                                     </select>
                                 </div>
                             </div>
@@ -222,6 +215,7 @@
                                         <th>Pendiente</th>
                                         <th>Cantidad</th>
                                         <th>Peso</th>
+                                        <th>Motivo</th>
                                         <th>Total Kg</th>
                                         <th>Eliminar</th>
                                     </tr>
@@ -231,7 +225,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="4" class="text-right"><b>Total</b></td>
+                                        <td colspan="5" class="text-right"><b>Total</b></td>
                                         <td id="totalKg">0.00 Kgr</td>
                                         <td></td>
                                     </tr>
@@ -264,6 +258,7 @@
     <script src="./js/bootstrap-material-design.min.js"></script>
     <script src="./js/sweetalert2.min.js"></script>
     <script>
+        if (false) {
         $(document).ready(function() {
             $('body').bootstrapMaterialDesign();
 
@@ -279,10 +274,6 @@
                                 <label>Producto</label>
                                 <select class="form-control form-input producto-select" required>
                                     <option value="">Seleccione producto</option>
-                                    <option value="1">Cemento</option>
-                                    <option value="2">Arena</option>
-                                    <option value="3">Grava</option>
-                                    <option value="4">Varilla</option>
                                 </select>
                             </div>
                         </div>
@@ -398,10 +389,6 @@
                                             <label>Producto</label>
                                             <select class="form-control form-input producto-select" required>
                                                 <option value="">Seleccione producto</option>
-                                                <option value="1">Cemento</option>
-                                                <option value="2">Arena</option>
-                                                <option value="3">Grava</option>
-                                                <option value="4">Varilla</option>
                                             </select>
                                         </div>
                                     </div>
@@ -438,7 +425,10 @@
                 });
             });
         });
+        }
     </script>
+    <script src="./js/devoluciones/devoluciones-api.js"></script>
+    <script src="./js/devoluciones/devolucion-crear.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

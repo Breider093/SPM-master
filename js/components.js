@@ -17,7 +17,6 @@ function loadSidebar() {
                         <li>
                             <a href="home.html"><i class="fab fa-dashcube fa-fw"></i> &nbsp; Dashboard</a>
                         </li>
-
                         <li>
                             <a href="#" class="nav-btn-submenu"><i class="fas fa-users fa-fw"></i> &nbsp; Clientes <i class="fas fa-chevron-down"></i></a>
                             <ul>
@@ -49,6 +48,18 @@ function loadSidebar() {
                         </li>
 
                         <li>
+                            <a href="#" class="nav-btn-submenu"><i class="fas fa-truck fa-fw"></i> &nbsp; Proveedores <i class="fas fa-chevron-down"></i></a>
+                            <ul>
+                                <li>
+                                    <a href="proveedores-nuevo.html"><i class="fas fa-plus fa-fw"></i> &nbsp; NUEVO PROVEEDOR</a>
+                                </li>
+                                <li>
+                                    <a href="proveedores-lista.html"><i class="fas fa-list fa-fw"></i> &nbsp; LISTA DE PROVEEDORES</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
                             <a href="#" class="nav-btn-submenu"><i class="fas fa-user-tie fa-fw"></i> &nbsp; Responsable <i class="fas fa-chevron-down"></i></a>
                             <ul>
                                 <li>
@@ -61,10 +72,16 @@ function loadSidebar() {
                             <a href="#" class="nav-btn-submenu"><i class="fas fa-truck fa-fw"></i> &nbsp; Transportadores <i class="fas fa-chevron-down"></i></a>
                             <ul>
                                 <li>
+                                    <a href="transportadores-viaje-form.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo viaje</a>
+                                </li>
+                                <li>
                                     <a href="transportadores-list.html"><i class="fas fa-list fa-fw"></i> &nbsp; Transportadores</a>
                                 </li>
                                 <li>
                                     <a href="transportadores-viajes.html"><i class="fas fa-route fa-fw"></i> &nbsp; Consultar viajes</a>
+                                </li>
+                                <li>
+                                    <a href="transportadores-viaje-remisiones.html"><i class="fas fa-link fa-fw"></i> &nbsp; Asignar remisiones</a>
                                 </li>
                             </ul>
                         </li>

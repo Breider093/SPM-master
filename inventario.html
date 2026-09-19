@@ -74,9 +74,6 @@
                             <select class="form-control" id="proveedor">
                                 <option value="">Seleccione un proveedor</option>
                                 <option value="todos">TODOS</option>
-                                <option value="ANDAMIOS S.A.">ANDAMIOS S.A.</option>
-                                <option value="EQUIPOS INDUSTRIALES">EQUIPOS INDUSTRIALES</option>
-                                <option value="HERRAMIENTAS PRO">HERRAMIENTAS PRO</option>
                             </select>
                         </div>
                     </div>
@@ -86,9 +83,6 @@
                             <select class="form-control" id="tipoProducto">
                                 <option value="">Seleccione un tipo</option>
                                 <option value="todos">TODOS</option>
-                                <option value="ANDAMIOS">ANDAMIOS</option>
-                                <option value="HERRAMIENTAS">HERRAMIENTAS</option>
-                                <option value="EQUIPOS">EQUIPOS</option>
                             </select>
                         </div>
                     </div>
@@ -101,9 +95,9 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col-12 text-right">
-                        <button type="button" class="btn btn-raised btn-info"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR</button>
-                        <button type="button" class="btn btn-raised btn-success"><i class="fas fa-file-pdf fa-fw"></i> &nbsp; EXPORTAR PDF</button>
-                        <button type="button" class="btn btn-raised btn-success"><i class="fas fa-file-excel fa-fw"></i> &nbsp; EXPORTAR EXCEL</button>
+                        <button id="inventarioBuscar" type="button" class="btn btn-raised btn-info"><i class="fas fa-search fa-fw"></i> &nbsp; BUSCAR</button>
+                        <button id="btnExportarPdfInventario" type="button" class="btn btn-raised btn-success"><i class="fas fa-file-pdf fa-fw"></i> &nbsp; EXPORTAR PDF</button>
+                        <button id="btnExportarExcelInventario" type="button" class="btn btn-raised btn-success"><i class="fas fa-file-excel fa-fw"></i> &nbsp; EXPORTAR EXCEL</button>
                     </div>
                 </div>
 
@@ -123,32 +117,7 @@
                                 <th>ESTADO</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td>RM-136</td>
-                                <td>ABRAZADERAS RM</td>
-                                <td>ANDAMIOS CERTIFICADOS</td>
-                                <td>85</td>
-                                <td>192</td>
-                                <td>107</td>
-                                <td>0</td>
-                                <td>85</td>
-                                <td>0</td>
-                                <td><span class="badge badge-warning">Stock Bajo</span></td>
-                            </tr>
-                            <tr class="text-center">
-                                <td>RM-137</td>
-                                <td>ANDAMIO CERTIFICADO</td>
-                                <td>ANDAMIOS CERTIFICADOS</td>
-                                <td>150</td>
-                                <td>80</td>
-                                <td>20</td>
-                                <td>10</td>
-                                <td>60</td>
-                                <td>90</td>
-                                <td><span class="badge badge-success">Disponible</span></td>
-                            </tr>
-                        </tbody>
+                        <tbody id="inventarioTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -169,6 +138,7 @@
     <script src="./js/main.js"></script>
 
     <!-- Script para manejar la precarga -->
+    <script src="./js/api/reportes/reportes-api.js"></script>
     <script>
         window.addEventListener('load', function() {
             document.body.classList.add('loaded');

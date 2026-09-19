@@ -211,7 +211,6 @@
                                 <select class="form-control form-input" id="tipoFilter">
                                     <option value="">Todos los tipos</option>
                                     <option value="venta">Venta</option>
-                                    <option value="prestamo">Préstamo</option>
                                     <option value="devolucion">Devolución</option>
                                 </select>
                             </div>
@@ -348,56 +347,7 @@
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>Cliente A</td>
-                                    <td>2024-03-15</td>
-                                    <td>Venta</td>
-                                    <td>3</td>
-                                    <td>$1,500.00</td>
-                                    <td><span class="badge badge-completed">Completado</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="verDetalle('001')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm ml-2" onclick="cancelarSalida('001')">
-                                            <i class="fas fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>002</td>
-                                    <td>Cliente B</td>
-                                    <td>2024-03-16</td>
-                                    <td>Préstamo</td>
-                                    <td>2</td>
-                                    <td>$800.00</td>
-                                    <td><span class="badge badge-pending">Pendiente</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="verDetalle('002')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-success btn-sm ml-2" onclick="completarSalida('002')">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>003</td>
-                                    <td>Cliente C</td>
-                                    <td>2024-03-17</td>
-                                    <td>Devolución</td>
-                                    <td>1</td>
-                                    <td>$350.00</td>
-                                    <td><span class="badge badge-cancelled">Cancelado</span></td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm" onclick="verDetalle('003')">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
@@ -494,6 +444,8 @@
             });
         }
     </script>
+    <script src="./js/inventario/entradas-salidas-api.js"></script>
+    <script src="./js/inventario/salida-list.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

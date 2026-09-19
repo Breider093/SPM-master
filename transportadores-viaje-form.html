@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viaje</title>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-material-design.min.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/preload.css">
+</head>
+<body>
+<main class="full-box main-container"><section class="full-box page-content">
+    <div class="full-box page-header"><h3><i class="fas fa-route"></i> &nbsp; <span id="tituloViaje">NUEVO VIAJE</span></h3></div>
+    <div class="container-fluid"><ul class="full-box list-unstyled page-nav-tabs">
+        <li><a href="transportadores-list.html">TRANSPORTADORES</a></li>
+        <li><a href="transportadores-viajes.html">GESTIÓN DE VIAJES</a></li>
+        <li><a class="active" href="transportadores-viaje-form.html">NUEVO VIAJE</a></li>
+        <li><a href="transportadores-viaje-remisiones.html">ASIGNAR REMISIONES</a></li>
+    </ul></div>
+    <div class="container-fluid"><form class="form-neon" id="formViaje">
+        <div class="row">
+            <div class="col-12 col-md-6"><label for="transportador">Transportador</label><select class="form-control" id="transportador" required><option value="">Cargando transportadores...</option></select><small id="estadoTransportadores" class="form-text text-muted"></small></div>
+            <div class="col-12 col-md-6"><label for="vehiculo">Vehículo</label><select class="form-control" id="vehiculo"><option value="">Sin vehículo</option><option value="__otro__">Otro</option></select><small id="estadoVehiculos" class="form-text text-muted"></small></div>
+            <div class="col-12 col-md-6"><label for="origen">Origen</label><input class="form-control" id="origen"></div>
+            <div class="col-12 col-md-6"><label for="destino">Destino</label><input class="form-control" id="destino" required></div>
+            <div class="col-12 col-md-6"><label for="pais_destino">País destino</label><input class="form-control" id="pais_destino" value="Colombia"></div>
+            <div class="col-12 col-md-6"><label for="fecha_salida">Fecha de salida</label><input type="datetime-local" class="form-control" id="fecha_salida" required></div>
+            <div class="col-12 col-md-6"><label for="fecha_llegada_estimada">Llegada estimada</label><input type="datetime-local" class="form-control" id="fecha_llegada_estimada"></div>
+            <div class="col-12"><label for="observaciones">Observaciones</label><textarea class="form-control" id="observaciones"></textarea></div>
+        </div>
+        <div class="text-center mt-4"><button class="btn btn-info" type="submit"><i class="fas fa-save"></i> GUARDAR</button> <a class="btn btn-secondary" href="transportadores-viajes.html">CANCELAR</a></div>
+    </form></div>
+</section></main>
+    <div class="modal fade" id="modalNuevoVehiculo" tabindex="-1" role="dialog" aria-labelledby="tituloNuevoVehiculo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloNuevoVehiculo">Registrar otro vehículo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form id="formNuevoVehiculo">
+                    <div class="modal-body">
+                        <div class="form-group"><label for="nuevaPlaca">Placa</label><input type="text" class="form-control" id="nuevaPlaca" maxlength="15" required></div>
+                        <div class="form-group"><label for="nuevoTipoVehiculo">Tipo</label><select class="form-control" id="nuevoTipoVehiculo" required><option value="">Seleccione un tipo</option><option value="CAMION">Camión</option><option value="FURGON">Furgón</option><option value="CAMIONETA">Camioneta</option></select></div>
+                        <div class="form-group"><label for="nuevaMarca">Marca</label><input type="text" class="form-control" id="nuevaMarca" maxlength="80"></div>
+                        <div class="form-group"><label for="nuevoModelo">Modelo</label><input type="text" class="form-control" id="nuevoModelo" maxlength="80"></div>
+                        <div class="form-group"><label for="nuevaCapacidad">Capacidad (kg)</label><input type="number" class="form-control" id="nuevaCapacidad" min="0" step="0.01"></div>
+                    </div>
+                    <div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button><button type="submit" class="btn btn-info">Guardar vehículo</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script src="./js/jquery-3.4.1.min.js"></script><script src="./js/popper.min.js"></script><script src="./js/bootstrap.min.js"></script><script src="./js/jquery.mCustomScrollbar.concat.min.js"></script><script src="./js/bootstrap-material-design.min.js"></script><script src="./js/sweetalert2.min.js"></script>
+<script src="./js/transportadores/transportadores-api.js"></script><script src="./js/transportadores/transportadores-viaje-form.js"></script><script src="./js/components.js"></script><script src="./js/main.js"></script>
+<script>
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+    });
+</script>
+</body></html>

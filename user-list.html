@@ -69,39 +69,6 @@
 						</li>
 
 						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-pallet fa-fw"></i> &nbsp; Items <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="item-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Agregar item</a>
-								</li>
-								<li>
-									<a href="item-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de items</a>
-								</li>
-								<li>
-									<a href="item-search.html"><i class="fas fa-search fa-fw"></i> &nbsp; Buscar item</a>
-								</li>
-							</ul>
-						</li>
-
-						<li>
-							<a href="#" class="nav-btn-submenu"><i class="fas fa-file-invoice-dollar fa-fw"></i> &nbsp; Préstamos <i class="fas fa-chevron-down"></i></a>
-							<ul>
-								<li>
-									<a href="reservation-new.html"><i class="fas fa-plus fa-fw"></i> &nbsp; Nuevo préstamo</a>
-								</li>
-								<li>
-									<a href="reservation-list.html"><i class="fas fa-clipboard-list fa-fw"></i> &nbsp; Lista de préstamos</a>
-								</li>
-								<li>
-									<a href="reservation-search.html"><i class="fas fa-search-dollar fa-fw"></i> &nbsp; Buscar préstamos</a>
-								</li>
-								<li>
-									<a href="reservation-pending.html"><i class="fas fa-hand-holding-usd fa-fw"></i> &nbsp; Préstamos pendientes</a>
-								</li>
-							</ul>
-						</li>
-
-						<li>
 							<a href="#" class="nav-btn-submenu"><i class="fas  fa-user-secret fa-fw"></i> &nbsp; Usuarios <i class="fas fa-chevron-down"></i></a>
 							<ul>
 								<li>
@@ -304,7 +271,69 @@
 	<!-- Bootstrap Material Design V4.0 -->
 	<script src="./js/bootstrap-material-design.min.js" ></script>
 	<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+	<script src="./js/usuarios/usuarios-api.js"></script>
+	<script>
+		$(document).ready(function() {
+			cargarUsuarios();
+		});
 
+		function cargarUsuarios() {
+			listarUsuarios()
+				.then((usuarios) => {
+					const tbody = $('.table tbody');
+					tbody.empty();
+
+					if (!usuarios.length) {
+						tbody.append('<tr class="text-center"><td colspan="9">No hay usuarios registrados.</td></tr>');
+						return;
+					}
+
+					usuarios.forEach((usuario) => {
+						const perfil = usuario.perfil || {};
+						tbody.append(`
+							<tr class="text-center">
+								<td>${usuario.id}</td>
+								<td>${perfil.documento || '-'}</td>
+								<td>${usuario.first_name || '-'}</td>
+								<td>${usuario.last_name || '-'}</td>
+								<td>${perfil.telefono || '-'}</td>
+								<td>${usuario.username || '-'}</td>
+								<td>${usuario.email || '-'}</td>
+								<td><a href="user-update.html?id=${usuario.id}" class="btn btn-success"><i class="fas fa-sync-alt"></i></a></td>
+								<td><button type="button" class="btn btn-warning" data-user-id="${usuario.id}"><i class="far fa-trash-alt"></i></button></td>
+							</tr>
+						`);
+					});
+
+					$('.btn-warning[data-user-id]').on('click', async function() {
+						const userId = $(this).data('userId');
+						const confirmacion = await Swal.fire({
+							title: '¿Eliminar usuario?',
+							text: 'Esta acción no se puede deshacer.',
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonText: 'Sí, eliminar',
+							cancelButtonText: 'Cancelar'
+						});
+
+						if (!confirmacion.isConfirmed) return;
+
+						try {
+							await eliminarUsuarioApi(userId);
+							Swal.fire('Eliminado', 'El usuario fue eliminado.', 'success');
+							cargarUsuarios();
+						} catch (error) {
+							console.error(error);
+							Swal.fire({ icon: 'error', title: 'Error', text: 'No se pudo eliminar el usuario.' });
+						}
+					});
+				})
+				.catch((error) => {
+					console.error(error);
+					Swal.fire({ icon: 'error', title: 'Error', text: 'No se pudieron cargar los usuarios.' });
+				});
+		}
+	</script>
 	<script src="./js/main.js" ></script>
 </body>
 </html>

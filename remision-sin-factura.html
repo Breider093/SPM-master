@@ -191,9 +191,6 @@
                                     </label>
                                     <select class="form-control form-input" id="cliente" name="cliente">
                                         <option value="">Todos los clientes</option>
-                                        <option value="1">Constructora XYZ</option>
-                                        <option value="2">Ferretería ABC</option>
-                                        <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
                             </div>
@@ -209,68 +206,6 @@
                     </form>
                 </div>
 
-                <!-- Lista de Remisiones sin Factura -->
-                <div class="remission-card pending">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <i class="fas fa-file-invoice-dollar remission-icon text-warning"></i>
-                        </div>
-                        <div class="col-8">
-                            <h5 class="remission-title">REM-2024-006</h5>
-                            <p class="mb-0">Cliente: Constructora XYZ</p>
-                            <small class="remission-date">
-                                <i class="fas fa-calendar"></i> Fecha de entrega: 2024-04-15
-                                <span class="days-overdue">(3 días pendiente)</span>
-                            </small>
-                            <ul class="product-list">
-                                <li>Cemento - 50 unidades</li>
-                                <li>Arena - 25 m³</li>
-                            </ul>
-                        </div>
-                        <div class="col-3 text-right remission-actions">
-                            <button class="btn btn-info action-btn" title="Ver Detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-success action-btn" title="Generar Factura">
-                                <i class="fas fa-file-invoice"></i>
-                            </button>
-                            <button class="btn btn-warning action-btn" title="Recordatorio">
-                                <i class="fas fa-bell"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="remission-card overdue">
-                    <div class="row align-items-center">
-                        <div class="col-1">
-                            <i class="fas fa-exclamation-triangle remission-icon text-danger"></i>
-                        </div>
-                        <div class="col-8">
-                            <h5 class="remission-title">REM-2024-007</h5>
-                            <p class="mb-0">Cliente: Ferretería ABC</p>
-                            <small class="remission-date">
-                                <i class="fas fa-calendar"></i> Fecha de entrega: 2024-04-10
-                                <span class="days-overdue">(8 días vencida)</span>
-                            </small>
-                            <ul class="product-list">
-                                <li>Grava - 30 m³</li>
-                                <li>Varilla - 100 unidades</li>
-                            </ul>
-                        </div>
-                        <div class="col-3 text-right remission-actions">
-                            <button class="btn btn-info action-btn" title="Ver Detalles">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-success action-btn" title="Generar Factura">
-                                <i class="fas fa-file-invoice"></i>
-                            </button>
-                            <button class="btn btn-danger action-btn" title="Marcar como Urgente">
-                                <i class="fas fa-exclamation"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
@@ -407,6 +342,8 @@
             });
         });
     </script>
+    <script src="./js/transportadores/transportadores-api.js"></script>
+    <script src="./js/remisiones/remisiones-paneles.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 

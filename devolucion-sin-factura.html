@@ -191,9 +191,6 @@
                                     </label>
                                     <select class="form-control form-input" id="cliente" name="cliente">
                                         <option value="">Todos los clientes</option>
-                                        <option value="1">Constructora XYZ</option>
-                                        <option value="2">Ferretería ABC</option>
-                                        <option value="3">Materiales S.A.</option>
                                     </select>
                                 </div>
                             </div>
@@ -210,14 +207,14 @@
                 </div>
 
                 <!-- Lista de Devoluciones -->
+                <div id="devolucionesContainer"></div>
+                <!--
                 <div class="devolucion-card pendiente">
                     <div class="row align-items-center">
                         <div class="col-1">
                             <i class="fas fa-exclamation-triangle devolucion-icon text-warning"></i>
                         </div>
                         <div class="col-8">
-                            <h5 class="devolucion-title">DEV-2024-001</h5>
-                            <p class="mb-0">Cliente: Constructora XYZ</p>
                             <small class="devolucion-date">
                                 <i class="fas fa-calendar"></i> Fecha: 2024-04-15
                             </small>
@@ -225,8 +222,6 @@
                                 <i class="fas fa-clock"></i> 5 días pendiente
                             </p>
                             <ul class="product-list">
-                                <li>Cemento - 10 unidades (Defectuoso)</li>
-                                <li>Arena - 5 m³ (Exceso de pedido)</li>
                             </ul>
                         </div>
                         <div class="col-3 text-right devolucion-actions">
@@ -242,15 +237,15 @@
                         </div>
                     </div>
                 </div>
+                -->
 
+                <!--
                 <div class="devolucion-card vencida">
                     <div class="row align-items-center">
                         <div class="col-1">
                             <i class="fas fa-exclamation-circle devolucion-icon text-danger"></i>
                         </div>
                         <div class="col-8">
-                            <h5 class="devolucion-title">DEV-2024-002</h5>
-                            <p class="mb-0">Cliente: Ferretería ABC</p>
                             <small class="devolucion-date">
                                 <i class="fas fa-calendar"></i> Fecha: 2024-04-10
                             </small>
@@ -258,8 +253,6 @@
                                 <i class="fas fa-clock"></i> 10 días vencida
                             </p>
                             <ul class="product-list">
-                                <li>Grava - 3 m³ (Cambio de producto)</li>
-                                <li>Varilla - 5 unidades (Defectuoso)</li>
                             </ul>
                         </div>
                         <div class="col-3 text-right devolucion-actions">
@@ -275,6 +268,7 @@
                         </div>
                     </div>
                 </div>
+                -->
             </div>
         </section>
     </main>
@@ -287,6 +281,7 @@
     <script src="./js/bootstrap-material-design.min.js"></script>
     <script src="./js/sweetalert2.min.js"></script>
     <script>
+        if (false) {
         $(document).ready(function() {
             $('body').bootstrapMaterialDesign();
 
@@ -327,15 +322,11 @@
                     title: 'Detalles de la Devolución',
                     html: `
                         <div class="text-left">
-                            <p><strong>Número de Devolución:</strong> DEV-2024-001</p>
-                            <p><strong>Cliente:</strong> Constructora XYZ</p>
                             <p><strong>Fecha:</strong> 2024-04-15</p>
                             <p><strong>Estado:</strong> Pendiente de Factura</p>
                             <p><strong>Días Pendiente:</strong> 5 días</p>
                             <p><strong>Productos:</strong></p>
                             <ul>
-                                <li>Cemento - 10 unidades (Defectuoso)</li>
-                                <li>Arena - 5 m³ (Exceso de pedido)</li>
                             </ul>
                             <p><strong>Observaciones:</strong> Productos recibidos en mal estado</p>
                         </div>
@@ -410,7 +401,10 @@
                 });
             });
         });
+        }
     </script>
+    <script src="./js/devoluciones/devoluciones-api.js"></script>
+    <script src="./js/devoluciones/devoluciones-consulta.js"></script>
     <script src="./js/components.js"></script>
     <script src="./js/main.js"></script>
 
