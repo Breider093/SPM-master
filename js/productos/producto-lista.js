@@ -1,8 +1,9 @@
-const API_URL = 'http://localhost:8000';
-const API_PRODUCTOS = `${API_URL}/api/productos/`;
-const API_TIPOS_PRODUCTO = `${API_URL}/api/tipos-producto/`;
-const API_PRODUCTO_PROVEEDORES = `${API_URL}/api/producto-proveedores/`;
-const API_PROVEEDORES = `${API_URL}/api/proveedores/`;
+const API_ORIGIN = 'http://192.168.1.14:8000';
+const API_BASE = `${API_ORIGIN}/api`;
+const API_PRODUCTOS = `${API_BASE}/productos/`;
+const API_TIPOS_PRODUCTO = `${API_BASE}/tipos-producto/`;
+const API_PRODUCTO_PROVEEDORES = `${API_BASE}/producto-proveedores/`;
+const API_PROVEEDORES = `${API_BASE}/proveedores/`;
 
 $(document).ready(function() {
     $('body').bootstrapMaterialDesign();
@@ -123,7 +124,7 @@ function crearEnlaceArchivo(url, texto) {
         return 'No disponible';
     }
 
-    const urlCompleta = url.startsWith('http') ? url : `${API_URL}${url}`;
+    const urlCompleta = url.startsWith('http') ? url : `${API_ORIGIN}${url}`;
     return `<a href="${urlCompleta}" target="_blank" rel="noopener">${texto}</a>`;
 }
 

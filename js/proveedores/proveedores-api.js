@@ -1,4 +1,5 @@
-const API_PROVEEDORES = 'http://localhost:8000/api/proveedores/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_PROVEEDORES = `${API_BASE}/proveedores/`;
 
 function obtenerCookie(nombre) {
     const cookies = document.cookie ? document.cookie.split(';') : [];

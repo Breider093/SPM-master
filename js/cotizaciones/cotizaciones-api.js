@@ -1,7 +1,8 @@
-const API_COTIZACIONES = 'http://localhost:8000/api/cotizaciones/';
-const API_COTIZACION_DETALLES = 'http://localhost:8000/api/cotizacion-detalles/';
-const API_CLIENTES_COTIZACION = 'http://localhost:8000/api/clientes/';
-const API_PRODUCTOS_COTIZACION = 'http://localhost:8000/api/productos/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_COTIZACIONES = `${API_BASE}/cotizaciones/`;
+const API_COTIZACION_DETALLES = `${API_BASE}/cotizacion-detalles/`;
+const API_CLIENTES_COTIZACION = `${API_BASE}/clientes/`;
+const API_PRODUCTOS_COTIZACION = `${API_BASE}/productos/`;
 
 function listaCotizaciones(datos) {
     return Array.isArray(datos) ? datos : datos.results || [];

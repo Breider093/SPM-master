@@ -1,9 +1,10 @@
-const API_PROFORMAS = 'http://localhost:8000/api/proformas/';
-const API_PROFORMA_ITEMS = 'http://localhost:8000/api/proforma-items/';
-const API_COTIZACIONES = 'http://localhost:8000/api/cotizaciones/';
-const API_COTIZACION_DETALLES = 'http://localhost:8000/api/cotizacion-detalles/';
-const API_CLIENTES = 'http://localhost:8000/api/clientes/';
-const API_PRODUCTOS = 'http://localhost:8000/api/productos/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_PROFORMAS = `${API_BASE}/proformas/`;
+const API_PROFORMA_ITEMS = `${API_BASE}/proforma-items/`;
+const API_COTIZACIONES = `${API_BASE}/cotizaciones/`;
+const API_COTIZACION_DETALLES = `${API_BASE}/cotizacion-detalles/`;
+const API_CLIENTES = `${API_BASE}/clientes/`;
+const API_PRODUCTOS = `${API_BASE}/productos/`;
 
 function normalizarLista(datos) {
     if (Array.isArray(datos)) return datos;

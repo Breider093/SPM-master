@@ -1,8 +1,9 @@
-const API_FACTURAS_FRONT = 'http://localhost:8000/api/facturas/';
-const API_FACTURA_DETALLES_FRONT = 'http://localhost:8000/api/factura-detalles/';
-const API_FACTURA_PAGOS_FRONT = 'http://localhost:8000/api/factura-pagos/';
-const API_CLIENTES_FACTURA = 'http://localhost:8000/api/clientes/';
-const API_PRODUCTOS_FACTURA = 'http://localhost:8000/api/productos/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_FACTURAS_FRONT = `${API_BASE}/facturas/`;
+const API_FACTURA_DETALLES_FRONT = `${API_BASE}/factura-detalles/`;
+const API_FACTURA_PAGOS_FRONT = `${API_BASE}/factura-pagos/`;
+const API_CLIENTES_FACTURA = `${API_BASE}/clientes/`;
+const API_PRODUCTOS_FACTURA = `${API_BASE}/productos/`;
 
 function listaFacturas(datos) {
     return Array.isArray(datos) ? datos : datos.results || [];

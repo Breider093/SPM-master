@@ -1,9 +1,9 @@
-const API_URL = 'http://localhost:8000';
-const API_CLIENTES = `${API_URL}/api/clientes/`;
-const API_CLIENTE_DOCUMENTOS = `${API_URL}/api/cliente-documentos/`;
-const API_OBRAS = `${API_URL}/api/obras/`;
-const API_KARDEX_MOVIMIENTOS = `${API_URL}/api/kardex-movimientos/`;
-const API_KARDEX_DETALLES = `${API_URL}/api/kardex-detalles/`;
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_CLIENTES = `${API_BASE}/clientes/`;
+const API_CLIENTE_DOCUMENTOS = `${API_BASE}/cliente-documentos/`;
+const API_OBRAS = `${API_BASE}/obras/`;
+const API_KARDEX_MOVIMIENTOS = `${API_BASE}/kardex-movimientos/`;
+const API_KARDEX_DETALLES = `${API_BASE}/kardex-detalles/`;
 const API_KARDEX_CLIENTE = (clienteId) => `${API_CLIENTES}${clienteId}/kardex/`;
 
 function obtenerCookie(nombre) {

@@ -1,5 +1,6 @@
-const API_REPORTES_ORDENES = 'http://localhost:8000/api/ordenes-compra/';
-const API_REPORTES_PROVEEDORES = 'http://localhost:8000/api/proveedores/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_REPORTES_ORDENES = `${API_BASE}/ordenes-compra/`;
+const API_REPORTES_PROVEEDORES = `${API_BASE}/proveedores/`;
 
 let ordenesReporte = [];
 let proveedoresReporte = [];

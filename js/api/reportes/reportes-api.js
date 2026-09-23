@@ -1,5 +1,5 @@
-const API_BASE_URL = 'http://localhost:8000';
-const REPORTES_API_BASE = `${API_BASE_URL}/api/reportes`;
+const API_BASE_URL = 'http://192.168.1.14:8000/api';
+const REPORTES_API_BASE = `${API_BASE_URL}/reportes`;
 
 function poblarSelect(selectId, opciones, textoBase, valorBase = '') {
     const select = document.getElementById(selectId);
@@ -21,8 +21,8 @@ function poblarSelect(selectId, opciones, textoBase, valorBase = '') {
 async function cargarOpcionesInventario() {
     try {
         const [proveedoresResponse, tiposResponse] = await Promise.all([
-            fetch(`${API_BASE_URL}/api/proveedores/`),
-            fetch(`${API_BASE_URL}/api/tipos-producto/`)
+            fetch(`${API_BASE_URL}/proveedores/`),
+            fetch(`${API_BASE_URL}/tipos-producto/`)
         ]);
 
         if (proveedoresResponse.ok) {
@@ -44,8 +44,8 @@ async function cargarOpcionesInventario() {
 async function cargarOpcionesEquiposObra() {
     try {
         const [clientesResponse, obrasResponse] = await Promise.all([
-            fetch(`${API_BASE_URL}/api/clientes/`),
-            fetch(`${API_BASE_URL}/api/obras/`)
+            fetch(`${API_BASE_URL}/clientes/`),
+            fetch(`${API_BASE_URL}/obras/`)
         ]);
 
         if (clientesResponse.ok) {

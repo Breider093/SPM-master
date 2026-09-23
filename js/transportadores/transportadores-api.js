@@ -1,15 +1,16 @@
-const API_URL_TRANSPORTADORES = 'http://localhost:8000';
-const API_TRANSPORTADORES = `${API_URL_TRANSPORTADORES}/api/transportadores/`;
-const API_VEHICULOS = `${API_URL_TRANSPORTADORES}/api/vehiculos/`;
-const API_TRANSPORTADOR_VEHICULOS = `${API_URL_TRANSPORTADORES}/api/transportador-vehiculos/`;
-const API_VIAJES = `${API_URL_TRANSPORTADORES}/api/viajes/`;
-const API_VIAJE_REMISIONES = `${API_URL_TRANSPORTADORES}/api/viaje-remisiones/`;
-const API_REMISIONES = `${API_URL_TRANSPORTADORES}/api/remisiones/`;
-const API_REMISION_DETALLES = `${API_URL_TRANSPORTADORES}/api/remision-detalles/`;
-const API_REMISION_RESERVAS = `${API_URL_TRANSPORTADORES}/api/remision-reservas/`;
-const API_REMISION_ALARMAS = `${API_URL_TRANSPORTADORES}/api/remision-alarmas/`;
-const API_FACTURAS = `${API_URL_TRANSPORTADORES}/api/facturas/`;
-const API_PRODUCTOS_TRANSPORTADORES = `${API_URL_TRANSPORTADORES}/api/productos/`;
+const API_BASE = 'http://192.168.1.14:8000/api';
+const endpoint = (path) => `${API_BASE}/${path}/`;
+const API_TRANSPORTADORES = endpoint('transportadores');
+const API_VEHICULOS = endpoint('vehiculos');
+const API_TRANSPORTADOR_VEHICULOS = endpoint('transportador-vehiculos');
+const API_VIAJES = endpoint('viajes');
+const API_VIAJE_REMISIONES = endpoint('viaje-remisiones');
+const API_REMISIONES = endpoint('remisiones');
+const API_REMISION_DETALLES = endpoint('remision-detalles');
+const API_REMISION_RESERVAS = endpoint('remision-reservas');
+const API_REMISION_ALARMAS = endpoint('remision-alarmas');
+const API_FACTURAS = endpoint('facturas');
+const API_PRODUCTOS_TRANSPORTADORES = endpoint('productos');
 
 function obtenerCookieTransportadores(nombre) {
     const cookies = document.cookie ? document.cookie.split(';') : [];

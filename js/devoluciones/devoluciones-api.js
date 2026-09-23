@@ -1,9 +1,10 @@
-const API_DEVOLUCIONES = 'http://localhost:8000/api/devoluciones/';
-const API_DEVOLUCION_DETALLES = 'http://localhost:8000/api/devolucion-detalles/';
-const API_CLIENTES_DEVOLUCION = 'http://localhost:8000/api/clientes/';
-const API_OBRAS_DEVOLUCION = 'http://localhost:8000/api/obras/';
-const API_TRANSPORTADORES_DEVOLUCION = 'http://localhost:8000/api/transportadores/';
-const API_PRODUCTOS_DEVOLUCION = 'http://localhost:8000/api/productos/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_DEVOLUCIONES = `${API_BASE}/devoluciones/`;
+const API_DEVOLUCION_DETALLES = `${API_BASE}/devolucion-detalles/`;
+const API_CLIENTES_DEVOLUCION = `${API_BASE}/clientes/`;
+const API_OBRAS_DEVOLUCION = `${API_BASE}/obras/`;
+const API_TRANSPORTADORES_DEVOLUCION = `${API_BASE}/transportadores/`;
+const API_PRODUCTOS_DEVOLUCION = `${API_BASE}/productos/`;
 
 function listaDevoluciones(datos) { return Array.isArray(datos) ? datos : datos.results || []; }
 function cookieDevolucion(nombre) {

@@ -1,4 +1,5 @@
-const API_RESPONSABLES = 'http://localhost:8000/api/responsables/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_RESPONSABLES = `${API_BASE}/responsables/`;
 
 async function apiResponsableRequest(url, opciones = {}) {
     const token = localStorage.getItem('rentamax_token');

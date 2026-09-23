@@ -1,7 +1,7 @@
-const API_URL = 'http://localhost:8000';
-const API_PRODUCTOS = `${API_URL}/api/productos/`;
-const API_PROVEEDORES = `${API_URL}/api/proveedores/`;
-const API_PRODUCTO_PROVEEDORES = `${API_URL}/api/producto-proveedores/`;
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_PRODUCTOS = `${API_BASE}/productos/`;
+const API_PROVEEDORES = `${API_BASE}/proveedores/`;
+const API_PRODUCTO_PROVEEDORES = `${API_BASE}/producto-proveedores/`;
 
 $(document).ready(function() {
     $('body').bootstrapMaterialDesign();

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_BASE = 'http://192.168.1.14:8000/api';
 
 $(document).ready(function() {
     $('body').bootstrapMaterialDesign();
@@ -26,7 +26,7 @@ $(document).ready(function() {
         const formData = new FormData(form);
         formData.append('habilitado', 'true');
 
-        fetch(`${API_URL}/api/productos/`, {
+        fetch(`${API_BASE}/productos/`, {
             method: 'POST',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken')
@@ -106,7 +106,7 @@ $(document).ready(function() {
 });
 
 function cargarTiposProducto() {
-    fetch(`${API_URL}/api/tipos-producto/`)
+    fetch(`${API_BASE}/tipos-producto/`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error('No se pudieron cargar los tipos de producto.');

@@ -1,7 +1,8 @@
-const API_ORDENES_COMPRA = 'http://localhost:8000/api/ordenes-compra/';
-const API_ORDEN_COMPRA_DETALLES = 'http://localhost:8000/api/orden-compra-detalles/';
-const API_PRODUCTOS_COMPRA = 'http://localhost:8000/api/productos/';
-const API_PROVEEDORES_COMPRA = 'http://localhost:8000/api/proveedores/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_ORDENES_COMPRA = `${API_BASE}/ordenes-compra/`;
+const API_ORDEN_COMPRA_DETALLES = `${API_BASE}/orden-compra-detalles/`;
+const API_PRODUCTOS_COMPRA = `${API_BASE}/productos/`;
+const API_PROVEEDORES_COMPRA = `${API_BASE}/proveedores/`;
 
 function obtenerCookieOrdenCompra(nombre) {
     const cookies = document.cookie ? document.cookie.split(';') : [];

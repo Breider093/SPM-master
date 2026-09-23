@@ -1,4 +1,5 @@
-const API_USERS = 'http://localhost:8000/api/users/';
+const API_BASE = 'http://192.168.1.14:8000/api';
+const API_USERS = `${API_BASE}/users/`;
 
 async function apiUsersRequest(url, opciones = {}) {
     const token = localStorage.getItem('rentamax_token');
