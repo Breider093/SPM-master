@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.1.14:8000/api';
+const API_BASE = 'http://192.168.1.4:8000/api';
 const API_FACTURAS_FRONT = `${API_BASE}/facturas/`;
 const API_FACTURA_DETALLES_FRONT = `${API_BASE}/factura-detalles/`;
 const API_FACTURA_PAGOS_FRONT = `${API_BASE}/factura-pagos/`;

@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.1.14:8000/api';
+const API_BASE = 'http://192.168.1.4:8000/api';
 const API_CLIENTES = `${API_BASE}/clientes/`;
 const API_CLIENTE_DOCUMENTOS = `${API_BASE}/cliente-documentos/`;
 const API_OBRAS = `${API_BASE}/obras/`;
