@@ -21,7 +21,7 @@ function nombreProducto(producto) {
 
 async function cargarOpcionesRemision() {
     const [clientes, transportadores, productos] = await Promise.all([
-        solicitarTransportadores('http://192.168.1.4:8000/api/clientes/').then(obtenerListaTransportadores),
+        solicitarTransportadores('/api/clientes/').then(obtenerListaTransportadores),
         listarTransportadores({ estado: 'ACTIVO' }),
         listarProductosTransportadores()
     ]);

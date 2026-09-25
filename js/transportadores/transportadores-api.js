@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.1.4:8000/api';
+const API_BASE = '/api';
 const endpoint = (path) => `${API_BASE}/${path}/`;
 const API_TRANSPORTADORES = endpoint('transportadores');
 const API_VEHICULOS = endpoint('vehiculos');

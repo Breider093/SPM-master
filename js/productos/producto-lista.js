@@ -1,5 +1,5 @@
-const API_ORIGIN = 'http://192.168.1.4:8000';
-const API_BASE = `${API_ORIGIN}/api`;
+const API_ORIGIN = '';
+const API_BASE = '/api';
 const API_PRODUCTOS = `${API_BASE}/productos/`;
 const API_TIPOS_PRODUCTO = `${API_BASE}/tipos-producto/`;
 const API_PRODUCTO_PROVEEDORES = `${API_BASE}/producto-proveedores/`;

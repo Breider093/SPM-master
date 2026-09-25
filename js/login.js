@@ -1,4 +1,4 @@
-const API_AUTH_URL = 'http://192.168.1.4:8000/api-token-auth/';
+const API_AUTH_URL = '/api-token-auth/';
 
 function guardarToken(token) {
     localStorage.setItem('rentamax_token', token);
@@ -55,7 +55,7 @@ async function loguear() {
         return true;
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
-        alert('No se pudo conectar con la API. Verifique que el backend esté levantado en http://192.168.1.4:8000');
+        alert('No se pudo conectar con la API. Verifique que Nginx y el backend estén levantados.');
         return false;
     }
 }

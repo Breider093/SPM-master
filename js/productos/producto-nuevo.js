@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.1.4:8000/api';
+const API_BASE = '/api';
 
 $(document).ready(function() {
     $('body').bootstrapMaterialDesign();

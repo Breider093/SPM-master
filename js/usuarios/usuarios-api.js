@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.1.4:8000/api';
+const API_BASE = '/api';
 const API_USERS = `${API_BASE}/users/`;
 
 async function apiUsersRequest(url, opciones = {}) {

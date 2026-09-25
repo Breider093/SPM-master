@@ -1,4 +1,4 @@
-const API_INVENTARIO_BASE = 'http://192.168.1.4:8000/api/';
+const API_INVENTARIO_BASE = '/api/';
 const API_ENTRADAS = `${API_INVENTARIO_BASE}entradas/`;
 const API_ENTRADA_DETALLES = `${API_INVENTARIO_BASE}entrada-detalles/`;
 const API_SALIDAS = `${API_INVENTARIO_BASE}salidas/`;

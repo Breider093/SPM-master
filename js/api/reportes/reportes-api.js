@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://192.168.1.4:8000/api';
+const API_BASE_URL = '/api';
 const REPORTES_API_BASE = `${API_BASE_URL}/reportes`;
 
 function poblarSelect(selectId, opciones, textoBase, valorBase = '') {

@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $('#btnNuevaReserva').remove();
 
-    solicitarTransportadores('http://192.168.1.4:8000/api/clientes/').then(function(data) {
+    solicitarTransportadores('/api/clientes/').then(function(data) {
         var clientes = obtenerListaTransportadores(data);
         $('#cliente').empty().append('<option value="">Todos los clientes</option>');
         clientes.forEach(function(cliente) {
